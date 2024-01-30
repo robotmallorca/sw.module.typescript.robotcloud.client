@@ -1,0 +1,40 @@
+{
+  "name": "robotcloud-client",
+  "version": "1.0.0",
+  "description": "RobotCloud API client",
+  "author": "Bernat Galmés Rubert",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robotmallorca/sw.module.typescript.robotcloud.client.git"
+  },
+  "keywords": [
+    "robotcloud",
+    "client",
+    "typescript"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robotmallorca/sw.module.typescript.robotcloud.client/issues"
+  },
+  "homepage": "https://github.com/robotmallorca/sw.module.typescript.robotcloud.client#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "consola": "^3.2.3",
+    "tsc": "^2.0.4"
+  }
+}
