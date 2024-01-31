@@ -1,6 +1,6 @@
 # TYPESCRIPT ROBOTCLOUD API CLIENT
 
-Python library to access robotcloud endpoints.
+Typescript library to access robotcloud endpoints.
 
 ## Installation
 
