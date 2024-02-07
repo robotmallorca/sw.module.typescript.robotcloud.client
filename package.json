@@ -1,8 +1,11 @@
 {
-  "name": "robotcloud-client",
-  "version": "1.0.0",
+  "name": "@robotbas/robotcloud-client",
+  "version": "1.0.0-rc.1",
   "description": "RobotCloud API client",
-  "author": "Bernat Galmés Rubert",
+  "author": {
+    "name": "Bernat Galmés Rubert",
+    "email": "bernat.galmes@robotbas.com"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -37,7 +40,6 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "consola": "^3.2.3",
-    "tsc": "^2.0.4"
+    "consola": "^3.2.3"
   }
 }
