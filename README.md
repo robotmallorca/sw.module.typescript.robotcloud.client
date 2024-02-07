@@ -5,7 +5,7 @@ Typescript library to access robotcloud endpoints.
 ## Installation
 
 ```bash
-yarn add robotcloud-client
+yarn add @robotbas/robotcloud-client
 ```
 
 ## Configure authentication interceptor
