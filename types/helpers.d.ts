@@ -1,4 +1,5 @@
+import { ProjectAccessLevel } from "./RobotCloudClient";
 
-interface RobotCloudPermissionsHelper {
+export interface RobotCloudPermissionsHelper {
     checkProjectAccess(prjId: string, required_project_access: ProjectAccessLevel): Promise<boolean>;
 }

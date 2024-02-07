@@ -1,13 +1,13 @@
-interface ProjectTagTreeNode {
+export interface ProjectTagTreeNode {
   tag: ProjectTag;
   children: ProjectTagTreeNode[];
 }
 
-interface ProjectTagsTree {
+export interface ProjectTagsTree {
   root: ProjectTagTreeNode[]
 }
 
-interface ProjectTag {
+export interface ProjectTag {
   id: string;
   name: string;
   parent_id: string;

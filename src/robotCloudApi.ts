@@ -1,5 +1,3 @@
-import type { InternalAxiosRequestConfig } from 'axios';
-
 import axios from "axios"
 import { useLogger } from 'utils/logger';
 

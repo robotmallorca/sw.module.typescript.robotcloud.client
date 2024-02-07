@@ -1,9 +1,10 @@
+import { RobotCloudNamedItem } from "./RobotCloudClient";
 
-interface RobotCloudServiceInstance extends RobotCloudNamedItem {
+export interface RobotCloudServiceInstance extends RobotCloudNamedItem {
     service: string;
 }
   
-interface ServiceInstanceDetails extends RobotCloudServiceInstance {
+export interface ServiceInstanceDetails extends RobotCloudServiceInstance {
   description: string;
   tags: string[];
   subsystems: string[];

@@ -1,4 +1,6 @@
 import * as robotCloudClient from "robotCloudClient";
+import { RobotCloudPermissionsHelper } from "../../types/helpers";
+import { ProjectAccessLevel } from "../../types/RobotCloudClient";
 
 
 class RobotCloudPermissionsHelperImpl implements RobotCloudPermissionsHelper {

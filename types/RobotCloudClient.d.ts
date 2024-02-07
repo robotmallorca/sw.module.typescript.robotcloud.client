@@ -1,41 +1,41 @@
-type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
-type RegimState = "COLD"|"HEAT"|"AUTO"
+export type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
+export type RegimState = "COLD"|"HEAT"|"AUTO"
 
-type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
-type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
+export type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
+export type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
 
-type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"
+export type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"
 
-interface ProjectRequestParams {
-
-}
-
-interface ProjectDetailsRequestParams {
+export interface ProjectRequestParams {
 
 }
-interface SubsystemRequestParams {
+
+export interface ProjectDetailsRequestParams {
+
+}
+export interface SubsystemRequestParams {
   subsystem_id?: string;
 }
 
-interface PaginableRequestParams {
+export interface PaginableRequestParams {
   startIndex?: number;
   maxSize?: number;
 }
 
-interface ProjectLocationsRequestParams extends SubsystemRequestParams, PaginableRequestParams {
+export interface ProjectLocationsRequestParams extends SubsystemRequestParams, PaginableRequestParams {
   tag_id?: string | string[];
 }
 
-interface ServiceDataRequestParams extends SubsystemRequestParams {
+export interface ServiceDataRequestParams extends SubsystemRequestParams {
   tag_id?: string | string[];
 }
 
-interface ProjectTagRequestParams extends PaginableRequestParams {
+export interface ProjectTagRequestParams extends PaginableRequestParams {
   parent_tag?: string;
   no_parent?: boolean;
 }
 
-interface ServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
+export interface ServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
   id?: string;
   name?: string;
   location_id?: string;
@@ -43,11 +43,11 @@ interface ServiceInstancesRequestParams extends SubsystemRequestParams, Paginabl
   tag_id?: string[];
 }
 
-interface LocationServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
+export interface LocationServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
   tag_id?: string[];
 }
 
-interface RoomClimeInstanceConfigParams {
+export interface RoomClimeInstanceConfigParams {
   temperature_set_point?: number;
   humidity_set_point?: number;
   regim?: RegimState;
@@ -61,7 +61,7 @@ interface RoomClimeInstanceConfigParams {
   temperature_units?: TemperatureUnit;
 }
 
-interface RoomGuestStatusInstanceConfigParams {
+export interface RoomGuestStatusInstanceConfigParams {
   sold?: boolean;
   do_not_disturb?: boolean;
   make_up_room?: boolean;
@@ -74,19 +74,19 @@ interface RoomGuestStatusInstanceConfigParams {
 
 /** RESPONSE **/
 
-interface RobotCloudNamedItem {
+export interface RobotCloudNamedItem {
   id: string;
   name: string;
 }
 
-interface RobotCloudProject {
+export interface RobotCloudProject {
   id: string;
   name: string;
   organization: string;
 }
 
 /** USERS */
-interface RobotCloudUserDetails {
+export interface RobotCloudUserDetails {
     username: string;
     name: string;
     last_name: string;
@@ -96,7 +96,7 @@ interface RobotCloudUserDetails {
 }
 
 
-interface RobotCloudProjectDetails extends RobotCloudProject {
+export interface RobotCloudProjectDetails extends RobotCloudProject {
   version: number;
   description?: string;
   country?: string;
@@ -109,7 +109,7 @@ interface RobotCloudProjectDetails extends RobotCloudProject {
   app_access_level?: AppAccessLevel;
 }
 
-interface RobotCloudDeviceDetails extends RobotCloudNamedItem {
+export interface RobotCloudDeviceDetails extends RobotCloudNamedItem {
   description?: string;
   location: string;
   address: {
@@ -123,13 +123,13 @@ interface RobotCloudDeviceDetails extends RobotCloudNamedItem {
 }
 
 /** SERVICE EVENTS VALUES **/
-interface RoomClime1AlertEventValue {
+export interface RoomClime1AlertEventValue {
   high_temperature: boolean;
   low_temperature: boolean;
   high_humidity: boolean;
   fancoil_on_overtime: boolean;
 }
-interface RoomClime1EventValue {
+export interface RoomClime1EventValue {
   temperature: number;
   humidity: number;
   fancoil_speed: number;
@@ -140,12 +140,12 @@ interface RoomClime1EventValue {
   regim: RegimState;
   eco_mode: "STANDBY"|"ECO"|"VIP";
 }
-interface RoomGuestStatus1AlertEventValue {
+export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;
   medical_alarm: boolean;
 }
-interface RoomGuestStatus1EventValue {
+export interface RoomGuestStatus1EventValue {
   sold: boolean;
   occupied: boolean;
   do_not_disturb: boolean;
@@ -156,26 +156,26 @@ interface RoomGuestStatus1EventValue {
   window_open: boolean;
   medical_alarm: boolean; // TODO: ???
 }
-interface AirQuality1DataEventValue {
+export interface AirQuality1DataEventValue {
   co2: number;
 }
-interface AirQuality1AlertEventValue {
+export interface AirQuality1AlertEventValue {
   high_co2: boolean;
 }
-interface RoomConsumes1AlertEventValue {
+export interface RoomConsumes1AlertEventValue {
   high_daily_energy_electric: boolean;
   high_daily_energy_thermal: boolean;
   high_daily_hot_water: boolean;
   high_daily_cold_water: boolean;
 }
 
-interface RoomGrouping1DataEventValue {
+export interface RoomGrouping1DataEventValue {
   replica_1_active: boolean;
   replica_2_active: boolean;
   replica_3_active: boolean;
 }
 
-interface RoomConsumes1DataEventValue {
+export interface RoomConsumes1DataEventValue {
     energy_electric: number;
     energy_thermal: number;
     hot_water: number;
@@ -189,11 +189,11 @@ interface RoomConsumes1DataEventValue {
 }
 
 /** SERVICE INSTANCES DEVICE CONFIG */
-interface ServiceInstanceDeviceConfig {
+export interface ServiceInstanceDeviceConfig {
   device: string;
 }
 
-interface RoomGrouping1InstanceDeviceConfig {
+export interface RoomGrouping1InstanceDeviceConfig {
   Main: ServiceInstanceDeviceConfig;
   Replica_1: ServiceInstanceDeviceConfig;
   Replica_2: ServiceInstanceDeviceConfig;
