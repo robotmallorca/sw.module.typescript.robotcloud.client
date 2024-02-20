@@ -2,11 +2,18 @@ import type { AxiosResponse } from "axios";
 
 import { useLogger } from 'utils/logger';
 import robotcloudApi from "robotCloudApi";
-import { AirQuality1AlertEventValue, AirQuality1DataEventValue, LocationServiceInstancesRequestParams, ProjectDetailsRequestParams, ProjectLocationsRequestParams, ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudUserDetails, RoomClime1AlertEventValue, RoomClime1EventValue, RoomClimeInstanceConfigParams, RoomConsumes1AlertEventValue, RoomConsumes1DataEventValue, RoomGrouping1DataEventValue, RoomGrouping1InstanceDeviceConfig, RoomGuestStatus1AlertEventValue, RoomGuestStatus1EventValue, RoomGuestStatusInstanceConfigParams, ServiceDataRequestParams, ServiceInstancesRequestParams } from "../types/RobotCloudClient";
+import { 
+    LocationServiceInstancesRequestParams, ProjectDetailsRequestParams, ProjectLocationsRequestParams, 
+    ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, 
+    RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudUserDetails, 
+    RoomConsumes1AlertEventValue, RoomConsumes1DataEventValue, RoomGrouping1DataEventValue, 
+    RoomGrouping1InstanceDeviceConfig, ServiceInstanceDataRequestParams, 
+    ServiceInstancesRequestParams 
+} from "../types/RobotCloudClient";
 import { RobotCloudServiceInstance, ServiceInstanceDetails } from "../types/ServiceInstance";
 import { ClassifierDetails } from "../types/ProjectClassifer";
 import { ProjectTag, ProjectTagTreeNode, ProjectTagsTree } from "../types/ProjectTag";
-import { ServiceDataMeasurement } from "../types/ServiceDataMeasurement";
+import { ServiceDataMeasurement, ServiceDataRequestParams } from "../types/services";
 
 
 const logger = useLogger("robotcloud-client")
@@ -185,51 +192,6 @@ export const getDeviceDetails = (
 
 /* SERVICES INSTANCES DATA ENDPOINTS */
 
-export const getRoomClimeServiceData = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1EventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<RoomClime1EventValue>[]>(
-    `/projects/${prjId}/services/RoomClime_1/data`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-export const getRoomGuestStatusServiceData = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1EventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1EventValue>[]>(
-    `/projects/${prjId}/services/RoomGuestStatus_1/data`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-export const getAirQualityServiceData = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>[]>(
-    `/projects/${prjId}/services/AirQuality_1/data`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
 export const getRoomGrouping1ServiceData = (
   prjId: string,
   params?: ServiceDataRequestParams
@@ -245,122 +207,20 @@ export const getRoomGrouping1ServiceData = (
   )
 }
 
-export const getRoomConsumesServiceData = (
+export const getRoomConsumesInstanceServiceData = (
     prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>> => {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>(
-      `/projects/${prjId}/services/RoomConsumes_1/data`,
-      { 
-        params,
-        headers: {
-          "Accept": 'application/json'
+    instanceId: string,
+    params?: ServiceInstanceDataRequestParams
+): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>>> => {
+    return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>>(
+        `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
+        { 
+            params,
+            headers: {
+                "Accept": 'application/json'
+            }
         }
-      }
     )
-  }
-/* SERVICES INSTANCES ALERTS ENDPOINTS */
-
-export const getRoomClimeServiceAlert = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1AlertEventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<RoomClime1AlertEventValue>[]>(
-    `/projects/${prjId}/services/RoomClime_1/alert`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-export const getRoomGuestStatusServiceAlert = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1AlertEventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1AlertEventValue>[]>(
-    `/projects/${prjId}/services/RoomGuestStatus_1/alert`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-export const getAirQualityServiceAlert = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>(
-    `/projects/${prjId}/services/AirQuality_1/alert`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-export const getRoomConsumesServiceAlert = (
-  prjId: string,
-  params?: ServiceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1AlertEventValue>[]>> => {
-  return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1AlertEventValue>[]>(
-    `/projects/${prjId}/services/RoomConsumes_1/alert`,
-    { 
-      params,
-      headers: {
-        "Accept": 'application/json'
-      }
-    }
-  )
-}
-
-/* SERVICES INSTANCES CONFIGURATION ENDPOINTS */
-
-export const getRoomClimeServiceInstanceConfiguration = (
-  prjId: string,
-  instanceId: string
-): Promise<AxiosResponse<RoomClimeInstanceConfigParams>> => {
-  return robotcloudApi.get<RoomClimeInstanceConfigParams>(
-    `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`
-  )
-}
-
-export const getRoomGuestStatusServiceInstanceConfiguration = (
-  prjId: string,
-  instanceId: string
-): Promise<AxiosResponse<RoomGuestStatusInstanceConfigParams>> => {
-  return robotcloudApi.get<RoomGuestStatusInstanceConfigParams>(
-    `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/configuration`
-  )
-}
-
-export const putRoomClimeServiceInstanceConfiguration = (
-  prjId: string,
-  instanceId: string,
-  data: RoomClimeInstanceConfigParams
-): Promise<AxiosResponse<RoomClimeInstanceConfigParams>> => {
-  return robotcloudApi.put<RoomClimeInstanceConfigParams>(
-    `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`,
-    data
-  )
-}
-
-export const putRoomGuestStatusServiceInstanceConfiguration = (
-  prjId: string,
-  instanceId: string,
-  data: RoomGuestStatusInstanceConfigParams
-): Promise<AxiosResponse<RoomGuestStatusInstanceConfigParams>> => {
-  return robotcloudApi.put<RoomGuestStatusInstanceConfigParams>(
-    `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/configuration`,
-    data
-  )
 }
 
 

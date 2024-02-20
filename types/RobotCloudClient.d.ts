@@ -1,3 +1,4 @@
+
 export type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
 export type RegimState = "COLD"|"HEAT"|"AUTO"
 
@@ -5,6 +6,9 @@ export type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
 export type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
 
 export type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"
+
+// Desired fancoil speed (0 = Auto, 1..3 = Manual Speed)
+export type FancoilSpeedState = 0|1|2|3;
 
 export interface ProjectRequestParams {
 
@@ -26,8 +30,9 @@ export interface ProjectLocationsRequestParams extends SubsystemRequestParams, P
   tag_id?: string | string[];
 }
 
-export interface ServiceDataRequestParams extends SubsystemRequestParams {
-  tag_id?: string | string[];
+
+export interface ServiceInstanceDataRequestParams {
+
 }
 
 export interface ProjectTagRequestParams extends PaginableRequestParams {
@@ -59,16 +64,6 @@ export interface RoomClimeInstanceConfigParams {
   high_humidity_level?: number;
   fancoil_on_time_limit?: number;
   temperature_units?: TemperatureUnit;
-}
-
-export interface RoomGuestStatusInstanceConfigParams {
-  sold?: boolean;
-  do_not_disturb?: boolean;
-  make_up_room?: boolean;
-  remote_occupation?: boolean;
-  door_open_time_limit?: number;
-  window_open_time_limit?: number;
-  medical_alarm?: boolean;
 }
 
 
@@ -140,28 +135,7 @@ export interface RoomClime1EventValue {
   regim: RegimState;
   eco_mode: "STANDBY"|"ECO"|"VIP";
 }
-export interface RoomGuestStatus1AlertEventValue {
-  door_open_overtime: boolean;
-  window_open_overtime: boolean;
-  medical_alarm: boolean;
-}
-export interface RoomGuestStatus1EventValue {
-  sold: boolean;
-  occupied: boolean;
-  do_not_disturb: boolean;
-  make_up_room: boolean;
-  tray_status: "IDLE"|'READY'|'FINISH';
-  remote_occupation: boolean;
-  door_open: boolean;
-  window_open: boolean;
-  medical_alarm: boolean; // TODO: ???
-}
-export interface AirQuality1DataEventValue {
-  co2: number;
-}
-export interface AirQuality1AlertEventValue {
-  high_co2: boolean;
-}
+
 export interface RoomConsumes1AlertEventValue {
   high_daily_energy_electric: boolean;
   high_daily_energy_thermal: boolean;
