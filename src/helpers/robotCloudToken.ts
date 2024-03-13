@@ -2,10 +2,11 @@ import axios from "axios";
 import { useLogger } from 'utils/logger';
 import robotcloudApi from "robotCloudApi";
 import { CheckTokenResponse, RobotCloudJWTPayload } from "../../types/Token";
+import { RobotCloudClientConfig } from "config";
 
 const logger = useLogger("robotcloud-token")
 
-const MINUTES_BEFORE_EXPIRATION_RENEW = 20; // TODO: Environment variable
+const MINUTES_BEFORE_EXPIRATION_RENEW = RobotCloudClientConfig.tokenMinutesBeforeExpirationRenew;
 
 
 
