@@ -6,9 +6,6 @@ import { RobotCloudClientConfig } from "config";
 
 const logger = useLogger("robotcloud-token")
 
-const MINUTES_BEFORE_EXPIRATION_RENEW = RobotCloudClientConfig.tokenMinutesBeforeExpirationRenew;
-
-
 
 function parseJwt(token: string) {
     if (!token) {
@@ -34,7 +31,7 @@ export const decodeToken = (token: string): RobotCloudJWTPayload | undefined => 
 export const isTokenExpired = (payload: RobotCloudJWTPayload): boolean => {
   const expirationDate = new Date(payload.exp * 1000);
   expirationDate.setMinutes(
-    expirationDate.getMinutes() - MINUTES_BEFORE_EXPIRATION_RENEW
+    expirationDate.getMinutes() - RobotCloudClientConfig.tokenMinutesBeforeExpirationRenew
   );
   const currentDate = new Date();
   return currentDate >= expirationDate;
