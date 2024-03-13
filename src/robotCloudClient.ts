@@ -5,10 +5,11 @@ import robotcloudApi from "robotCloudApi";
 import { 
     LocationServiceInstancesRequestParams, ProjectDetailsRequestParams, ProjectLocationsRequestParams, 
     ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, 
-    RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudUserDetails, 
-    RoomConsumes1AlertEventValue, RoomConsumes1DataEventValue, RoomGrouping1DataEventValue, 
+    RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudServiceTypeDetails, RobotCloudUserDetails, 
+    RoomConsumes1DataEventValue, RoomGrouping1DataEventValue, 
     RoomGrouping1InstanceDeviceConfig, ServiceInstanceDataRequestParams, 
-    ServiceInstancesRequestParams 
+    ServiceInstancesRequestParams, 
+    SubsystemRequestParams
 } from "../types/RobotCloudClient";
 import { RobotCloudServiceInstance, ServiceInstanceDetails } from "../types/ServiceInstance";
 import { ClassifierDetails } from "../types/ProjectClassifer";
@@ -190,6 +191,15 @@ export const getDeviceDetails = (
   return robotcloudApi.get<RobotCloudDeviceDetails>(`devices/${deviceId}`);
 }
 
+/* SERVICES ENDPOINTS */
+export const getProjectServiceTypes = (
+    prjId: string,
+    params?: SubsystemRequestParams
+): Promise<AxiosResponse<RobotCloudServiceTypeDetails[]>> => {
+    return robotcloudApi.get<RobotCloudServiceTypeDetails[]>(`projects/${prjId}/services`, {
+        params,
+    });
+}
 /* SERVICES INSTANCES DATA ENDPOINTS */
 
 export const getRoomGrouping1ServiceData = (

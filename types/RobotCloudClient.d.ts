@@ -5,7 +5,7 @@ export type RegimState = "COLD"|"HEAT"|"AUTO"
 export type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
 export type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
 
-export type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"
+export type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"|"AirQuality_1"
 
 // Desired fancoil speed (0 = Auto, 1..3 = Manual Speed)
 export type FancoilSpeedState = 0|1|2|3;
@@ -117,6 +117,10 @@ export interface RobotCloudDeviceDetails extends RobotCloudNamedItem {
   tags: string;
 }
 
+export interface RobotCloudServiceTypeDetails {
+    description: string;
+    name: RobotCloudServiceType
+}
 /** SERVICE EVENTS VALUES **/
 export interface RoomClime1AlertEventValue {
   high_temperature: boolean;
