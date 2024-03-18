@@ -1,4 +1,5 @@
 import axios from "axios"
+import clientConfig from "config";
 import { useLogger } from 'utils/logger';
 
 const logger = useLogger("robotcloud-api")
@@ -11,17 +12,15 @@ const clearPromise = () => checkTokenPromise = null;
 async function refreshToken(checkToken: () => Promise<string | undefined>) {
     const access_token = await checkToken();
     return access_token;
-  }
+}
 
   
-let checkToken = async (): Promise<string> => { return ''}
-
 // Important to add interceptor once, inside a middleware are stacked in each request.
 robotcloudApi.interceptors.request.use(
     async config => {
         logger.info("robotcloud api interceptor:", config.url)
         if (!checkTokenPromise) {
-            checkTokenPromise = refreshToken(checkToken).finally(clearPromise);
+            checkTokenPromise = refreshToken(clientConfig.checkToken).finally(clearPromise);
         }
 
         // When other request is checking token wait for it
@@ -37,9 +36,5 @@ robotcloudApi.interceptors.request.use(
         logger.error(error)
         Promise.reject(error)
   });
-
-export const setCheckTokenFunction = (fun: () => Promise<string>) => {
-    checkToken = fun
-}
 
 export default robotcloudApi;

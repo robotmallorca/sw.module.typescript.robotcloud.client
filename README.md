@@ -12,18 +12,20 @@ yarn add @robotbas/robotcloud-client
 
 Example used on a nuxtjs middleware to setup the RobotCloud API token.
 ```typescript
-import robotcloudApi, { setCheckTokenFunction } from "robotcloud-client";
+import { clientConfig } from "@robotbas/robotcloud-client";
 
 const appConfigs = useRuntimeConfig().public; // Get aplication global configs
-robotcloudApi.defaults.baseURL = appConfigs.robotCloudUrl
-setCheckTokenFunction(async () => {
-    const token = await getAccessToken()
+// Configure Robotcloud API
+clientConfig.baseURL = appConfigs.robotCloudUrl
+clientConfig.checkToken = async () => {
+    const token = await checkToken()
     if (!token) {
         await navigateTo(appConfigs.loginUrl, { external: true })
         return ''
     }
     return token
-})
+}
+clientConfig.tokenMinutesBeforeExpirationRenew = 10
 
 ```
 

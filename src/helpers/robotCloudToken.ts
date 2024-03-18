@@ -2,7 +2,7 @@ import axios from "axios";
 import { useLogger } from 'utils/logger';
 import robotcloudApi from "robotCloudApi";
 import { CheckTokenResponse, RobotCloudJWTPayload } from "../../types/Token";
-import { RobotCloudClientConfig } from "config";
+import clientConfig from "config";
 
 const logger = useLogger("robotcloud-token")
 
@@ -31,7 +31,7 @@ export const decodeToken = (token: string): RobotCloudJWTPayload | undefined => 
 export const isTokenExpired = (payload: RobotCloudJWTPayload): boolean => {
   const expirationDate = new Date(payload.exp * 1000);
   expirationDate.setMinutes(
-    expirationDate.getMinutes() - RobotCloudClientConfig.tokenMinutesBeforeExpirationRenew
+    expirationDate.getMinutes() - clientConfig.tokenMinutesBeforeExpirationRenew
   );
   const currentDate = new Date();
   return currentDate >= expirationDate;

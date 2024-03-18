@@ -1,14 +1,15 @@
-import { setCheckTokenFunction } from "robotCloudApi"
 import robotcloudApi from "robotCloudApi"
+import clientConfig from "config"
 
 export * as robotcloudClient from "robotCloudClient"
 export * as robotCloudToken from "helpers/robotCloudToken"
 
 export * from "client/services"
+export * from "config"
 
 export {
     robotcloudApi,
-    setCheckTokenFunction,
+    clientConfig
 }
 
 export type * from "../types/ProjectClassifer"
