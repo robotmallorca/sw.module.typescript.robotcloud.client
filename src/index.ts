@@ -7,6 +7,7 @@ export * as robotCloudToken from "helpers/robotCloudToken"
 export * from "client/services"
 export * from "config"
 
+export * from "helpers"
 export {
     robotcloudApi,
     clientConfig
