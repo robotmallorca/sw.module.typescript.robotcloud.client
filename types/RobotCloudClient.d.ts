@@ -1,3 +1,4 @@
+import { RoomClime1Data } from "./services-data"
 
 export type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
 export type RegimState = "COLD"|"HEAT"|"AUTO"
@@ -50,20 +51,6 @@ export interface ServiceInstancesRequestParams extends SubsystemRequestParams, P
 
 export interface LocationServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
   tag_id?: string[];
-}
-
-export interface RoomClimeInstanceConfigParams {
-  temperature_set_point?: number;
-  humidity_set_point?: number;
-  regim?: RegimState;
-  eco_mode?: "STANDBY" | "ECO" | "VIP";
-  fancoil_speed?: 0 | 1 | 2 | 3;
-  on?: boolean;
-  high_temperature_level?: number;
-  low_temperature_level?: number;
-  high_humidity_level?: number;
-  fancoil_on_time_limit?: number;
-  temperature_units?: TemperatureUnit;
 }
 
 
@@ -127,17 +114,6 @@ export interface RoomClime1AlertEventValue {
   low_temperature: boolean;
   high_humidity: boolean;
   fancoil_on_overtime: boolean;
-}
-export interface RoomClime1EventValue {
-  temperature: number;
-  humidity: number;
-  fancoil_speed: number;
-  fancoil_manual: boolean;
-  on: boolean;
-  temperature_set_point: number; 
-  humidity_set_point: number; 
-  regim: RegimState;
-  eco_mode: "STANDBY"|"ECO"|"VIP";
 }
 
 export interface RoomConsumes1AlertEventValue {
