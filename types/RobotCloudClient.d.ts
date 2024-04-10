@@ -129,19 +129,6 @@ export interface RoomGrouping1DataEventValue {
   replica_3_active: boolean;
 }
 
-export interface RoomConsumes1DataEventValue {
-    energy_electric: number;
-    energy_thermal: number;
-    hot_water: number;
-    cold_water: number;
-    daily_energy_electric: number;
-    daily_energy_thermal: number;
-    daily_hot_water: number;
-    daily_cold_water: number;
-    daily_co2_footprint: number;
-    daily_tree_equivalent: number;
-}
-
 /** SERVICE INSTANCES DEVICE CONFIG */
 export interface ServiceInstanceDeviceConfig {
   device: string;

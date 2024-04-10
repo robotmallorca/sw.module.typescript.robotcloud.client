@@ -2,18 +2,20 @@ import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
 import { 
-    RoomClime1AlertEventValue, RoomClime1EventValue, RoomClimeInstanceConfigParams 
+    RoomClime1AlertEventValue,
 } from "../../../types/RobotCloudClient";
 import { 
     ServiceDataMeasurement, ServiceDataRequestParams, ServiceInstanceHistoricParams, ServiceTypeClient,
     HistoricAggregateFunction,
     ServiceInstanceHistoricAggregateParams
 } from "../../../types/services";
+import { RoomClime1Data } from "../../../types/services-data";
+import { RoomClimeConfigurationParams } from "../../../types/services-configuration";
 
 
 class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue, 
-                                                    RoomClime1EventValue, 
-                                                    RoomClimeInstanceConfigParams> {
+                                                    RoomClime1Data, 
+                                                    RoomClimeConfigurationParams> {
 
     getAlerts(
         prjId: string,
@@ -33,8 +35,8 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
     getData (
         prjId: string,
         params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1EventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1EventValue>[]>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1Data>[]>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1Data>[]>(
             `/projects/${prjId}/services/RoomClime_1/data`,
             {
                 params,
@@ -48,8 +50,8 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
     getInstanceConfiguration (
         prjId: string,
         instanceId: string
-    ): Promise<AxiosResponse<RoomClimeInstanceConfigParams>> {
-        return robotcloudApi.get<RoomClimeInstanceConfigParams>(
+    ): Promise<AxiosResponse<RoomClimeConfigurationParams>> {
+        return robotcloudApi.get<RoomClimeConfigurationParams>(
             `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`
         )
     }
@@ -57,9 +59,9 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
     putInstanceConfiguration (
         prjId: string,
         instanceId: string,
-        data: RoomClimeInstanceConfigParams
-    ): Promise<AxiosResponse<RoomClimeInstanceConfigParams>> {
-        return robotcloudApi.put<RoomClimeInstanceConfigParams>(
+        data: RoomClimeConfigurationParams
+    ): Promise<AxiosResponse<RoomClimeConfigurationParams>> {
+        return robotcloudApi.put<RoomClimeConfigurationParams>(
             `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`,
             data
         )
@@ -71,8 +73,8 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
         startTime: Date,
         endTime: Date,
         params: ServiceInstanceHistoricParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1EventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1EventValue>[]>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1Data>[]>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1Data>[]>(
             `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/historic/data`, {
                 params: {
                     start_time: startTime,
@@ -91,8 +93,8 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
         aggFunction: HistoricAggregateFunction,
         periode: string,
         params: ServiceInstanceHistoricAggregateParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1EventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1EventValue>[]>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1Data>[]>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1Data>[]>(
             `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/historic/data/aggregate`, {
                 params: {
                     start_time: startTime,

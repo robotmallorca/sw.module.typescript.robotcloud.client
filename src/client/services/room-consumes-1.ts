@@ -7,11 +7,12 @@ import {
     ServiceTypeClient 
 } from "../../../types/services";
 import { 
-    RoomConsumes1AlertEventValue, RoomConsumes1DataEventValue, ServiceInstanceDataRequestParams 
+    RoomConsumes1AlertEventValue, ServiceInstanceDataRequestParams 
 } from "../../../types/RobotCloudClient";
+import { RoomConsumes1Data } from "../../../types/services-data";
 
 class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventValue, 
-                                                    RoomConsumes1DataEventValue,
+                                                    RoomConsumes1Data,
                                                     any> {
 
     getAlerts(
@@ -32,8 +33,8 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
     getData (
         prjId: string,
         params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1Data>[]>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1Data>[]>(
             `/projects/${prjId}/services/RoomConsumes_1/data`,
             { 
               params,
@@ -48,8 +49,8 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
         prjId: string,
         instanceId: string,
         params?: ServiceInstanceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>>> => {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1Data>>> => {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1Data>>(
             `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
             { 
                 params,
@@ -81,8 +82,8 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
         startTime: Date,
         endTime: Date,
         params: ServiceInstanceHistoricParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>(
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1Data>[]>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1Data>[]>(
             `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/configuration`, {
                 params: {
                     start_time: startTime,
@@ -101,7 +102,7 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
         aggFunction: HistoricAggregateFunction,
         periode: string,
         params: ServiceInstanceHistoricAggregateParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>[]>> {
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1Data>[]>> {
         throw Error("Not implemented method")
     }
 }

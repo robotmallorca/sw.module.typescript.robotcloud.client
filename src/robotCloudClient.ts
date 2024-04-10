@@ -6,7 +6,7 @@ import {
     LocationServiceInstancesRequestParams, ProjectDetailsRequestParams, ProjectLocationsRequestParams, 
     ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, 
     RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudServiceTypeDetails, RobotCloudUserDetails, 
-    RoomConsumes1DataEventValue, RoomGrouping1DataEventValue, 
+    RoomGrouping1DataEventValue, 
     RoomGrouping1InstanceDeviceConfig, ServiceInstanceDataRequestParams, 
     ServiceInstancesRequestParams, 
     SubsystemRequestParams
@@ -15,6 +15,7 @@ import { RobotCloudServiceInstance, ServiceInstanceDetails } from "../types/Serv
 import { ClassifierDetails } from "../types/ProjectClassifer";
 import { ProjectTag, ProjectTagTreeNode, ProjectTagsTree } from "../types/ProjectTag";
 import { ServiceDataMeasurement, ServiceDataRequestParams } from "../types/services";
+import { RoomConsumes1Data } from "../types/services-data";
 
 
 const logger = useLogger("robotcloud-client")
@@ -216,23 +217,6 @@ export const getRoomGrouping1ServiceData = (
     }
   )
 }
-
-export const getRoomConsumesInstanceServiceData = (
-    prjId: string,
-    instanceId: string,
-    params?: ServiceInstanceDataRequestParams
-): Promise<AxiosResponse<ServiceDataMeasurement<RoomConsumes1DataEventValue>>> => {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomConsumes1DataEventValue>>(
-        `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
-        { 
-            params,
-            headers: {
-                "Accept": 'application/json'
-            }
-        }
-    )
-}
-
 
 /* SERVICES INSTANCES DEVICE INGORMATION ENDPOINTS */
 
