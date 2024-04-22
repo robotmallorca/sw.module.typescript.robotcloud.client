@@ -1,6 +1,10 @@
 import * as robotCloudClient from "robotCloudClient";
 import { RobotCloudPermissionsHelper } from "../../types/helpers";
-import { ProjectAccessLevel, RobotCloudProjectDetails } from "../../types/RobotCloudClient";
+import { 
+    AppAccessLevel, 
+    ProjectAccessLevel, 
+    RobotCloudProjectDetails 
+} from "../../types/RobotCloudClient";
 
 /**
  * Helper of robotcloud permissions
@@ -29,6 +33,22 @@ class RobotCloudPermissionsHelperImpl implements RobotCloudPermissionsHelper {
             case 'RESTRICTED':
                 return project.access_level == 'RESTRICTED' || project.access_level == 'BASIC' || 
                         project.access_level == 'ADVANCED'
+            case 'BLOCKED':
+                return true   
+            default:
+                return false
+        }
+    }
+
+    public hasAppAccessLevel(project: RobotCloudProjectDetails, required_application_access: AppAccessLevel): boolean {
+        switch (required_application_access) {
+            case 'ADMIN':
+                return project.app_access_level == 'ADMIN'
+            case 'ADVANCED':
+                return project.app_access_level == 'ADVANCED' || project.app_access_level == 'ADMIN'
+            case 'STANDARD':
+                return project.app_access_level == 'STANDARD' || project.app_access_level == 'ADVANCED' || 
+                        project.app_access_level == 'ADMIN'
             case 'BLOCKED':
                 return true   
             default:
