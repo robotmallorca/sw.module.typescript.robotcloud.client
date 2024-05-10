@@ -45,6 +45,21 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
           )
     }
 
+    getInstanceConfiguration<T> (
+        prjId: string,
+        instanceId: string
+    ): Promise<AxiosResponse<T>> {
+        throw Error("Not implemented method")
+    }
+
+    putInstanceConfiguration<T> (
+        prjId: string,
+        instanceId: string,
+        data: T
+    ): Promise<AxiosResponse<T>> {
+        throw Error("Not implemented method")
+    }
+
     getInstanceData = (
         prjId: string,
         instanceId: string,
@@ -59,21 +74,6 @@ class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1AlertEventVal
                 }
             }
         )
-    }
-
-    getInstanceConfiguration<T> (
-        prjId: string,
-        instanceId: string
-    ): Promise<AxiosResponse<T>> {
-        throw Error("Not implemented method")
-    }
-
-    putInstanceConfiguration<T> (
-        prjId: string,
-        instanceId: string,
-        data: T
-    ): Promise<AxiosResponse<T>> {
-        throw Error("Not implemented method")
     }
 
     getInstanceHistoric(

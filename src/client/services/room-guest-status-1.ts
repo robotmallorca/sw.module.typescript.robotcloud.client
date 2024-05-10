@@ -12,6 +12,7 @@ import {
     ServiceInstanceHistoricParams, 
     ServiceTypeClient 
 } from "../../../types/services";
+import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
 
 class RoomGuestStatusClient implements ServiceTypeClient<   RoomGuestStatus1AlertEventValue, 
                                                             RoomGuestStatus1EventValue, 
@@ -65,6 +66,22 @@ class RoomGuestStatusClient implements ServiceTypeClient<   RoomGuestStatus1Aler
             `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/configuration`,
             data
           )
+    }
+
+    getInstanceData = (
+        prjId: string,
+        instanceId: string,
+        params?: ServiceInstanceDataRequestParams
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1EventValue>>> => {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1EventValue>>(
+            `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
+            { 
+                params,
+                headers: {
+                    "Accept": 'application/json'
+                }
+            }
+        )
     }
 
     getInstanceHistoric(

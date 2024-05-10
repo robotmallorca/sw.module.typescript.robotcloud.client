@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { ServiceInstanceRead } from "./ServiceInstanceRead";
-import { SubsystemRequestParams } from "./RobotCloudClient";
+import { ServiceInstanceDataRequestParams, SubsystemRequestParams } from "./RobotCloudClient";
 
 export type MeasurementStatus =  "GOOD"|"NOT_MEASURED"|"INVALID_VALUE"|"DEVICE_ERROR";
 
@@ -87,6 +87,12 @@ export interface ServiceTypeClient<T_ALERTS, T_DATA, T_CONFIG> {
         instanceId: string,
         data: T_CONFIG
     ): Promise<AxiosResponse<T_CONFIG>>;
+
+    getInstanceData (
+        prjId: string,
+        instanceId: string,
+        params?: ServiceInstanceDataRequestParams
+    ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>>>;
 
     getInstanceHistoric (
         prjId: string,

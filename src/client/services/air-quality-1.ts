@@ -8,6 +8,7 @@ import {
     ServiceInstanceHistoricParams, 
     ServiceTypeClient 
 } from "../../../types/services";
+import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
 
 class AirQualityClient implements ServiceTypeClient<AirQuality1AlertEventValue, 
                                                     AirQuality1DataEventValue,
@@ -56,6 +57,22 @@ class AirQualityClient implements ServiceTypeClient<AirQuality1AlertEventValue,
         data: T
     ): Promise<AxiosResponse<T>> {
         throw Error("Not implemented method")
+    }
+
+    getInstanceData (
+        prjId: string,
+        instanceId: string,
+        params?: ServiceInstanceDataRequestParams
+    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>>> {
+        return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>>(
+            `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/data`,
+            { 
+                params,
+                headers: {
+                    "Accept": 'application/json'
+                }
+            }
+        )
     }
 
     getInstanceHistoric(

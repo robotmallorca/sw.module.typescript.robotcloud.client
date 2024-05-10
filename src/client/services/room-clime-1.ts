@@ -3,6 +3,7 @@ import type { AxiosResponse } from "axios";
 import robotcloudApi from "robotCloudApi";
 import { 
     RoomClime1AlertEventValue,
+    ServiceInstanceDataRequestParams,
 } from "../../../types/RobotCloudClient";
 import { 
     ServiceDataMeasurement, ServiceDataRequestParams, ServiceInstanceHistoricParams, ServiceTypeClient,
@@ -64,6 +65,19 @@ class RoomClimeClient implements ServiceTypeClient< RoomClime1AlertEventValue,
         return robotcloudApi.put<RoomClimeConfigurationParams>(
             `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`,
             data
+        )
+    }
+
+    getInstanceData (
+        prjId: string,
+        instanceId: string,
+        params?: ServiceInstanceDataRequestParams
+    ): Promise<AxiosResponse<ServiceDataMeasurement<RoomClime1Data>>> {
+        return robotcloudApi.get<ServiceDataMeasurement<RoomClime1Data>> (
+            `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/data`,
+            { 
+                params
+            }
         )
     }
 
