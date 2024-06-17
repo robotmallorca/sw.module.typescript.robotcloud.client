@@ -12,10 +12,9 @@ import {
     SubsystemRequestParams
 } from "../types/RobotCloudClient";
 import { RobotCloudServiceInstance, ServiceInstanceDetails } from "../types/ServiceInstance";
-import { ClassifierDetails } from "../types/ProjectClassifer";
+import { Classifier, ClassifierDetails, ProjectClassifiersRequestParams } from "../types/ProjectClassifer";
 import { ProjectTag, ProjectTagTreeNode, ProjectTagsTree } from "../types/ProjectTag";
 import { ServiceDataMeasurement, ServiceDataRequestParams } from "../types/services";
-import { RoomConsumes1Data } from "../types/services-data";
 
 
 const logger = useLogger("robotcloud-client")
@@ -107,6 +106,16 @@ export const getServiceInstance = (
   service_id: string
 ) => {
   return robotcloudApi.get<ServiceInstanceDetails>(`projects/${prjId}/services/${service_type}/instances/${service_id}`);
+}
+
+export const getProjectClassifiers = (
+  prjId: string,
+  params?: ProjectClassifiersRequestParams
+): Promise<AxiosResponse<Classifier[]>> => {
+    logger.info(`Get project ${prjId} classifiers`)
+    return robotcloudApi.get<Classifier[]>(`projects/${prjId}/classifiers`, {
+        params,
+    });
 }
 
 export const getClassifier = (

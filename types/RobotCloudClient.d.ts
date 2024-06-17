@@ -1,5 +1,3 @@
-import { RoomClime1Data } from "./services-data"
-
 export type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
 export type RegimState = "COLD"|"HEAT"|"AUTO"
 
