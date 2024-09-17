@@ -1,6 +1,7 @@
 export type TemperatureUnit = "CELSIUS" | "FAHRENHEIT"
 export type RegimState = "COLD"|"HEAT"|"AUTO"
 
+export type OrganizationAccessLevel = "STAFF" | "STANDARD" | "ADMIN" | "SUPERUSER" | "MASTER"
 export type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
 export type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
 
@@ -72,7 +73,7 @@ export interface RobotCloudUserDetails {
     last_name: string;
     email: string;
     org_id: string;
-    org_access: number;
+    org_access: OrganizationAccessLevel;
 }
 
 
