@@ -102,7 +102,17 @@ class AirQualityClient implements ServiceTypeClient<AirQuality1AlertEventValue,
         periode: string,
         params: ServiceInstanceHistoricAggregateParams
     ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>> {
-        throw Error("Not implemented method")
+      return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>[]>(
+        `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/historic/data/aggregate`, {
+          params: {
+            start_time: startTime,
+            end_time: endTime,
+            function: aggFunction,
+            periode,
+            ...params
+          }
+        }
+      )
     }
 }
 
