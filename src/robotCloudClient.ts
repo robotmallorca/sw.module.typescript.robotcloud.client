@@ -7,7 +7,7 @@ import {
     ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, 
     RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudServiceTypeDetails, RobotCloudUserDetails, 
     RoomGrouping1DataEventValue, 
-    RoomGrouping1InstanceDeviceConfig, ServiceInstanceDataRequestParams, 
+    RoomGrouping1InstanceDeviceConfig,
     ServiceInstancesRequestParams, 
     SubsystemRequestParams
 } from "../types/RobotCloudClient";

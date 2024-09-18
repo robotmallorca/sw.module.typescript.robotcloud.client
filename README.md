@@ -16,7 +16,7 @@ import { clientConfig } from "@robotbas/robotcloud-client";
 
 const appConfigs = useRuntimeConfig().public; // Get aplication global configs
 // Configure Robotcloud API
-clientConfig.baseURL = appConfigs.robotCloudUrl
+clientConfig.baseURL = appConfigs.robotcloudUrl
 clientConfig.checkToken = async () => {
     const token = await checkToken()
     if (!token) {
