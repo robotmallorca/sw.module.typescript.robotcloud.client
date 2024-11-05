@@ -37,27 +37,7 @@ export interface RoomGuestStatus1AlertEventValue {
     medical_alarm: boolean;
 }
 
-export interface RoomGuestStatus1EventValue {
-    sold: boolean;
-    occupied: boolean;
-    do_not_disturb: boolean;
-    make_up_room: boolean;
-    tray_status: "IDLE"|'READY'|'FINISH';
-    remote_occupation: boolean;
-    door_open: boolean;
-    window_open: boolean;
-    medical_alarm: boolean; // TODO: ???
-}
 
-export interface RoomGuestStatusInstanceConfigParams {
-    sold?: boolean;
-    do_not_disturb?: boolean;
-    make_up_room?: boolean;
-    remote_occupation?: boolean;
-    door_open_time_limit?: number;
-    window_open_time_limit?: number;
-    medical_alarm?: boolean;
-}
 
 
 ////

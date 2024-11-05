@@ -19,4 +19,15 @@ export interface RoomClimeConfigurationParams {
     high_humidity_level?: number;
     fancoil_on_time_limit?: number;
     temperature_units?: TemperatureUnit;
-  }
+}
+
+export interface RoomGuestStatusConfigurationParams {
+    sold?: boolean;
+    vip?: boolean;
+    do_not_disturb?: boolean;
+    make_up_room?: boolean;
+    remote_occupation?: boolean;
+    door_open_time_limit?: number;
+    window_open_time_limit?: number;
+    medical_alarm?: boolean;
+}

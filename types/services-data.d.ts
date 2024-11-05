@@ -36,3 +36,16 @@ export interface RoomConsumes1Data {
     guest_co2_footprint: number;
     guest_tree_equivalent: number;
 }
+
+export interface RoomGuestStatus1Data {
+    sold: boolean;
+    vip: boolean;
+    occupied: boolean;
+    do_not_disturb: boolean;
+    make_up_room: boolean;
+    tray_status: "IDLE"|'READY'|'FINISH';
+    remote_occupation: boolean;
+    door_open: boolean;
+    window_open: boolean;
+    medical_alarm: boolean;
+}
