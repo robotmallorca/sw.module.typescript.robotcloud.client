@@ -67,6 +67,12 @@ export interface RobotCloudProject {
 }
 
 /** USERS */
+export interface RobotCloudUserAppAccess {
+    app_id: string;
+    app_name: string;
+    access_level: AppAccessLevel;
+}
+
 export interface RobotCloudUserDetails {
     username: string;
     name: string;
@@ -74,6 +80,10 @@ export interface RobotCloudUserDetails {
     email: string;
     org_id: string;
     org_access: OrganizationAccessLevel;
+    default_project_access: ProjectAccessLevel;
+    default_app_access: RobotCloudUserAppAccess[];
+    access_all_projects: boolean;
+    blocked: true;
 }
 
 

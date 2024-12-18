@@ -44,9 +44,9 @@ export const getLocationServiceInstances = (
 // USERS ENDPOINTS
 export const getUser = (
     username: string
-  ): Promise<AxiosResponse<RobotCloudUserDetails>> => {
+): Promise<AxiosResponse<RobotCloudUserDetails>> => {
     return robotcloudApi.get<RobotCloudUserDetails>(`users/${username}`);
-  };
+};
 
 // PROJECT ENDPOINTS
 export const getProjects = (
