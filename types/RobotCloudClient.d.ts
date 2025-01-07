@@ -86,6 +86,10 @@ export interface RobotCloudUserDetails {
     blocked: true;
 }
 
+export interface RobotCloudOrganizationDetails extends RobotCloudNamedItem {
+    description?: string;
+    address?: string;
+}
 
 export interface RobotCloudProjectDetails extends RobotCloudProject {
   version: number;
