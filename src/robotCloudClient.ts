@@ -5,7 +5,9 @@ import robotcloudApi from "robotCloudApi";
 import { 
     LocationServiceInstancesRequestParams, ProjectDetailsRequestParams, ProjectLocationsRequestParams, 
     ProjectRequestParams, ProjectTagRequestParams, RobotCloudDeviceDetails, RobotCloudNamedItem, 
+    RobotCloudOrganizationDetails, 
     RobotCloudProject, RobotCloudProjectDetails, RobotCloudServiceType, RobotCloudServiceTypeDetails, RobotCloudUserDetails, 
+    RobotCloudUserProject, 
     RoomGrouping1DataEventValue, 
     RoomGrouping1InstanceDeviceConfig,
     ServiceInstancesRequestParams, 
@@ -46,6 +48,25 @@ export const getUser = (
     username: string
 ): Promise<AxiosResponse<RobotCloudUserDetails>> => {
     return robotcloudApi.get<RobotCloudUserDetails>(`users/${username}`);
+};
+export const getUserProjects = (
+    username: string
+): Promise<AxiosResponse<RobotCloudUserProject[]>> => {
+    return robotcloudApi.get<RobotCloudUserProject[]>(`users/${username}/projects`);
+};
+
+
+// ORGANIZATIONS ENDPOINTS
+export const getOrganization = (
+    organizationId: string
+): Promise<AxiosResponse<RobotCloudOrganizationDetails>> => {
+    return robotcloudApi.get<RobotCloudOrganizationDetails>(`organizations/${organizationId}`);
+};
+
+export const getOrganizationProjects = (
+    organizationId: string
+): Promise<AxiosResponse<RobotCloudProject[]>> => {
+    return robotcloudApi.get<RobotCloudProject[]>(`organizations/${organizationId}/projects`);
 };
 
 // PROJECT ENDPOINTS

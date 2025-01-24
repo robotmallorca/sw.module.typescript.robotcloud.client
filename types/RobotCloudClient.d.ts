@@ -83,7 +83,14 @@ export interface RobotCloudUserDetails {
     default_project_access: ProjectAccessLevel;
     default_app_access: RobotCloudUserAppAccess[];
     access_all_projects: boolean;
-    blocked: true;
+    blocked: boolean;
+}
+
+export interface RobotCloudUserProject {
+    project_id: string;
+    project_name: string;
+    access_level: ProjectAccessLevel;
+    app_access_level: {app_id: string, app_name: string, access_level: AppAccessLevel}[]
 }
 
 export interface RobotCloudOrganizationDetails extends RobotCloudNamedItem {
