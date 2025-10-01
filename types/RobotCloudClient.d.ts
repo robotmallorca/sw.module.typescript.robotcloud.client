@@ -40,13 +40,6 @@ export interface ProjectTagRequestParams extends PaginableRequestParams {
   no_parent?: boolean;
 }
 
-export interface ServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
-  id?: string;
-  name?: string;
-  location_id?: string;
-  device_id?: string;
-  tag_id?: string[];
-}
 
 export interface LocationServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
   tag_id?: string[];
@@ -141,22 +134,4 @@ export interface RoomConsumes1AlertEventValue {
   high_daily_energy_thermal: boolean;
   high_daily_hot_water: boolean;
   high_daily_cold_water: boolean;
-}
-
-export interface RoomGrouping1DataEventValue {
-  replica_1_active: boolean;
-  replica_2_active: boolean;
-  replica_3_active: boolean;
-}
-
-/** SERVICE INSTANCES DEVICE CONFIG */
-export interface ServiceInstanceDeviceConfig {
-  device: string;
-}
-
-export interface RoomGrouping1InstanceDeviceConfig {
-  Main: ServiceInstanceDeviceConfig;
-  Replica_1: ServiceInstanceDeviceConfig;
-  Replica_2: ServiceInstanceDeviceConfig;
-  Replica_3: ServiceInstanceDeviceConfig;
 }

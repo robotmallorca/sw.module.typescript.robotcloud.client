@@ -1,4 +1,4 @@
-import * as robotCloudClient from "robotCloudClient";
+import { projectsClient } from "client/projects";
 import { RobotCloudPermissionsHelper } from "../../types/helpers";
 import { 
     AppAccessLevel, 
@@ -15,7 +15,7 @@ class RobotCloudPermissionsHelperImpl implements RobotCloudPermissionsHelper {
 
     public async checkProjectAccess(prjId: string, required_project_access: ProjectAccessLevel): Promise<boolean> {
 
-        const { data: project} = await robotCloudClient.getProjectDetails(prjId)
+        const { data: project} = await projectsClient.getProjectDetails(prjId)
         if (project.access_level == required_project_access) {
             return true
         }

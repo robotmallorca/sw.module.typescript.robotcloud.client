@@ -49,3 +49,20 @@ export interface RoomGuestStatus1Data {
     window_open: boolean;
     medical_alarm: boolean;
 }
+
+export interface ServiceInstanceDeviceConfig {
+  device: string;
+}
+
+export interface RoomGrouping1InstanceDeviceConfig {
+  Main: ServiceInstanceDeviceConfig;
+  Replica_1: ServiceInstanceDeviceConfig;
+  Replica_2: ServiceInstanceDeviceConfig;
+  Replica_3: ServiceInstanceDeviceConfig;
+}
+
+export interface RoomGrouping1DataEventValue {
+  replica_1_active: boolean;
+  replica_2_active: boolean;
+  replica_3_active: boolean;
+}
