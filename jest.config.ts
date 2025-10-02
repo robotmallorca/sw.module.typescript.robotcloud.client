@@ -8,5 +8,6 @@ export default {
     "^@/(.*)$": "<rootDir>/src/$1",
     '^client/(.*)$': '<rootDir>/src/client/$1',
     '^helpers/(.*)$': '<rootDir>/src/helpers/$1',
+    '^utils/(.*)$': '<rootDir>/src/utils/$1',
   },
 };
