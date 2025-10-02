@@ -1,0 +1,42 @@
+name: Create Release
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+permissions:
+  contents: write
+jobs:
+  release:
+    name: Release pushed tag
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for GitHub to generate commit-based notes
+
+      - name: Check if RELEASE.md exists and is non-empty
+        id: release_note_check
+        run: |
+          if [ -s RELEASE.md ]; then
+            echo "has_notes=true" >> $GITHUB_OUTPUT
+            body=$(cat RELEASE.md)
+            echo "body<<EOF" >> $GITHUB_OUTPUT
+            echo "$body" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "has_notes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: ${{ steps.release_note_check.outputs.has_notes == 'true' && steps.release_note_check.outputs.body || '' }}
+          generate_release_notes: ${{ steps.release_note_check.outputs.has_notes != 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
