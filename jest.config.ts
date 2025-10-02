@@ -4,4 +4,7 @@ export default {
   roots: ["<rootDir>", "./src"],
   modulePaths: ["<rootDir>", "./src"],
   moduleDirectories: ["node_modules"],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
 };

@@ -1,8 +1,7 @@
 import { robotCloudPermissionsHelper } from "helpers";
-import { projectsClient } from '../src/client/projects'
 import { RobotCloudProjectDetails } from "index";
 
-jest.mock("../src/client/projects", () => {
+jest.mock("client/projects", () => {
   return {
     projectsClient: {
       getProjectDetails: jest.fn(
