@@ -3,7 +3,7 @@ export default {
   testEnvironment: "node",
   roots: ["<rootDir>", "./src"],
   modulePaths: ["<rootDir>", "./src"],
-  moduleDirectories: ["node_modules"],
+  moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^client/(.*)$": "<rootDir>/src/client/$1",
