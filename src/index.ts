@@ -1,7 +1,6 @@
 import robotcloudApi from "robotCloudApi"
 import clientConfig from "config"
 
-export * as robotcloudClient from "robotCloudClient"
 export * as robotCloudToken from "helpers/robotCloudToken"
 
 export * from "client/services"
