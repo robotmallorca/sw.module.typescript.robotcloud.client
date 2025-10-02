@@ -28,7 +28,7 @@ export const decodeToken = (token: string): RobotCloudJWTPayload | undefined => 
   return payload as RobotCloudJWTPayload;
 };
 
-export const isTokenExpired = (payload: RobotCloudJWTPayload): boolean => {
+export const needRenew = (payload: RobotCloudJWTPayload): boolean => {
   const expirationDate = new Date(payload.exp * 1000);
   expirationDate.setMinutes(
     expirationDate.getMinutes() - clientConfig.tokenMinutesBeforeExpirationRenew
