@@ -1,120 +1,143 @@
 import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
-import { 
-    AirQuality1AlertEventValue, AirQuality1DataEventValue, HistoricAggregateFunction, ServiceDataMeasurement, 
-    ServiceDataRequestParams, 
-    ServiceInstanceHistoricAggregateParams, 
-    ServiceInstanceHistoricParams, 
-    ServiceTypeClient 
+import {
+  AirQuality1AlertEventValue,
+  AirQuality1DataEventValue,
+  HistoricAggregateFunction,
+  ServiceDataMeasurement,
+  ServiceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+  ServiceTypeAlertStatusClient,
+  ServiceTypeClient,
 } from "../../../types/services";
 import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
 
-class AirQualityClient implements ServiceTypeClient<AirQuality1AlertEventValue, 
-                                                    AirQuality1DataEventValue,
-                                                    any> {
+class AirQualityClient
+  implements
+    ServiceTypeClient<
+      AirQuality1AlertEventValue,
+      AirQuality1DataEventValue,
+      any
+    >
+{
+  get alertStatus() {
+    throw Error("Not implemented method");
+    return null as unknown as ServiceTypeAlertStatusClient<any>;
+  }
+  getAlerts(
+    prjId: string,
+    params?: ServiceDataRequestParams
+  ): Promise<
+    AxiosResponse<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>
+  > {
+    return robotcloudApi.get<
+      ServiceDataMeasurement<AirQuality1AlertEventValue>[]
+    >(`/projects/${prjId}/services/AirQuality_1/alert`, {
+      params,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+  }
 
-    getAlerts(
-        prjId: string,
-        params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>(
-            `/projects/${prjId}/services/AirQuality_1/alert`,
-            { 
-              params,
-              headers: {
-                "Accept": 'application/json'
-              }
-            }
-          )
-    }
+  getData(
+    prjId: string,
+    params?: ServiceDataRequestParams
+  ): Promise<
+    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
+  > {
+    return robotcloudApi.get<
+      ServiceDataMeasurement<AirQuality1DataEventValue>[]
+    >(`/projects/${prjId}/services/AirQuality_1/data`, {
+      params,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+  }
 
-    getData (
-        prjId: string,
-        params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>[]>(
-            `/projects/${prjId}/services/AirQuality_1/data`,
-            { 
-              params,
-              headers: {
-                "Accept": 'application/json'
-              }
-            }
-          )
-    }
+  getInstanceConfiguration<T>(
+    prjId: string,
+    instanceId: string
+  ): Promise<AxiosResponse<T>> {
+    throw Error("Not implemented method");
+  }
 
-    getInstanceConfiguration<T> (
-        prjId: string,
-        instanceId: string
-    ): Promise<AxiosResponse<T>> {
-        throw Error("Not implemented method")
-    }
+  putInstanceConfiguration<T>(
+    prjId: string,
+    instanceId: string,
+    data: T
+  ): Promise<AxiosResponse<T>> {
+    throw Error("Not implemented method");
+  }
 
-    putInstanceConfiguration<T> (
-        prjId: string,
-        instanceId: string,
-        data: T
-    ): Promise<AxiosResponse<T>> {
-        throw Error("Not implemented method")
-    }
+  getInstanceData(
+    prjId: string,
+    instanceId: string,
+    params?: ServiceInstanceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>>> {
+    return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>>(
+      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/data`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
 
-    getInstanceData (
-        prjId: string,
-        instanceId: string,
-        params?: ServiceInstanceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>>> {
-        return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>>(
-            `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/data`,
-            { 
-                params,
-                headers: {
-                    "Accept": 'application/json'
-                }
-            }
-        )
-    }
+  getInstanceHistoric(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    params: ServiceInstanceHistoricParams
+  ): Promise<
+    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
+  > {
+    return robotcloudApi.get<
+      ServiceDataMeasurement<AirQuality1DataEventValue>[]
+    >(
+      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/configuration`,
+      {
+        params: {
+          start_time: startTime,
+          end_time: endTime,
+          ...params,
+        },
+      }
+    );
+  }
 
-    getInstanceHistoric(
-        prjId: string,
-        instanceId: string,
-        startTime: Date,
-        endTime: Date,
-        params: ServiceInstanceHistoricParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>> {
-        return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>[]>(
-            `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/configuration`, {
-                params: {
-                    start_time: startTime,
-                    end_time: endTime,
-                    ...params
-                }
-            }
-        )
-    }
-
-    getInstanceHistoricAggregate(
-        prjId: string,
-        instanceId: string,
-        startTime: Date,
-        endTime: Date,
-        aggFunction: HistoricAggregateFunction,
-        periode: string,
-        params: ServiceInstanceHistoricAggregateParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>> {
-      return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>[]>(
-        `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/historic/data/aggregate`, {
-          params: {
-            start_time: startTime,
-            end_time: endTime,
-            function: aggFunction,
-            periode,
-            ...params
-          }
-        }
-      )
-    }
+  getInstanceHistoricAggregate(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    aggFunction: HistoricAggregateFunction,
+    periode: string,
+    params: ServiceInstanceHistoricAggregateParams
+  ): Promise<
+    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
+  > {
+    return robotcloudApi.get<
+      ServiceDataMeasurement<AirQuality1DataEventValue>[]
+    >(
+      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/historic/data/aggregate`,
+      {
+        params: {
+          start_time: startTime,
+          end_time: endTime,
+          function: aggFunction,
+          periode,
+          ...params,
+        },
+      }
+    );
+  }
 }
 
-
-export const airQualityClient = new AirQualityClient()
+export const airQualityClient = new AirQualityClient();

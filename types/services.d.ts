@@ -38,7 +38,28 @@ export interface RoomGuestStatus1AlertEventValue {
 }
 
 
+////
+// Alert status interfaces
+////
 
+export interface ServiceTypeAlertStatusResponse<T extends string> {
+  instance: string;
+  time_mark: string;
+  alert_status: Record<T, ServiceTypeAlertStatus>;
+}
+export interface ServiceTypeAlertStatus {
+  acknowledged: boolean;
+  ack_time: string;
+  ack_user: string; // username
+  active_time: string;
+  deactive_time: string;
+  activation_count: number;
+}
+
+export interface ServiceTypeAlertStatusClient<T extends string> {
+  get(instance_id: string): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
+  put(instance_id: string, status: Record<T, boolean>): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
+}
 
 ////
 // Generic interface  types
@@ -47,7 +68,8 @@ export interface RoomGuestStatus1AlertEventValue {
 export type HistoricAggregateFunction = "count"|"increase"|"mean"|"first"|"last"|"max"|"min"|"amax"|"amin"|"pmax"|"pmin"|"nmax"|"nmin";
 
 export interface ServiceTypeClient<T_ALERTS, T_DATA, T_CONFIG> {
-    getAlerts(
+  get alertStatus(): ServiceTypeAlertStatusClient<any>;  
+  getAlerts(
         prjId: string,
         params?: ServiceDataRequestParams
     ): Promise<AxiosResponse<ServiceDataMeasurement<T_ALERTS>[]>>;
