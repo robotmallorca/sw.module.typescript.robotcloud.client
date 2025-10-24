@@ -57,6 +57,7 @@ export interface ServiceTypeAlertStatus {
 }
 
 export interface ServiceTypeAlertStatusClient<T extends string> {
+  getAll(): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
   get(instance_id: string): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
   put(instance_id: string, status: Record<T, boolean>): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
 }

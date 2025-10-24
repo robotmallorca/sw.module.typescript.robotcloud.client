@@ -14,6 +14,12 @@ export class GenericAlertStatusClient<T extends string>
   constructor(serviceName: string) {
     this.serviceName = serviceName;
   }
+  getAll(
+  ): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>> {
+    return robotcloudApi.get<ServiceTypeAlertStatusResponse<T>>(
+      `/services/${this.serviceName}/alertstatus`
+    );
+  }
 
   get(
     instance_id: string
