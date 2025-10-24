@@ -1,6 +1,6 @@
 import { useLogger } from "utils/logger";;
 import { ProjectTagRequestParams } from "../../types/RobotCloudClient";
-import { TagsClient } from '../client/projects/tags';
+import { tagsClient, TagsClient } from '../client/projects/tags';
 import {
   ProjectTagTreeNode,
   ProjectTagsTree,

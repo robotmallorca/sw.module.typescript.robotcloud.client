@@ -4,6 +4,9 @@ import clientConfig from "config"
 export * as robotCloudToken from "helpers/robotCloudToken"
 
 export * from "client/services"
+export * from "client/projects"
+export * from "client/users"
+export * from "client/organizations"
 export * from "config"
 
 export * from "helpers"
