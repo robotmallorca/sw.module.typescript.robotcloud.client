@@ -1,117 +1,112 @@
 import { AxiosResponse } from "axios";
 import { ServiceInstanceRead } from "./ServiceInstanceRead";
-import { ServiceInstanceDataRequestParams, SubsystemRequestParams } from "./RobotCloudClient";
+import {
+  ServiceInstanceDataRequestParams,
+  SubsystemRequestParams,
+  SubsystemTagsRequestParams,
+} from "./RobotCloudClient";
 
-export type MeasurementStatus =  "GOOD"|"NOT_MEASURED"|"INVALID_VALUE"|"DEVICE_ERROR";
+export type MeasurementStatus =
+  | "GOOD"
+  | "NOT_MEASURED"
+  | "INVALID_VALUE"
+  | "DEVICE_ERROR";
 
 export interface ServiceDataMeasurement<T> extends ServiceInstanceRead<T> {
-    status: MeasurementStatus;
+  status: MeasurementStatus;
 }
 
 export interface ServiceDataRequestParams extends SubsystemRequestParams {
-    tag_id?: string | string[];
+  tag_id?: string | string[];
 }
 export interface ServiceInstanceHistoricAggregateParams {
-    offset?: string;
-    property?: any[];
-    maxSize?: number;
-} 
+  offset?: string;
+  property?: any[];
+  maxSize?: number;
+}
 export interface ServiceInstanceHistoricParams {
-    status?: MeasurementStatus;
-    property?: any[];
-    maxSize?: number;
-} 
+  status?: MeasurementStatus;
+  property?: any[];
+  maxSize?: number;
+}
 
 export interface AirQuality1DataEventValue {
-    co2: number;
+  co2: number;
 }
 
 export interface AirQuality1AlertEventValue {
-    high_co2: boolean;
+  high_co2: boolean;
 }
-
 
 export interface RoomGuestStatus1AlertEventValue {
-    door_open_overtime: boolean;
-    window_open_overtime: boolean;
-    medical_alarm: boolean;
+  door_open_overtime: boolean;
+  window_open_overtime: boolean;
+  medical_alarm: boolean;
 }
 
-
-////
-// Alert status interfaces
-////
-
-export interface ServiceTypeAlertStatusResponse<T extends string> {
-  instance: string;
-  time_mark: string;
-  alert_status: Record<T, ServiceTypeAlertStatus>;
-}
-export interface ServiceTypeAlertStatus {
-  acknowledged: boolean;
-  ack_time: string;
-  ack_user: string; // username
-  active_time: string;
-  deactive_time: string;
-  activation_count: number;
-}
-
-export interface ServiceTypeAlertStatusClient<T extends string> {
-  getAll(): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
-  get(instance_id: string): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
-  put(instance_id: string, status: Record<T, boolean>): Promise<AxiosResponse<ServiceTypeAlertStatusResponse<T>>>;
-}
 
 ////
 // Generic interface  types
 ////
 
-export type HistoricAggregateFunction = "count"|"increase"|"mean"|"first"|"last"|"max"|"min"|"amax"|"amin"|"pmax"|"pmin"|"nmax"|"nmin";
+export type HistoricAggregateFunction =
+  | "count"
+  | "increase"
+  | "mean"
+  | "first"
+  | "last"
+  | "max"
+  | "min"
+  | "amax"
+  | "amin"
+  | "pmax"
+  | "pmin"
+  | "nmax"
+  | "nmin";
 
 export interface ServiceTypeClient<T_ALERTS, T_DATA, T_CONFIG> {
-  get alertStatus(): ServiceTypeAlertStatusClient<any>;  
   getAlerts(
-        prjId: string,
-        params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<T_ALERTS>[]>>;
+    prjId: string,
+    params?: ServiceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T_ALERTS>[]>>;
 
-    getData (
-        prjId: string,
-        params?: ServiceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  getData(
+    prjId: string,
+    params?: ServiceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
 
-    getInstanceConfiguration (
-        prjId: string,
-        instanceId: string
-    ): Promise<AxiosResponse<T_CONFIG>>;
+  getInstanceConfiguration(
+    prjId: string,
+    instanceId: string
+  ): Promise<AxiosResponse<T_CONFIG>>;
 
-    putInstanceConfiguration (
-        prjId: string,
-        instanceId: string,
-        data: T_CONFIG
-    ): Promise<AxiosResponse<T_CONFIG>>;
+  putInstanceConfiguration(
+    prjId: string,
+    instanceId: string,
+    data: T_CONFIG
+  ): Promise<AxiosResponse<T_CONFIG>>;
 
-    getInstanceData (
-        prjId: string,
-        instanceId: string,
-        params?: ServiceInstanceDataRequestParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>>>;
+  getInstanceData(
+    prjId: string,
+    instanceId: string,
+    params?: ServiceInstanceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>>>;
 
-    getInstanceHistoric (
-        prjId: string,
-        instanceId: string,
-        startTime: Date,
-        endTime: Date,
-        params: ServiceInstanceHistoricParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  getInstanceHistoric(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    params: ServiceInstanceHistoricParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
 
-    getInstanceHistoricAggregate(
-        prjId: string,
-        instanceId: string,
-        startTime: Date,
-        endTime: Date,
-        aggFunction: HistoricAggregateFunction,
-        periode: string,
-        params: ServiceInstanceHistoricAggregateParams
-    ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  getInstanceHistoricAggregate(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    aggFunction: HistoricAggregateFunction,
+    periode: string,
+    params: ServiceInstanceHistoricAggregateParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
 }

@@ -15,22 +15,16 @@ import {
 } from "../../../types/services";
 import { RoomClime1Data } from "../../../types/services-data";
 import { RoomClimeConfigurationParams } from "../../../types/services-configuration";
-import { GenericAlertStatusClient } from "./generics";
 
 
-type RoomClimeAlertsKeys =
+export type RoomClimeAlertsKeys =
   | "high_temperature"
   | "low_temperature"
   | "high_humidity"
   | "fancoil_on_overtime";
 
-export class RoomClientAlertStatusClient extends GenericAlertStatusClient<RoomClimeAlertsKeys> {
-  constructor() {
-    super("RoomClime_1");
-  }
-}
 
-class RoomClimeClient
+export class RoomClimeClient
   implements
     ServiceTypeClient<
       RoomClime1AlertEventValue,
@@ -38,15 +32,6 @@ class RoomClimeClient
       RoomClimeConfigurationParams
     >
 {
-  private _alertstatusClient: RoomClientAlertStatusClient;
-  get alertStatus() {
-    return this._alertstatusClient
-  }
-
-  constructor() {
-    this._alertstatusClient = new RoomClientAlertStatusClient();
-  }
-
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams

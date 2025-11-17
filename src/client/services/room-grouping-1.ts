@@ -7,7 +7,6 @@ import {
   ServiceDataRequestParams,
   ServiceInstanceHistoricAggregateParams,
   ServiceInstanceHistoricParams,
-  ServiceTypeAlertStatusClient,
   ServiceTypeClient,
 } from "../../../types/services";
 import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
@@ -24,11 +23,6 @@ class RoomGroupingClient
       RoomGrouping1InstanceDeviceConfig
     >
 {
-  get alertStatus() {
-    throw Error("Not implemented method");
-    return null as unknown as ServiceTypeAlertStatusClient<any>;
-  }
-
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams

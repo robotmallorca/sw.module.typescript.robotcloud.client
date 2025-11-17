@@ -7,7 +7,6 @@ import {
   ServiceDataRequestParams,
   ServiceInstanceHistoricAggregateParams,
   ServiceInstanceHistoricParams,
-  ServiceTypeAlertStatusClient,
   ServiceTypeClient,
 } from "../../../types/services";
 import {
@@ -20,10 +19,6 @@ class RoomConsumesClient
   implements
     ServiceTypeClient<RoomConsumes1AlertEventValue, RoomConsumes1Data, any>
 {
-  get alertStatus() {
-    throw Error("Not implemented method");
-    return null as unknown as ServiceTypeAlertStatusClient<any>;
-  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams

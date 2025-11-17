@@ -26,8 +26,12 @@ export interface PaginableRequestParams {
   maxSize?: number;
 }
 
-export interface ProjectLocationsRequestParams extends SubsystemRequestParams, PaginableRequestParams {
+export interface SubsystemTagsRequestParams extends SubsystemRequestParams {
   tag_id?: string | string[];
+}
+
+export interface ProjectLocationsRequestParams extends SubsystemTagsRequestParams, PaginableRequestParams {
+  
 }
 
 
