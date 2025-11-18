@@ -1,10 +1,10 @@
 import { useLogger } from "utils/logger";;
-import { ProjectTagRequestParams } from "../../types/RobotCloudClient";
-import { tagsClient, TagsClient } from '../client/projects/tags';
+import { TagsClient } from '../client/projects/tags';
 import {
   ProjectTagTreeNode,
   ProjectTagsTree,
 } from "../../types/ProjectTag";
+import { ProjectTagRequestParams } from "../../types/request-params";
 
 const logger = useLogger("tags-helper");
 

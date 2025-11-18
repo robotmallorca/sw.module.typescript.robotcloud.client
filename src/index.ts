@@ -5,8 +5,9 @@ export * as robotCloudToken from "helpers/robotCloudToken"
 
 export * from "client/services"
 export * from "client/projects"
-export * from "client/users"
+export * from "client/alerts"
 export * from "client/organizations"
+export * from "client/users"
 export * from "config"
 
 export * from "helpers"
