@@ -59,6 +59,11 @@ export interface LocationServiceInstancesRequestParams extends BaseFullPaginable
   
 }
 
+export interface AlertLogsListRequestParams extends BaseFullPaginableRequestParams {
+
+}
+
+
 export interface ServiceInstancesRequestParams extends BaseFullPaginableRequestParams {
   id?: string;
   name?: string;
