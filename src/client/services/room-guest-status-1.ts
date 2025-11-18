@@ -5,23 +5,35 @@ import {
   HistoricAggregateFunction,
   RoomGuestStatus1AlertEventValue,
   ServiceDataMeasurement,
-  ServiceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
   ServiceTypeClient,
 } from "../../../types/services";
-import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
 import { RoomGuestStatus1Data } from "../../../types/services-data";
 import { RoomGuestStatusConfigurationParams } from "../../../types/services-configuration";
+import { GenericInstanceConfigClient } from "./generics";
+import {
+  ServiceDataRequestParams,
+  ServiceInstanceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+} from "../../../types/request-params";
+
+export class RoomGuestStatusConfigClient extends GenericInstanceConfigClient<RoomGuestStatusConfigurationParams> {
+  constructor() {
+    super("RoomGuestStatus_1");
+  }
+}
 
 class RoomGuestStatusClient
   implements
-    ServiceTypeClient<
-      RoomGuestStatus1AlertEventValue,
-      RoomGuestStatus1Data,
-      RoomGuestStatusConfigurationParams
-    >
+    ServiceTypeClient<RoomGuestStatus1AlertEventValue, RoomGuestStatus1Data>
 {
+  private _configurationClient: RoomGuestStatusConfigClient;
+  get configuration() {
+    return this._configurationClient;
+  }
+  constructor() {
+    this._configurationClient = new RoomGuestStatusConfigClient();
+  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -133,3 +145,4 @@ class RoomGuestStatusClient
 }
 
 export const roomGuestStatusClient = new RoomGuestStatusClient();
+

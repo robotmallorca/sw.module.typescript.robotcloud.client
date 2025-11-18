@@ -2,10 +2,10 @@ import type { AxiosResponse } from "axios";
 
 import { useLogger } from "utils/logger";
 import robotcloudApi from "robotCloudApi";
-import { ProjectTagRequestParams } from "../../../types/RobotCloudClient";
 import {
   ProjectTag,
 } from "../../../types/ProjectTag";
+import { ProjectTagRequestParams } from "../../../types/request-params";
 
 const logger = useLogger("service-instances-client");
 

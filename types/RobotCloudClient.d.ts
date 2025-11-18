@@ -10,45 +10,6 @@ export type RobotCloudServiceType = "RoomClime_1"|"RoomGuestStatus_1"|"AirQualit
 // Desired fancoil speed (0 = Auto, 1..3 = Manual Speed)
 export type FancoilSpeedState = 0|1|2|3;
 
-export interface ProjectRequestParams {
-
-}
-
-export interface ProjectDetailsRequestParams {
-
-}
-export interface SubsystemRequestParams {
-  subsystem_id?: string;
-}
-
-export interface PaginableRequestParams {
-  startIndex?: number;
-  maxSize?: number;
-}
-
-export interface SubsystemTagsRequestParams extends SubsystemRequestParams {
-  tag_id?: string | string[];
-}
-
-export interface ProjectLocationsRequestParams extends SubsystemTagsRequestParams, PaginableRequestParams {
-  
-}
-
-
-export interface ServiceInstanceDataRequestParams {
-
-}
-
-export interface ProjectTagRequestParams extends PaginableRequestParams {
-  parent_tag?: string;
-  no_parent?: boolean;
-}
-
-
-export interface LocationServiceInstancesRequestParams extends SubsystemRequestParams, PaginableRequestParams {
-  tag_id?: string[];
-}
-
 
 /** RESPONSE **/
 
@@ -70,6 +31,11 @@ export interface RobotCloudUserAppAccess {
     access_level: AppAccessLevel;
 }
 
+export interface RobotCloudUserSimple {
+    username: string;
+    name: string;
+    last_name: string;
+}
 export interface RobotCloudUserDetails {
     username: string;
     name: string;

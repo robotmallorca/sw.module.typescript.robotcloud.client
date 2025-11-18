@@ -1,21 +1,21 @@
 import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
-import {
-  RoomClime1AlertEventValue,
-  ServiceInstanceDataRequestParams,
-} from "../../../types/RobotCloudClient";
+import { RoomClime1AlertEventValue } from "../../../types/RobotCloudClient";
 import {
   ServiceDataMeasurement,
-  ServiceDataRequestParams,
-  ServiceInstanceHistoricParams,
   ServiceTypeClient,
   HistoricAggregateFunction,
-  ServiceInstanceHistoricAggregateParams,
 } from "../../../types/services";
 import { RoomClime1Data } from "../../../types/services-data";
 import { RoomClimeConfigurationParams } from "../../../types/services-configuration";
-
+import { GenericInstanceConfigClient } from "./generics";
+import {
+  ServiceDataRequestParams,
+  ServiceInstanceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+} from "../../../types/request-params";
 
 export type RoomClimeAlertsKeys =
   | "high_temperature"
@@ -23,15 +23,22 @@ export type RoomClimeAlertsKeys =
   | "high_humidity"
   | "fancoil_on_overtime";
 
+export class RoomClimeConfigClient extends GenericInstanceConfigClient<RoomClimeConfigurationParams> {
+  constructor() {
+    super("RoomClime_1");
+  }
+}
 
 export class RoomClimeClient
-  implements
-    ServiceTypeClient<
-      RoomClime1AlertEventValue,
-      RoomClime1Data,
-      RoomClimeConfigurationParams
-    >
+  implements ServiceTypeClient<RoomClime1AlertEventValue, RoomClime1Data>
 {
+  private _configurationClient: RoomClimeConfigClient;
+  get configuration() {
+    return this._configurationClient;
+  }
+  constructor() {
+    this._configurationClient = new RoomClimeConfigClient();
+  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -60,26 +67,6 @@ export class RoomClimeClient
           Accept: "application/json",
         },
       }
-    );
-  }
-
-  getInstanceConfiguration(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<RoomClimeConfigurationParams>> {
-    return robotcloudApi.get<RoomClimeConfigurationParams>(
-      `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`
-    );
-  }
-
-  putInstanceConfiguration(
-    prjId: string,
-    instanceId: string,
-    data: RoomClimeConfigurationParams
-  ): Promise<AxiosResponse<RoomClimeConfigurationParams>> {
-    return robotcloudApi.put<RoomClimeConfigurationParams>(
-      `/projects/${prjId}/services/RoomClime_1/instances/${instanceId}/configuration`,
-      data
     );
   }
 
@@ -140,3 +127,4 @@ export class RoomClimeClient
 }
 
 export const roomClimeClient = new RoomClimeClient();
+

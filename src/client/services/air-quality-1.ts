@@ -6,21 +6,33 @@ import {
   AirQuality1DataEventValue,
   HistoricAggregateFunction,
   ServiceDataMeasurement,
-  ServiceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
   ServiceTypeClient,
 } from "../../../types/services";
-import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
+import {
+  ServiceDataRequestParams,
+  ServiceInstanceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+} from "../../../types/request-params";
+import { GenericInstanceConfigClient } from "./generics";
+
+export class AirQualityConfigClient extends GenericInstanceConfigClient<any> {
+  constructor() {
+    super("AirQuality_1");
+  }
+}
 
 class AirQualityClient
   implements
-    ServiceTypeClient<
-      AirQuality1AlertEventValue,
-      AirQuality1DataEventValue,
-      any
-    >
+    ServiceTypeClient<AirQuality1AlertEventValue, AirQuality1DataEventValue>
 {
+  private _configurationClient: AirQualityConfigClient;
+  get configuration() {
+    return this._configurationClient;
+  }
+  constructor() {
+    this._configurationClient = new AirQualityConfigClient();
+  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -51,21 +63,6 @@ class AirQualityClient
         Accept: "application/json",
       },
     });
-  }
-
-  getInstanceConfiguration<T>(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<T>> {
-    throw Error("Not implemented method");
-  }
-
-  putInstanceConfiguration<T>(
-    prjId: string,
-    instanceId: string,
-    data: T
-  ): Promise<AxiosResponse<T>> {
-    throw Error("Not implemented method");
   }
 
   getInstanceData(
@@ -136,3 +133,4 @@ class AirQualityClient
 }
 
 export const airQualityClient = new AirQualityClient();
+

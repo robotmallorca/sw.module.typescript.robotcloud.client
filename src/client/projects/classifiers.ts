@@ -4,9 +4,9 @@ import { useLogger } from "utils/logger";
 import robotcloudApi from "robotCloudApi";
 import {
   Classifier,
-  ClassifierDetails,
-  ProjectClassifiersRequestParams,
+  ClassifierDetails
 } from "../../../types/ProjectClassifer";
+import { ProjectClassifiersRequestParams } from "../../../types/request-params";
 
 const logger = useLogger("classifiers-client");
 

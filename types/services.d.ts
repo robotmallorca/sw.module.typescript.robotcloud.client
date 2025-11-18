@@ -1,10 +1,7 @@
 import { AxiosResponse } from "axios";
 import { ServiceInstanceRead } from "./ServiceInstanceRead";
-import {
-  ServiceInstanceDataRequestParams,
-  SubsystemRequestParams,
-  SubsystemTagsRequestParams,
-} from "./RobotCloudClient";
+import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceInstanceHistoricAggregateParams, ServiceInstanceHistoricParams } from "./request-params";
+
 
 export type MeasurementStatus =
   | "GOOD"
@@ -14,20 +11,6 @@ export type MeasurementStatus =
 
 export interface ServiceDataMeasurement<T> extends ServiceInstanceRead<T> {
   status: MeasurementStatus;
-}
-
-export interface ServiceDataRequestParams extends SubsystemRequestParams {
-  tag_id?: string | string[];
-}
-export interface ServiceInstanceHistoricAggregateParams {
-  offset?: string;
-  property?: any[];
-  maxSize?: number;
-}
-export interface ServiceInstanceHistoricParams {
-  status?: MeasurementStatus;
-  property?: any[];
-  maxSize?: number;
 }
 
 export interface AirQuality1DataEventValue {
@@ -64,7 +47,15 @@ export type HistoricAggregateFunction =
   | "nmax"
   | "nmin";
 
-export interface ServiceTypeClient<T_ALERTS, T_DATA, T_CONFIG> {
+  
+export interface ServiceInstanceConfigClient<T> {
+  get(project_id: string, instance_id: string): Promise<AxiosResponse<T>>;
+  put(project_id: string, instance_id: string, configuration: T): Promise<AxiosResponse<T>>;
+}
+
+export interface ServiceTypeClient<T_ALERTS, T_DATA> {
+
+  get configuration(): ServiceInstanceConfigClient<any>;  
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -74,17 +65,6 @@ export interface ServiceTypeClient<T_ALERTS, T_DATA, T_CONFIG> {
     prjId: string,
     params?: ServiceDataRequestParams
   ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
-
-  getInstanceConfiguration(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<T_CONFIG>>;
-
-  putInstanceConfiguration(
-    prjId: string,
-    instanceId: string,
-    data: T_CONFIG
-  ): Promise<AxiosResponse<T_CONFIG>>;
 
   getInstanceData(
     prjId: string,

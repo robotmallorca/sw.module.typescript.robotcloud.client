@@ -2,18 +2,19 @@ import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
 import {
-  ProjectRequestParams,
   RobotCloudProject,
   RobotCloudProjectDetails,
-  ProjectDetailsRequestParams,
   RobotCloudServiceTypeDetails,
-  SubsystemRequestParams,
 } from "../../../types/RobotCloudClient";
+import {
+  ProjectDetailsRequestParams,
+  ProjectsRequestParams,
+  SubsystemRequestParams,
+} from "../../../types/request-params";
 
 class ProjectsClient {
-
   getProjects = (
-    params?: ProjectRequestParams
+    params?: ProjectsRequestParams
   ): Promise<AxiosResponse<RobotCloudProject[]>> => {
     return robotcloudApi.get<RobotCloudProject[]>("projects", {
       params,
@@ -42,3 +43,4 @@ class ProjectsClient {
   };
 }
 export const projectsClient = new ProjectsClient();
+

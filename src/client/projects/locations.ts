@@ -2,14 +2,13 @@ import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
 import {
-  LocationServiceInstancesRequestParams,
-  ProjectLocationsRequestParams,
   RobotCloudNamedItem,
   RobotCloudServiceType,
 } from "../../../types/RobotCloudClient";
 import {
   RobotCloudServiceInstance
 } from "../../../types/ServiceInstance";
+import { LocationServiceInstancesRequestParams, ProjectLocationsRequestParams } from "../../../types/request-params";
 
 interface RobotCloudLocationDetails {
   id: string;

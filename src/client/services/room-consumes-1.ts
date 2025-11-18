@@ -4,21 +4,34 @@ import robotcloudApi from "robotCloudApi";
 import {
   HistoricAggregateFunction,
   ServiceDataMeasurement,
-  ServiceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
   ServiceTypeClient,
 } from "../../../types/services";
-import {
-  RoomConsumes1AlertEventValue,
-  ServiceInstanceDataRequestParams,
-} from "../../../types/RobotCloudClient";
+import { RoomConsumes1AlertEventValue } from "../../../types/RobotCloudClient";
 import { RoomConsumes1Data } from "../../../types/services-data";
+import { GenericInstanceConfigClient } from "./generics";
+import {
+  ServiceDataRequestParams,
+  ServiceInstanceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+} from "../../../types/request-params";
+
+export class RoomConsumesConfigClient extends GenericInstanceConfigClient<any> {
+  constructor() {
+    super("RoomConsumes_1");
+  }
+}
 
 class RoomConsumesClient
-  implements
-    ServiceTypeClient<RoomConsumes1AlertEventValue, RoomConsumes1Data, any>
+  implements ServiceTypeClient<RoomConsumes1AlertEventValue, RoomConsumes1Data>
 {
+  private _configurationClient: RoomConsumesConfigClient;
+  get configuration() {
+    return this._configurationClient;
+  }
+  constructor() {
+    this._configurationClient = new RoomConsumesConfigClient();
+  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -48,21 +61,6 @@ class RoomConsumesClient
         },
       }
     );
-  }
-
-  getInstanceConfiguration<T>(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<T>> {
-    throw Error("Not implemented method");
-  }
-
-  putInstanceConfiguration<T>(
-    prjId: string,
-    instanceId: string,
-    data: T
-  ): Promise<AxiosResponse<T>> {
-    throw Error("Not implemented method");
   }
 
   getInstanceData = (
@@ -114,3 +112,4 @@ class RoomConsumesClient
 }
 
 export const roomConsumesClient = new RoomConsumesClient();
+

@@ -4,25 +4,36 @@ import robotcloudApi from "robotCloudApi";
 import {
   HistoricAggregateFunction,
   ServiceDataMeasurement,
-  ServiceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
   ServiceTypeClient,
 } from "../../../types/services";
-import { ServiceInstanceDataRequestParams } from "../../../types/RobotCloudClient";
 import {
   RoomGrouping1DataEventValue,
   RoomGrouping1InstanceDeviceConfig,
 } from "../../../types/services-data";
+import { GenericInstanceConfigClient } from "./generics";
+import {
+  ServiceDataRequestParams,
+  ServiceInstanceDataRequestParams,
+  ServiceInstanceHistoricAggregateParams,
+  ServiceInstanceHistoricParams,
+} from "../../../types/request-params";
+
+export class RoomGroupingConfigClient extends GenericInstanceConfigClient<RoomGrouping1InstanceDeviceConfig> {
+  constructor() {
+    super("RoomGrouping_1");
+  }
+}
 
 class RoomGroupingClient
-  implements
-    ServiceTypeClient<
-      any,
-      RoomGrouping1DataEventValue,
-      RoomGrouping1InstanceDeviceConfig
-    >
+  implements ServiceTypeClient<any, RoomGrouping1DataEventValue>
 {
+  private _configurationClient: RoomGroupingConfigClient;
+  get configuration() {
+    return this._configurationClient;
+  }
+  constructor() {
+    this._configurationClient = new RoomGroupingConfigClient();
+  }
   getAlerts(
     prjId: string,
     params?: ServiceDataRequestParams
@@ -44,25 +55,6 @@ class RoomGroupingClient
         Accept: "application/json",
       },
     });
-  }
-
-  getInstanceConfiguration(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<RoomGrouping1InstanceDeviceConfig>> {
-    return robotcloudApi.get<RoomGrouping1InstanceDeviceConfig>(
-      `/projects/${prjId}/services/RoomGrouping_1/instances/${instanceId}/configuration`
-    );
-  }
-
-  putInstanceConfiguration(
-    prjId: string,
-    instanceId: string,
-    data: RoomGrouping1InstanceDeviceConfig
-  ): Promise<AxiosResponse<RoomGrouping1InstanceDeviceConfig>> {
-    return robotcloudApi.put<RoomGrouping1InstanceDeviceConfig>(
-      `/projects/${prjId}/services/RoomGrouping_1/instances/${instanceId}/configuration`
-    );
   }
 
   getInstanceData = (
@@ -113,3 +105,4 @@ class RoomGroupingClient
 }
 
 export const roomGroupingClient = new RoomGroupingClient();
+
