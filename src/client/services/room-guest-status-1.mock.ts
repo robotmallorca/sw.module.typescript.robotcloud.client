@@ -65,33 +65,13 @@ class RoomGuestStatusClient
     );
   }
 
-  getInstanceConfiguration(
-    prjId: string,
-    instanceId: string
-  ): Promise<AxiosResponse<RoomGuestStatusConfigurationParams>> {
-    return robotcloudApi.get<RoomGuestStatusConfigurationParams>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/configuration`
-    );
-  }
-
-  putInstanceConfiguration(
-    prjId: string,
-    instanceId: string,
-    data: RoomGuestStatusConfigurationParams
-  ): Promise<AxiosResponse<RoomGuestStatusConfigurationParams>> {
-    return robotcloudApi.put<RoomGuestStatusConfigurationParams>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/configuration`,
-      data
-    );
-  }
-
   getInstanceData = (
     prjId: string,
     instanceId: string,
     params?: ServiceInstanceDataRequestParams
   ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1Data>>> => {
     return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1Data>>(
-      `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
+      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/data`,
       {
         params,
         headers: {
