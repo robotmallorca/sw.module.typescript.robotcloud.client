@@ -56,6 +56,11 @@ export interface AlertsClient {
     projectId: string,
     data: AlertLogAckAlerts
   ): Promise<AxiosResponse<AlertsLogsList>>;
+
+  getAggregatedLogs(
+    projectId: string,
+    params: AlertAggregatedLogsRequestParams
+  ): Promise<AxiosResponse<AlertsLogsList>>;
 }
 
 class AlertsClientImpl implements AlertsClient {
