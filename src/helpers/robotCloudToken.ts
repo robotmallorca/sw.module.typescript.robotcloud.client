@@ -8,10 +8,10 @@ const logger = useLogger("robotcloud-token")
 
 
 function parseJwt(token: string) {
-    if (!token) {
-      return;
-    }
-    return JSON.parse(atob(token.split('.')[1])); 
+  if (!token) {
+    return;
+  }
+  return JSON.parse(atob(token.split('.')[1]));
 }
 
 export interface RobotCloudNewTokenResponse {
@@ -37,16 +37,22 @@ export const needRenew = (payload: RobotCloudJWTPayload): boolean => {
   return currentDate >= expirationDate;
 };
 
+export const isExpired = (payload: RobotCloudJWTPayload): boolean => {
+  const expirationDate = new Date(payload.exp * 1000);
+  const currentDate = new Date();
+  return currentDate >= expirationDate;
+};
+
 export const renewToken = async (
   renew_token: string
 ): Promise<CheckTokenResponse> => {
-    logger.debug("Renewing token ...");
-    const cloudUrl = robotcloudApi.defaults.baseURL
-    const { data } = await axios.get(cloudUrl + "login/renew", {
-        headers: {
-            Authorization: `Bearer ${renew_token}`,
-        },
-    });
+  logger.debug("Renewing token ...");
+  const cloudUrl = robotcloudApi.defaults.baseURL
+  const { data } = await axios.get(cloudUrl + "login/renew", {
+    headers: {
+      Authorization: `Bearer ${renew_token}`,
+    },
+  });
 
   return {
     renewed: true,
@@ -56,31 +62,31 @@ export const renewToken = async (
 };
 
 export const validateToken = async (
-    access_token: string
+  access_token: string
 ): Promise<boolean> => {
-    logger.debug("Validate token ...");
-    const payload = decodeToken(access_token)
-    if (!payload) {
-        return false
+  logger.debug("Validate token ...");
+  const payload = decodeToken(access_token)
+  if (!payload) {
+    return false
+  }
+  const cloudUrl = robotcloudApi.defaults.baseURL
+  try {
+    const { data } = await axios.get(
+      cloudUrl + `users/${payload.sub}`,
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      logger.warn(`${error.message}: ${error.response?.data?.message ?? ''}`)
+    } else {
+      logger.warn(error)
     }
-    const cloudUrl = robotcloudApi.defaults.baseURL
-    try {
-        const { data } = await axios.get(
-            cloudUrl + `users/${payload.sub}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${access_token}`,
-                },
-            }
-        );  
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            logger.warn(`${error.message}: ${error.response?.data?.message ?? ''}`)
-        } else {
-            logger.warn(error)
-        }
-        return false;
-    }
+    return false;
+  }
 
-    return true
+  return true
 };

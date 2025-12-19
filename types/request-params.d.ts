@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 import { MeasurementStatus } from "./services";
@@ -16,64 +16,69 @@ export interface PaginableRequestParams {
   startIndex?: number;
   maxSize?: number;
 }
+export interface SortableListRequestParams {
+  sort_by?: string; // Prefix the field name with '-' for descending order.
+}
 
 export interface SubsystemTagsRequestParams extends SubsystemRequestParams {
   tag_id?: string | string[];
 }
 
-export interface BaseFullPaginableRequestParams  extends SubsystemTagsRequestParams, PaginableRequestParams {
- 
-}
+export interface BaseFullPaginableRequestParams
+  extends SubsystemTagsRequestParams,
+    PaginableRequestParams {}
 
 /*
  * CONCRETE INTERFACES
  */
 
-export interface ProjectClassifiersRequestParams extends PaginableRequestParams {
-
-}
+export interface ProjectClassifiersRequestParams
+  extends PaginableRequestParams {}
 
 export interface ProjectsRequestParams extends PaginableRequestParams {
   "organization-id": string;
 }
 
-export interface ProjectDetailsRequestParams {
+export interface ProjectDetailsRequestParams {}
 
-}
+export interface ProjectLocationsRequestParams
+  extends BaseFullPaginableRequestParams {}
 
-export interface ProjectLocationsRequestParams extends BaseFullPaginableRequestParams {
-  
-}
-
-
-export interface ServiceInstanceDataRequestParams {
-
-}
+export interface ServiceInstanceDataRequestParams {}
 
 export interface ProjectTagRequestParams extends PaginableRequestParams {
   parent_tag?: string;
   no_parent?: boolean;
 }
 
-export interface LocationServiceInstancesRequestParams extends BaseFullPaginableRequestParams {
-  
+export interface LocationServiceInstancesRequestParams
+  extends BaseFullPaginableRequestParams {}
+
+export interface AlertLogsListRequestParams
+  extends BaseFullPaginableRequestParams,
+    SortableListRequestParams {
+  location_id?: string;
+  classifier_id?: string;
+  service_name?: string;
+  instance_id?: string;
+  name?: string;
+  active?: boolean;
+  acknowledged?: boolean;
+  ack_user?: string;
+  active_time?: string;
+  deactive_time?: string;
+  ack_time?: string;
 }
 
-export interface AlertLogsListRequestParams extends BaseFullPaginableRequestParams {
-
-}
-
-
-export interface ServiceInstancesRequestParams extends BaseFullPaginableRequestParams {
+export interface ServiceInstancesRequestParams
+  extends BaseFullPaginableRequestParams {
   id?: string;
   name?: string;
   location_id?: string;
   device_id?: string;
 }
 
-
-export interface ServiceDataRequestParams extends SubsystemTagsRequestParams {
-}
+export interface ServiceDataRequestParams extends SubsystemTagsRequestParams {}
 
 export interface ServiceInstanceHistoricAggregateParams {
   offset?: string;

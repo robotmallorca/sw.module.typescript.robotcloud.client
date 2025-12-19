@@ -22,8 +22,7 @@ export interface ServiceTypeAlertStatus {
 }
 
 
-export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClient<T>
-{
+export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClient<T> {
   private readonly serviceName: string;
 
   constructor(serviceName: string) {
@@ -46,7 +45,7 @@ export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClie
   ): Promise<AxiosResponse<T>> {
     return robotcloudApi.put<T>(
       `/projects/${project_id}/services/${this.serviceName}/instances/${instance_id}/configuration`,
-      { new_config }
+      new_config
     );
   }
 }

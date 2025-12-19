@@ -5,15 +5,16 @@ import {
   RobotCloudUserSimple,
 } from "../../types/RobotCloudClient";
 import { AlertLogsListRequestParams } from "../../types/request-params";
+import { useLogger } from "utils/logger";
 
-interface AlertsLogsStats {
+export interface AlertsLogsStats {
   total: number;
   active: number;
   noack: number;
   active_noack: number;
 }
 
-interface AlertLogLine {
+export interface AlertLogLine {
   id: string;
   service: string;
   instance: string;
@@ -23,6 +24,7 @@ interface AlertLogLine {
   acknowledged: boolean;
   ack_time: string;
   ack_user: RobotCloudUserSimple;
+  active: boolean;
   active_time: string;
   deactive_time: string;
 }
@@ -30,7 +32,7 @@ interface AlertLogLine {
 interface AlertsLogsList {
   total_size: number;
   initial_index: number;
-  alerts: AlertLogLine;
+  alerts: AlertLogLine[];
 }
 
 interface AlertLogAckItem {
@@ -38,7 +40,11 @@ interface AlertLogAckItem {
   acknowledged: boolean;
 }
 
-interface AlertsClient {
+interface AlertLogAckAlerts {
+  alerts: AlertLogAckItem[];
+}
+
+export interface AlertsClient {
   getProjectStats(projectId: string): Promise<AxiosResponse<AlertsLogsStats>>;
 
   getProjectLog(
@@ -48,12 +54,13 @@ interface AlertsClient {
 
   acknowledge(
     projectId: string,
-    data: AlertLogAckItem[]
+    data: AlertLogAckAlerts
   ): Promise<AxiosResponse<AlertsLogsList>>;
 }
 
 class AlertsClientImpl implements AlertsClient {
   private robotcloudApi: AxiosInstance;
+  private logger = useLogger('AlertsClientImpl')
 
   constructor(robotcloudApi: AxiosInstance) {
     this.robotcloudApi = robotcloudApi;
@@ -79,13 +86,12 @@ class AlertsClientImpl implements AlertsClient {
 
   acknowledge(
     projectId: string,
-    data: AlertLogAckItem[]
+    data: AlertLogAckAlerts
   ): Promise<AxiosResponse<AlertsLogsList>> {
-    return this.robotcloudApi.put<AlertsLogsList>(
+    this.logger.debug("Sending put data: ", data);
+    return this.robotcloudApi.put<AlertsLogsList, AxiosResponse<AlertsLogsList, AlertLogAckAlerts>, AlertLogAckAlerts>(
       `projects/${projectId}/alerts/log`,
-      {
-        data,
-      }
+      data
     );
   }
 }
