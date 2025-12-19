@@ -35,6 +35,23 @@ interface AlertsLogsList {
   alerts: AlertLogLine[];
 }
 
+interface AlertsLogsAggregatedAlertRecord {
+  periode_start: string,
+  periode_end: string,
+  activation_count: number,
+  active_seconds: number
+}
+
+interface AlertsLogsAggregatedAlert {
+  service: string;
+  alert_name: string;
+  aggregates: AlertsLogsAggregatedAlertRecord[];
+}
+
+export interface AlertsLogsAggregated {
+  alerts: AlertsLogsAggregatedAlert[];
+}
+
 interface AlertLogAckItem {
   id: string;
   acknowledged: boolean;
@@ -60,7 +77,7 @@ export interface AlertsClient {
   getAggregatedLogs(
     projectId: string,
     params: AlertAggregatedLogsRequestParams
-  ): Promise<AxiosResponse<AlertsLogsList>>;
+  ): Promise<AxiosResponse<AlertsLogsAggregated>>;
 }
 
 class AlertsClientImpl implements AlertsClient {
@@ -103,8 +120,8 @@ class AlertsClientImpl implements AlertsClient {
   getAggregatedLogs(
     projectId: string,
     params: AlertAggregatedLogsRequestParams
-  ): Promise<AxiosResponse<AlertsLogsList>> {
-    return this.robotcloudApi.get<AlertsLogsList>(
+  ): Promise<AxiosResponse<AlertsLogsAggregated>> {
+    return this.robotcloudApi.get<AlertsLogsAggregated>(
       `projects/${projectId}/alerts/aggregate`,
       { params }
     );

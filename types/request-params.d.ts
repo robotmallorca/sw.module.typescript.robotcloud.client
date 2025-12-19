@@ -75,9 +75,9 @@ export interface AlertAggregatedLogsRequestParams extends SubsystemTagsRequestPa
   service_name?: string;
   instance_id?: string;
   name?: string;
-  periode?: 'h' | 'd' | 'w' | 'm' | 'y';
+  periode: 'h' | 'd' | 'w' | 'm' | 'y';
   offset?: string;
-  time_range?: string;
+  time_range: string;
 }
 export interface ServiceInstancesRequestParams
   extends BaseFullPaginableRequestParams {
