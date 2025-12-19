@@ -26,25 +26,25 @@ export interface SubsystemTagsRequestParams extends SubsystemRequestParams {
 
 export interface BaseFullPaginableRequestParams
   extends SubsystemTagsRequestParams,
-    PaginableRequestParams {}
+  PaginableRequestParams { }
 
 /*
  * CONCRETE INTERFACES
  */
 
 export interface ProjectClassifiersRequestParams
-  extends PaginableRequestParams {}
+  extends PaginableRequestParams { }
 
 export interface ProjectsRequestParams extends PaginableRequestParams {
   "organization-id": string;
 }
 
-export interface ProjectDetailsRequestParams {}
+export interface ProjectDetailsRequestParams { }
 
 export interface ProjectLocationsRequestParams
-  extends BaseFullPaginableRequestParams {}
+  extends BaseFullPaginableRequestParams { }
 
-export interface ServiceInstanceDataRequestParams {}
+export interface ServiceInstanceDataRequestParams { }
 
 export interface ProjectTagRequestParams extends PaginableRequestParams {
   parent_tag?: string;
@@ -52,11 +52,11 @@ export interface ProjectTagRequestParams extends PaginableRequestParams {
 }
 
 export interface LocationServiceInstancesRequestParams
-  extends BaseFullPaginableRequestParams {}
+  extends BaseFullPaginableRequestParams { }
 
 export interface AlertLogsListRequestParams
   extends BaseFullPaginableRequestParams,
-    SortableListRequestParams {
+  SortableListRequestParams {
   location_id?: string;
   classifier_id?: string;
   service_name?: string;
@@ -69,7 +69,16 @@ export interface AlertLogsListRequestParams
   deactive_time?: string;
   ack_time?: string;
 }
-
+export interface AlertAggregatedLogsRequestParams extends SubsystemTagsRequestParams {
+  location_id?: string;
+  classifier_id?: string;
+  service_name?: string;
+  instance_id?: string;
+  name?: string;
+  periode?: 'h' | 'd' | 'w' | 'm' | 'y';
+  offset?: string;
+  time_range?: string;
+}
 export interface ServiceInstancesRequestParams
   extends BaseFullPaginableRequestParams {
   id?: string;
@@ -78,7 +87,7 @@ export interface ServiceInstancesRequestParams
   device_id?: string;
 }
 
-export interface ServiceDataRequestParams extends SubsystemTagsRequestParams {}
+export interface ServiceDataRequestParams extends SubsystemTagsRequestParams { }
 
 export interface ServiceInstanceHistoricAggregateParams {
   offset?: string;
