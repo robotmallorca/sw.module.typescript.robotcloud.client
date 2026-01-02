@@ -75,7 +75,7 @@ export interface AlertAggregatedLogsRequestParams extends SubsystemTagsRequestPa
   service_name?: string;
   instance_id?: string;
   name?: string;
-  periode: 'h' | 'd' | 'w' | 'm' | 'y';
+  periode: `${number}${'h' | 'd' | 'w' | 'm' | 'y'}`;
   offset?: string;
   time_range: string;
 }

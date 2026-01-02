@@ -12,12 +12,13 @@ export * from "config"
 
 export * from "helpers"
 export {
-    robotcloudApi,
-    clientConfig
+  robotcloudApi,
+  clientConfig
 }
 
 export type * from "../types/ProjectClassifer"
 export type * from "../types/ProjectTag"
+export type * from "../types/request-params"
 export type * from "../types/RobotCloudClient"
 export type * from "../types/services"
 export type * from "../types/services-configuration"
