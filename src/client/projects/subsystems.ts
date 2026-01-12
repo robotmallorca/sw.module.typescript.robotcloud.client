@@ -4,7 +4,7 @@ import { RobotCloudDescribedItem } from "../../../types/RobotCloudClient";
 
 class SubsystemsClient {
   getProjectSubsystems = (prjId: string) => {
-    return robotcloudApi.get<RobotCloudDescribedItem>(
+    return robotcloudApi.get<RobotCloudDescribedItem[]>(
       `projects/${prjId}/subsystems`
     );
   };
