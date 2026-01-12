@@ -4,6 +4,7 @@ import { useLogger } from "utils/logger";
 import robotcloudApi from "robotCloudApi";
 import {
   ProjectTag,
+  ProjectTagDetails,
 } from "../../../types/ProjectTag";
 import { ProjectTagRequestParams } from "../../../types/request-params";
 
@@ -18,6 +19,13 @@ export class TagsClient {
     return robotcloudApi.get<ProjectTag[]>(`projects/${prjId}/tags`, {
       params,
     });
+  };
+  getTag = (
+    prjId: string,
+    tagId: string
+  ): Promise<AxiosResponse<ProjectTagDetails>> => {
+    logger.info(`Get project ${prjId} tag ${tagId}`);
+    return robotcloudApi.get<ProjectTagDetails>(`tags/${tagId}`);
   };
 }
 

@@ -5,6 +5,7 @@ import robotcloudApi from "robotCloudApi";
 import {
   RobotCloudServiceInstance,
   ServiceInstanceDetails,
+  ServiceInstanceDevicesInfo,
 } from "../../../types/ServiceInstance";
 import { ServiceInstancesRequestParams } from "../../../types/request-params";
 
@@ -32,6 +33,14 @@ class ServiceInstancesClient {
     return robotcloudApi.get<ServiceInstanceDetails>(
       `projects/${prjId}/services/${service_type}/instances/${service_id}`
     );
+  };
+
+  getServiceInstanceDevicesInfo = (
+    prjId: string,
+    service_type: string,
+    service_id: string
+  ) => {
+    return robotcloudApi.get<Record<string, ServiceInstanceDevicesInfo>>(`projects/${prjId}/services/${service_type}/instances/${service_id}/deviceconf`);
   };
 }
 

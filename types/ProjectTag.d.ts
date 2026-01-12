@@ -12,3 +12,8 @@ export interface ProjectTag {
   name: string;
   parent_id: string;
 }
+export interface ProjectTagDetails extends ProjectTag {
+  color: string;
+  project: string;
+  children: string[];
+}
