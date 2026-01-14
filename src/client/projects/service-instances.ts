@@ -57,7 +57,7 @@ class ServiceInstancesClient {
     service_type: string
   ): Promise<AxiosResponse<ServiceInstanceRead<any>[]>> {
     return robotcloudApi.get<ServiceInstanceRead<any>[]>(
-      `projects/${prjId}/services/${service_type}/alerts`);
+      `projects/${prjId}/services/${service_type}/alert`);
   };
 
 }
