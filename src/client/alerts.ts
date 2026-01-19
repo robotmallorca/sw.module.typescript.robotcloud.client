@@ -5,7 +5,7 @@ import {
   RobotCloudServiceTypeDetails,
   RobotCloudUserSimple,
 } from "../../types/RobotCloudClient";
-import { AlertAggregatedLogsRequestParams, AlertLogsListRequestParams } from "../../types/request-params";
+import { AlertAggregatedLogsRequestParams, AlertLogsListRequestParams, SubsystemRequestParams } from "../../types/request-params";
 import { useLogger } from "utils/logger";
 
 export interface AlertsLogsStats {
@@ -80,7 +80,7 @@ export interface AlertsClient {
     params: AlertAggregatedLogsRequestParams
   ): Promise<AxiosResponse<AlertsLogsAggregated>>;
 
-  getAvailableAlerts(projectId: string): Promise<AxiosResponse<string[]>>;
+  getAvailableAlerts(projectId: string, params?: SubsystemRequestParams): Promise<AxiosResponse<string[]>>;
 }
 
 const ALERTS_BY_SERVICE_TYPE = {
@@ -154,9 +154,10 @@ class AlertsClientImpl implements AlertsClient {
     );
   }
 
-  async getAvailableAlerts(projectId: string): Promise<AxiosResponse<string[]>> {
+  async getAvailableAlerts(projectId: string, params?: SubsystemRequestParams): Promise<AxiosResponse<string[]>> {
     const { data } = await this.robotcloudApi.get<RobotCloudServiceTypeDetails[]>(
-      `projects/${projectId}/services`
+      `projects/${projectId}/services`,
+      { params: params ?? {} }
     );
 
     let alerts: string[] = [];
