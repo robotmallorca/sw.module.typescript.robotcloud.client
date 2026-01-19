@@ -2,6 +2,7 @@ import robotcloudApi from "@/robotCloudApi";
 import { AxiosInstance, AxiosResponse } from "axios";
 import {
   RobotCloudNamedItem,
+  RobotCloudServiceTypeDetails,
   RobotCloudUserSimple,
 } from "../../types/RobotCloudClient";
 import { AlertAggregatedLogsRequestParams, AlertLogsListRequestParams } from "../../types/request-params";
@@ -78,8 +79,34 @@ export interface AlertsClient {
     projectId: string,
     params: AlertAggregatedLogsRequestParams
   ): Promise<AxiosResponse<AlertsLogsAggregated>>;
+
+  getAvailableAlerts(projectId: string): Promise<AxiosResponse<string[]>>;
 }
 
+const ALERTS_BY_SERVICE_TYPE = {
+  "RoomBLEPairing_1": [],
+  "RoomClime_1": [
+    "high_temperature",
+    "low_temperature",
+    "high_humidity",
+    "fancoil_on_overtime"
+  ],
+  "RoomConsumes_1": [
+    "high_daily_energy_electric",
+    "high_daily_energy_thermal",
+    "high_daily_hot_water",
+    "high_daily_cold_water"
+  ],
+  "RoomDiagnostics_1": [
+    "low_peripheral_num"
+  ],
+  "RoomGrouping_1": [],
+  "RoomGuestStatus_1": [
+    "door_open_overtime",
+    "window_open_overtime",
+    "medical_alarm"
+  ],
+}
 class AlertsClientImpl implements AlertsClient {
   private robotcloudApi: AxiosInstance;
   private logger = useLogger('AlertsClientImpl')
@@ -125,6 +152,24 @@ class AlertsClientImpl implements AlertsClient {
       `projects/${projectId}/alerts/aggregate`,
       { params }
     );
+  }
+
+  async getAvailableAlerts(projectId: string): Promise<AxiosResponse<string[]>> {
+    const { data } = await this.robotcloudApi.get<RobotCloudServiceTypeDetails[]>(
+      `projects/${projectId}/services`
+    );
+
+    let alerts: string[] = [];
+    for (const service of data) {
+      if (!(service.name in ALERTS_BY_SERVICE_TYPE)) {
+        this.logger.warn(`Service ${service.name} not found in ALERTS_BY_SERVICE_TYPE`);
+        continue;
+      }
+      alerts.push(...ALERTS_BY_SERVICE_TYPE[service.name as keyof typeof ALERTS_BY_SERVICE_TYPE]);
+    }
+    return {
+      data: alerts
+    } as AxiosResponse<string[]>;
   }
 }
 
