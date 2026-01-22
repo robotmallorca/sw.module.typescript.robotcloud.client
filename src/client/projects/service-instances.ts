@@ -14,6 +14,17 @@ import { ServiceInstanceRead } from "../../../types/ServiceInstanceRead";
 const logger = useLogger("service-instances-client");
 
 class ServiceInstancesClient {
+  getAll = (
+    prjId: string,
+    params?: ServiceInstancesRequestParams
+  ): Promise<AxiosResponse<RobotCloudServiceInstance[]>> => {
+    return robotcloudApi.get<RobotCloudServiceInstance[]>(
+      `projects/${prjId}/instances`,
+      {
+        params,
+      }
+    );
+  };
   getServiceInstances = (
     prjId: string,
     service_type: string,
