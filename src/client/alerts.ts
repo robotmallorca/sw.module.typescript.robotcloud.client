@@ -63,7 +63,10 @@ interface AlertLogAckAlerts {
 }
 
 export interface AlertsClient {
-  getProjectStats(projectId: string): Promise<AxiosResponse<AlertsLogsStats>>;
+  getProjectStats(
+    projectId: string,
+    params?: AlertsProjectStatsRequestParams
+  ): Promise<AxiosResponse<AlertsLogsStats>>;
 
   getProjectLog(
     projectId: string,
@@ -118,7 +121,7 @@ class AlertsClientImpl implements AlertsClient {
   getProjectStats(projectId: string, params?: AlertsProjectStatsRequestParams): Promise<AxiosResponse<AlertsLogsStats>> {
     return this.robotcloudApi.get<AlertsLogsStats>(
       `projects/${projectId}/alerts/stats`,
-      { params }
+      { params: params ?? {} }
     );
   }
 
