@@ -26,6 +26,25 @@ export interface RobotCloudProject {
   organization: string;
 }
 
+
+export interface RobotCloudCreateOrganization {
+  name: string
+  description: string
+  address: string
+}
+
+/** ORGANIZATIONS */
+
+export interface RobotCloudCreateOrganization {
+  name: string
+  description: string
+  address: string
+}
+
+export interface RobotCloudOrganizationDetails extends RobotCloudDescribedItem {
+  address?: string;
+}
+
 /** USERS */
 export interface RobotCloudUserAppAccess {
   app_id: string;
@@ -38,28 +57,64 @@ export interface RobotCloudUserSimple {
   name: string;
   last_name: string;
 }
+
+export interface RobotCloudUserOrganization extends RobotCloudNamedItem {
+}
+
+export interface RobotCloudUsers {
+  username: string;
+  name: string;
+  last_name: string;
+  email?: string;
+  external?: boolean;
+}
+
 export interface RobotCloudUserDetails {
   username: string;
   name: string;
   last_name: string;
-  email: string;
+  email?: string;
   org_id: string;
   org_access: OrganizationAccessLevel;
   default_project_access: ProjectAccessLevel;
-  default_app_access: RobotCloudUserAppAccess[];
+  default_app_access?: RobotCloudUserAppAccess[];
   access_all_projects: boolean;
   blocked: boolean;
+}
+
+export interface RobotCloudPutUserDetails {
+  password?: string;
+  name?: string;
+  last_name?: string;
+  email?: string;
+  org_id?: string;
+  org_access?: OrganizationAccessLevel;
+  default_project_access?: ProjectAccessLevel;
+  default_app_access?: RobotCloudUserAppAccess[];
+  access_all_projects?: boolean;
+  blocked?: boolean;
+}
+
+export interface RobotCloudCreateUser extends RobotCloudUserDetails {
+  password?: string
 }
 
 export interface RobotCloudUserProject {
   project_id: string;
   project_name: string;
   access_level: ProjectAccessLevel;
-  app_access_level: { app_id: string, app_name: string, access_level: AppAccessLevel }[]
+  app_access_level?: { app_id: string, app_name: string, access_level: AppAccessLevel }[]
 }
 
-export interface RobotCloudOrganizationDetails extends RobotCloudDescribedItem {
-  address?: string;
+export interface RobotCloudPostUserProject {
+  project_id: string;
+  access_level: ProjectAccessLevel;
+  app_access_level?: { app_id: string, app_name: string, access_level: AppAccessLevel }[]
+}
+
+export interface RobotCloudPutProjectUser {
+  access_level: ProjectAccessLevel;
+  app_access_level?: { app_id: string, app_name: string, access_level: AppAccessLevel }[]
 }
 
 export interface RobotCloudProjectDetails extends RobotCloudProject {
