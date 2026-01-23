@@ -9,6 +9,7 @@ import {
     RobotCloudUserProject,
     RobotCloudPostUserProject,
     RobotCloudPutProjectUser,
+    RobotCloudDelete
 } from "../../types/RobotCloudClient";
 
 class UsersClient {
@@ -30,8 +31,8 @@ class UsersClient {
 
   deleteUser = (
     username: string
-  ): Promise<AxiosResponse<RobotCloudUserDetails>> => {
-    return robotcloudApi.delete<RobotCloudUserDetails>(`users/${username}`);
+  ): Promise<AxiosResponse<RobotCloudDelete>> => {
+    return robotcloudApi.delete<RobotCloudDelete>(`users/${username}`);
   };
 
   getUserOrganizations = (
@@ -77,8 +78,8 @@ class UsersClient {
   deleteProjectToUser = (
     username: string,
     projectId: string
-  ): Promise<AxiosResponse<RobotCloudUserProject>> => {
-    return robotcloudApi.delete<RobotCloudUserProject>(
+  ): Promise<AxiosResponse<RobotCloudDelete>> => {
+    return robotcloudApi.delete<RobotCloudDelete>(
       `users/${username}/projects/${projectId}`
     );
   }

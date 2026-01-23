@@ -26,11 +26,18 @@ export interface RobotCloudProject {
   organization: string;
 }
 
+export interface RobotCloudDelete {
+  deleted_id: string
+}
 
-export interface RobotCloudCreateOrganization {
+export interface RobotCloudCreateProject {
   name: string
-  description: string
-  address: string
+  description?: string
+  country?: string
+  timezone?: string
+  longitude?: number
+  latitude?: number
+  image_url?: string
 }
 
 /** ORGANIZATIONS */
@@ -41,8 +48,38 @@ export interface RobotCloudCreateOrganization {
   address: string
 }
 
+export interface RobotCloudPutOrganization {
+  name?: string
+  description?: string
+  address?: string
+}
+
 export interface RobotCloudOrganizationDetails extends RobotCloudDescribedItem {
-  address?: string;
+  address: string;
+}
+
+export interface RobotCloudOrganizations extends RobotCloudNamedItem {
+}
+
+export interface RobotCloudOrganizationUsers {
+  username: string
+  name: string
+  last_name: string
+  email?: string
+  external?: boolean
+}
+
+export interface RobotCloudOrganizationCreateUser {
+  username: string;
+  password: string;
+  name: string;
+  last_name: string;
+  email?: string;
+  org_access: OrganizationAccessLevel;
+  default_project_access: ProjectAccessLevel;
+  default_app_access?: RobotCloudUserAppAccess[];
+  access_all_projects?: boolean;
+  blocked?: boolean;
 }
 
 /** USERS */
@@ -78,8 +115,8 @@ export interface RobotCloudUserDetails {
   org_access: OrganizationAccessLevel;
   default_project_access: ProjectAccessLevel;
   default_app_access?: RobotCloudUserAppAccess[];
-  access_all_projects: boolean;
-  blocked: boolean;
+  access_all_projects?: boolean;
+  blocked?: boolean;
 }
 
 export interface RobotCloudPutUserDetails {
