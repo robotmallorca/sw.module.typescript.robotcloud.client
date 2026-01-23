@@ -3,8 +3,12 @@ import type { AxiosResponse } from "axios";
 import robotcloudApi from "robotCloudApi";
 import {
   RobotCloudProject,
+  RobotCloudPutProject,
   RobotCloudProjectDetails,
   RobotCloudServiceTypeDetails,
+  RobotCloudDelete,
+  RobotCloudProjectUsers,
+  RobotCloudProjectInstances
 } from "../../../types/RobotCloudClient";
 import {
   ProjectDetailsRequestParams,
@@ -28,6 +32,45 @@ class ProjectsClient {
     return robotcloudApi.get<RobotCloudProjectDetails>(`projects/${prjId}`, {
       params,
     });
+  };
+
+  putProjectDetails = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudPutProject>> => {
+    return robotcloudApi.put<RobotCloudPutProject>(`projects/${prjId}`, {
+      params,
+    });
+  };
+
+  deleteProject = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudDelete>> => {
+    return robotcloudApi.delete<RobotCloudDelete>(`projects/${prjId}`, {
+      params,
+    });
+  };
+
+  getProjectUsers = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudProjectUsers>> => {
+    return robotcloudApi.get<RobotCloudProjectUsers>(`projects/${prjId}/users`, {
+      params,
+    });
+  };
+
+  getProjectInstances = (
+    prjId: string,
+    params?: SubsystemRequestParams
+  ): Promise<AxiosResponse<RobotCloudProjectInstances[]>> => {
+    return robotcloudApi.get<RobotCloudProjectInstances[]>(
+      `projects/${prjId}/services`,
+      {
+        params,
+      }
+    );
   };
 
   getProjectServiceTypes = (

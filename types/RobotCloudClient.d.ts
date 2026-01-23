@@ -41,7 +41,6 @@ export interface RobotCloudCreateProject {
 }
 
 /** ORGANIZATIONS */
-
 export interface RobotCloudCreateOrganization {
   name: string
   description: string
@@ -154,6 +153,7 @@ export interface RobotCloudPutProjectUser {
   app_access_level?: { app_id: string, app_name: string, access_level: AppAccessLevel }[]
 }
 
+/** PROJECTS */
 export interface RobotCloudProjectDetails extends RobotCloudProject {
   version: number;
   description?: string;
@@ -165,6 +165,23 @@ export interface RobotCloudProjectDetails extends RobotCloudProject {
   application_enabled?: boolean;
   access_level?: ProjectAccessLevel;
   app_access_level?: AppAccessLevel;
+}
+
+export interface RobotCloudPutProject {
+  name?: string
+  description?: string
+  organization?: string
+  country?: string
+  timezone?: string 
+  longitude?: number;
+  latitude?: number;
+  image_url?: string;
+}
+
+export interface RobotCloudProjectUsers {
+  username: string
+  access_level: ProjectAccessLevel
+  external?: boolean
 }
 
 export interface RobotCloudDeviceDetails extends RobotCloudDescribedItem {
@@ -179,8 +196,14 @@ export interface RobotCloudDeviceDetails extends RobotCloudDescribedItem {
   tags: string[];
 }
 
+export interface RobotCloudProjectInstances {
+  id: string
+  name: string;
+  service: RobotCloudServiceType
+}
+
 export interface RobotCloudServiceTypeDetails {
-  description: string;
+  description?: string;
   name: RobotCloudServiceType
 }
 /** SERVICE EVENTS VALUES **/
