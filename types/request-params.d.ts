@@ -69,6 +69,7 @@ export interface AlertLogsListRequestParams
   deactive_time?: string;
   ack_time?: string;
 }
+export interface AlertsProjectStatsRequestParams extends SubsystemRequestParams { }
 export interface AlertAggregatedLogsRequestParams extends SubsystemTagsRequestParams {
   location_id?: string;
   classifier_id?: string;

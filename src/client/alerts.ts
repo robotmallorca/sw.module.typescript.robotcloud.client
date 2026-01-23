@@ -5,7 +5,7 @@ import {
   RobotCloudServiceTypeDetails,
   RobotCloudUserSimple,
 } from "../../types/RobotCloudClient";
-import { AlertAggregatedLogsRequestParams, AlertLogsListRequestParams, SubsystemRequestParams } from "../../types/request-params";
+import { AlertAggregatedLogsRequestParams, AlertLogsListRequestParams, AlertsProjectStatsRequestParams, SubsystemRequestParams } from "../../types/request-params";
 import { useLogger } from "utils/logger";
 
 export interface AlertsLogsStats {
@@ -115,9 +115,10 @@ class AlertsClientImpl implements AlertsClient {
     this.robotcloudApi = robotcloudApi;
   }
 
-  getProjectStats(projectId: string): Promise<AxiosResponse<AlertsLogsStats>> {
+  getProjectStats(projectId: string, params?: AlertsProjectStatsRequestParams): Promise<AxiosResponse<AlertsLogsStats>> {
     return this.robotcloudApi.get<AlertsLogsStats>(
-      `projects/${projectId}/alerts/stats`
+      `projects/${projectId}/alerts/stats`,
+      { params }
     );
   }
 
