@@ -82,7 +82,7 @@ class LocationsClient {
   putLocation = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudLocationModify>> => {
-    return robotcloudApi.get<RobotCloudLocationModify>(
+    return robotcloudApi.put<RobotCloudLocationModify>(
       `locations/${locationId}`,
       {}
     );
@@ -91,7 +91,7 @@ class LocationsClient {
   deleteLocation = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudDelete>> => {
-    return robotcloudApi.get<RobotCloudDelete>(
+    return robotcloudApi.delete<RobotCloudDelete>(
       `locations/${locationId}`,
       {}
     );
