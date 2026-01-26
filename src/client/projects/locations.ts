@@ -4,19 +4,18 @@ import robotcloudApi from "robotCloudApi";
 import {
   RobotCloudNamedItem,
   RobotCloudServiceType,
+  RobotCloudDelete
 } from "../../../types/RobotCloudClient";
 import {
-  RobotCloudServiceInstance
+  RobotCloudServiceInstance,
+  CreateServiceInstance
 } from "../../../types/ServiceInstance";
+import {
+  RobotCloudLocationDetails,
+  RobotCloudLocationModify,
+  RobotCloudLocationCreate
+} from "../../../types/ProjectLocation";
 import { LocationServiceInstancesRequestParams, ProjectLocationsRequestParams } from "../../../types/request-params";
-
-interface RobotCloudLocationDetails {
-  id: string;
-  name: string;
-  description: string;
-  project: string;
-  tags: string[];
-}
 
 class LocationsClient {
   getLocationServiceInstances = (
@@ -26,6 +25,20 @@ class LocationsClient {
     params?: LocationServiceInstancesRequestParams
   ): Promise<AxiosResponse<RobotCloudServiceInstance[]>> => {
     return robotcloudApi.get<RobotCloudServiceInstance[]>(
+      `projects/${prjId}/locations/${locId}/services/${service_type}/instances`,
+      {
+        params,
+      }
+    );
+  };
+
+  postLocationServiceInstances = (
+    prjId: string,
+    locId: string,
+    service_type: RobotCloudServiceType,
+    params?: LocationServiceInstancesRequestParams
+  ): Promise<AxiosResponse<CreateServiceInstance[]>> => {
+    return robotcloudApi.post<CreateServiceInstance[]>(
       `projects/${prjId}/locations/${locId}/services/${service_type}/instances`,
       {
         params,
@@ -45,10 +58,40 @@ class LocationsClient {
     );
   };
 
+  postLocations = (
+    prjId: string,
+    params?: ProjectLocationsRequestParams
+  ): Promise<AxiosResponse<RobotCloudLocationCreate[]>> => {
+    return robotcloudApi.post<RobotCloudLocationCreate[]>(
+      `projects/${prjId}/locations`,
+      {
+        params,
+      }
+    );
+  };
+
   getLocation = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudLocationDetails>> => {
     return robotcloudApi.get<RobotCloudLocationDetails>(
+      `locations/${locationId}`,
+      {}
+    );
+  };
+
+  putLocation = (
+    locationId: string
+  ): Promise<AxiosResponse<RobotCloudLocationModify>> => {
+    return robotcloudApi.get<RobotCloudLocationModify>(
+      `locations/${locationId}`,
+      {}
+    );
+  };
+
+  deleteLocation = (
+    locationId: string
+  ): Promise<AxiosResponse<RobotCloudDelete>> => {
+    return robotcloudApi.get<RobotCloudDelete>(
       `locations/${locationId}`,
       {}
     );
