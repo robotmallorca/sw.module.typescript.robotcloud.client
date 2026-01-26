@@ -24,7 +24,7 @@ export class TagsClient {
       params,
     });
   };
-  
+
   getTag = (
     prjId: string,
     tagId: string
@@ -52,7 +52,7 @@ export class TagsClient {
     prjId: string,
     tagId: string
   ): Promise<AxiosResponse<RobotCloudDelete>> => {
-    logger.info(`Modify project ${prjId} tag ${tagId}`);
+    logger.info(`Delete project ${prjId} tag ${tagId}`);
     return robotcloudApi.delete<RobotCloudDelete>(`tags/${tagId}`);
   };
 
