@@ -39,6 +39,31 @@ export interface RobotCloudCreateProject {
   latitude?: number
   image_url?: string
 }
+/** APPLICATIONS */
+export interface RobotCloudCreateApplication extends RobotCloudDescribedItem{
+  access_level: ProjectAccessLevel;
+  api_key: string
+  create_time?: string
+  create_user?: string
+  update_time?: string
+  update_user?: string
+}
+
+export interface RobotCloudGetApplication extends RobotCloudDescribedItem{
+  access_level?: ProjectAccessLevel;
+  create_time?: string
+  create_user?: string
+  update_time?: string
+  update_user?: string
+}
+
+export interface RobotCloudPutApplication extends RobotCloudDescribedItem{
+  access_level?: ProjectAccessLevel;
+  create_time?: string
+  create_user?: string
+  update_time?: string
+  update_user?: string
+}
 
 /** ORGANIZATIONS */
 export interface RobotCloudCreateOrganization {
