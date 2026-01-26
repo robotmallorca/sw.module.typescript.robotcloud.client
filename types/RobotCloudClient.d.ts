@@ -193,6 +193,20 @@ export interface RobotCloudProjectDetails extends RobotCloudProject {
   app_access_level?: AppAccessLevel;
 }
 
+export interface RobotCloudProjectApplications {
+  application_id: string
+  application_name: string
+  enabled: string
+  expiration?: string
+  update_time?: string
+  update_user?: string 
+}
+
+export interface RobotCloudApplicationEnable {
+  enabled?: string
+  expiration?: string
+}
+
 export interface RobotCloudPutProject {
   name?: string
   description?: string

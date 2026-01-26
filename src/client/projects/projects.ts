@@ -8,7 +8,9 @@ import {
   RobotCloudServiceTypeDetails,
   RobotCloudDelete,
   RobotCloudProjectUsers,
-  RobotCloudProjectInstances
+  RobotCloudProjectInstances,
+  RobotCloudProjectApplications,
+  RobotCloudApplicationEnable
 } from "../../../types/RobotCloudClient";
 import {
   ProjectDetailsRequestParams,
@@ -84,6 +86,34 @@ class ProjectsClient {
       }
     );
   };
+
+  getProjectApplications = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudProjectApplications[]>> => {
+    return robotcloudApi.get<RobotCloudProjectApplications[]>(`projects/${prjId}/applications`, {
+      params,
+    });
+  };
+
+  getProjectApplication = (
+    prjId: string,
+    appId: string
+  ): Promise<AxiosResponse<RobotCloudProjectApplications>> => {
+    return robotcloudApi.get<RobotCloudProjectApplications>(`projects/${prjId}/applications/${appId}`, 
+      {}
+    );
+  };
+
+  putProjectApplication = (
+    prjId: string,
+    appId: string
+  ): Promise<AxiosResponse<RobotCloudApplicationEnable>> => {
+    return robotcloudApi.put<RobotCloudApplicationEnable>(`projects/${prjId}/applications/${appId}`, 
+      {}
+    );
+  };
+
 }
 export const projectsClient = new ProjectsClient();
 
