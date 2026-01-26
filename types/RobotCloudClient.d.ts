@@ -5,7 +5,8 @@ export type OrganizationAccessLevel = "STAFF" | "STANDARD" | "ADMIN" | "SUPERUSE
 export type ProjectAccessLevel = "BLOCKED" | "RESTRICTED" | "BASIC" | "ADVANCED"
 export type AppAccessLevel = "BLOCKED" | "STANDARD" | "ADVANCED" | "ADMIN"
 
-export type RobotCloudServiceType = "RoomClime_1" | "RoomGuestStatus_1" | "AirQuality_1"
+export type RobotCloudServiceType = "PowerMeter_1" | "CoolHeatProd_1" | "HeatProd_1" | "CoolHeatCons_1" | "OutdoorClime_1" | "WaterCounter_1" | "RoomClime_1" | "RoomGuestStatus_1" | "EnergyProduction_1" | "RoomConsumes_1" | "EnergyCounter_1" | "HeatMeter_1" | "TemporizedOutput_1" | "GasCounter_1" | "ChillerHeatingPump_1" | "AirHandlingUnit_1" | "AirQuality_1" | "RoomDiagnostics_1" | "RoomBLEPairing_1" | "RoomGrouping_1" | "GenericTemperature_1" | "CoolHeatTemperature_1"
+
 
 // Desired fancoil speed (0 = Auto, 1..3 = Manual Speed)
 export type FancoilSpeedState = 0 | 1 | 2 | 3;

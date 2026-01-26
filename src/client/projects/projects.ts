@@ -63,10 +63,10 @@ class ProjectsClient {
 
   getProjectInstances = (
     prjId: string,
-    params?: SubsystemRequestParams
+    params?: ProjectDetailsRequestParams
   ): Promise<AxiosResponse<RobotCloudProjectInstances[]>> => {
     return robotcloudApi.get<RobotCloudProjectInstances[]>(
-      `projects/${prjId}/services`,
+      `projects/${prjId}/instances`,
       {
         params,
       }
@@ -75,7 +75,7 @@ class ProjectsClient {
 
   getProjectServiceTypes = (
     prjId: string,
-    params?: SubsystemRequestParams
+    params?: ProjectDetailsRequestParams
   ): Promise<AxiosResponse<RobotCloudServiceTypeDetails[]>> => {
     return robotcloudApi.get<RobotCloudServiceTypeDetails[]>(
       `projects/${prjId}/services`,

@@ -10,8 +10,15 @@ export interface ProjectTagsTree {
 export interface ProjectTag {
   id: string;
   name: string;
-  parent_id: string;
+  parent_id?: string;
 }
+
+export interface ProjectModifyTag {
+  id?: string,
+  name?: string,
+  parent_id?: string
+}
+
 export interface ProjectTagDetails extends ProjectTag {
   color: string;
   project: string;
