@@ -224,6 +224,29 @@ export interface RobotCloudProjectUsers {
   external?: boolean
 }
 
+export interface RobotCloudDeviceConfiguration extends RobotCloudNamedItem {
+  description: string
+}
+
+export interface RobotCloudRobotCloudDeviceCreate {
+  name: string
+  description?: string
+  address: string
+  type?: number
+  configuration_type?: string;
+  tags?: string[];
+}
+
+export interface RobotCloudRobotCloudDeviceModify {
+  name?: string
+  description?: string
+  address?: string
+  location_id?: string
+  type?: number
+  configuration_type?: string;
+  tags?: string[];
+}
+
 export interface RobotCloudDeviceDetails extends RobotCloudDescribedItem {
   location: string;
   address: {
