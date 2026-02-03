@@ -58,12 +58,10 @@ export interface RobotCloudGetApplication extends RobotCloudDescribedItem{
   update_user?: string
 }
 
-export interface RobotCloudPutApplication extends RobotCloudDescribedItem{
+export interface RobotCloudPutApplication {
+  name?: string
+  description?: string
   access_level?: ProjectAccessLevel;
-  create_time?: string
-  create_user?: string
-  update_time?: string
-  update_user?: string
 }
 
 /** ORGANIZATIONS */
@@ -191,6 +189,16 @@ export interface RobotCloudProjectDetails extends RobotCloudProject {
   application_enabled?: boolean;
   access_level?: ProjectAccessLevel;
   app_access_level?: AppAccessLevel;
+}
+
+export interface RobotCloudCreateProject {
+  name: string
+  description?: string
+  country?: string
+  timezone?: string 
+  longitude?: number;
+  latitude?: number;
+  image_url?: string;
 }
 
 export interface RobotCloudProjectApplications {
