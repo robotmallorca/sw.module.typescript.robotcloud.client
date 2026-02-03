@@ -33,13 +33,13 @@ export class ApplicationsClient {
   putApplication = (
     applicationId: string
   ): Promise<AxiosResponse<RobotCloudPutApplication>> => {
-    return this.robotcloudApi.get<RobotCloudPutApplication>(`application/register/${applicationId}`)
+    return this.robotcloudApi.put<RobotCloudPutApplication>(`application/register/${applicationId}`)
   };
 
   deleteApplication = (
     applicationId: string
   ): Promise<AxiosResponse<RobotCloudDelete>> => {
-    return this.robotcloudApi.get<RobotCloudDelete>(`application/register/${applicationId}`)
+    return this.robotcloudApi.delete<RobotCloudDelete>(`application/register/${applicationId}`)
   };
 
 }
