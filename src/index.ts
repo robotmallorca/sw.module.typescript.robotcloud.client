@@ -3,12 +3,8 @@ import clientConfig from "config"
 
 export * as robotCloudToken from "helpers/robotCloudToken"
 
-export * from "client/services"
-export * from "client/projects"
-export * from "client/alerts"
-export * from "client/organizations"
-export * from "client/users"
 export * from "config"
+export * from "client"
 
 export * from "helpers"
 export {
@@ -26,3 +22,4 @@ export type * from "../types/services-data"
 export type * from "../types/ServiceInstance"
 export type * from "../types/ServiceInstanceRead"
 export type * from "../types/Token"
+export type * from "../types/alerts"

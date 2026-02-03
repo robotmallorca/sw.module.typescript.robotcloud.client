@@ -1,5 +1,4 @@
-import type { AxiosResponse } from "axios";
-import robotcloudApi from "robotCloudApi";
+import type { AxiosInstance, AxiosResponse } from "axios";
 
 import {
   RobotCloudDescribedItem,
@@ -8,33 +7,39 @@ import {
   RobotCloudPutApplication,
   RobotCloudDelete
 } from "../../types/RobotCloudClient";
-class ApplicationsClient {
-    getApplications = (): Promise<AxiosResponse<RobotCloudDescribedItem[]>> => {
-        return robotcloudApi.get<RobotCloudDescribedItem[]>(`application/register`)
-    };
+import { useLogger } from "@/utils/logger";
 
-    postOrganizations = (): Promise<AxiosResponse<RobotCloudCreateApplication>> => {
-        return robotcloudApi.post<RobotCloudCreateApplication>(`application/register`)
-    };
+export class ApplicationsClient {
+  private robotcloudApi: AxiosInstance;
+  private logger = useLogger('ApplicationsClient')
 
-    getApplication = (
-        applicationId: string
-    ): Promise<AxiosResponse<RobotCloudGetApplication>> => {
-        return robotcloudApi.get<RobotCloudGetApplication>(`application/register/${applicationId}`)
-    };
+  constructor(robotcloudApi: AxiosInstance) {
+    this.robotcloudApi = robotcloudApi;
+  }
+  getApplications = (): Promise<AxiosResponse<RobotCloudDescribedItem[]>> => {
+    return this.robotcloudApi.get<RobotCloudDescribedItem[]>(`application/register`)
+  };
 
-    putApplication = (
-        applicationId: string
-    ): Promise<AxiosResponse<RobotCloudPutApplication>> => {
-        return robotcloudApi.get<RobotCloudPutApplication>(`application/register/${applicationId}`)
-    };
+  postOrganizations = (): Promise<AxiosResponse<RobotCloudCreateApplication>> => {
+    return this.robotcloudApi.post<RobotCloudCreateApplication>(`application/register`)
+  };
 
-    deleteApplication = (
-        applicationId: string
-    ): Promise<AxiosResponse<RobotCloudDelete>> => {
-        return robotcloudApi.get<RobotCloudDelete>(`application/register/${applicationId}`)
-    };
+  getApplication = (
+    applicationId: string
+  ): Promise<AxiosResponse<RobotCloudGetApplication>> => {
+    return this.robotcloudApi.get<RobotCloudGetApplication>(`application/register/${applicationId}`)
+  };
 
-}   
+  putApplication = (
+    applicationId: string
+  ): Promise<AxiosResponse<RobotCloudPutApplication>> => {
+    return this.robotcloudApi.get<RobotCloudPutApplication>(`application/register/${applicationId}`)
+  };
 
-export const usersClient = new ApplicationsClient();
+  deleteApplication = (
+    applicationId: string
+  ): Promise<AxiosResponse<RobotCloudDelete>> => {
+    return this.robotcloudApi.get<RobotCloudDelete>(`application/register/${applicationId}`)
+  };
+
+}

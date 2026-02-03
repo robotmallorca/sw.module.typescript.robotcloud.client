@@ -1,6 +1,5 @@
-import type { AxiosResponse } from "axios";
+import type { AxiosInstance, AxiosResponse } from "axios";
 
-import robotcloudApi from "robotCloudApi";
 import {
   RobotCloudOrganizations,
   RobotCloudCreateOrganization,
@@ -11,20 +10,28 @@ import {
   RobotCloudOrganizationCreateUser,
   RobotCloudDelete
 } from "../../types/RobotCloudClient";
+import { useLogger } from "@/utils/logger";
 
-class OrganizationsClient {
+export class OrganizationsClient {
+  private robotcloudApi: AxiosInstance;
+  private logger = useLogger('OrganizationsClient')
+
+  constructor(robotcloudApi: AxiosInstance) {
+    this.robotcloudApi = robotcloudApi;
+  }
+
   getOrganizations = (): Promise<AxiosResponse<RobotCloudOrganizations[]>> => {
-    return robotcloudApi.get<RobotCloudOrganizations[]>(`organizations`)
+    return this.robotcloudApi.get<RobotCloudOrganizations[]>(`organizations`)
   };
 
   postOrganizations = (): Promise<AxiosResponse<RobotCloudCreateOrganization>> => {
-    return robotcloudApi.post<RobotCloudCreateOrganization>(`organizations`)
+    return this.robotcloudApi.post<RobotCloudCreateOrganization>(`organizations`)
   };
 
   getOrganization = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudOrganizationDetails>> => {
-    return robotcloudApi.get<RobotCloudOrganizationDetails>(
+    return this.robotcloudApi.get<RobotCloudOrganizationDetails>(
       `organizations/${organizationId}`
     );
   };
@@ -32,7 +39,7 @@ class OrganizationsClient {
   putOrganization = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudPutOrganization>> => {
-    return robotcloudApi.put<RobotCloudPutOrganization>(
+    return this.robotcloudApi.put<RobotCloudPutOrganization>(
       `organizations/${organizationId}`
     );
   };
@@ -40,7 +47,7 @@ class OrganizationsClient {
   deleteOrganization = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudDelete>> => {
-    return robotcloudApi.delete<RobotCloudDelete>(
+    return this.robotcloudApi.delete<RobotCloudDelete>(
       `organizations/${organizationId}`
     );
   };
@@ -48,7 +55,7 @@ class OrganizationsClient {
   getOrganizationProjects = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudProject[]>> => {
-    return robotcloudApi.get<RobotCloudProject[]>(
+    return this.robotcloudApi.get<RobotCloudProject[]>(
       `organizations/${organizationId}/projects`
     );
   };
@@ -56,7 +63,7 @@ class OrganizationsClient {
   postOrganizationProjects = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudOrganizationCreateUser>> => {
-    return robotcloudApi.post<RobotCloudOrganizationCreateUser>(
+    return this.robotcloudApi.post<RobotCloudOrganizationCreateUser>(
       `organizations/${organizationId}/projects`
     );
   };
@@ -64,7 +71,7 @@ class OrganizationsClient {
   getOrganizationUsers = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudOrganizationUsers[]>> => {
-    return robotcloudApi.get<RobotCloudOrganizationUsers[]>(
+    return this.robotcloudApi.get<RobotCloudOrganizationUsers[]>(
       `organizations/${organizationId}/users`
     );
   };
@@ -72,12 +79,11 @@ class OrganizationsClient {
   postOrganizationUsers = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudOrganizationCreateUser>> => {
-    return robotcloudApi.post<RobotCloudOrganizationCreateUser>(
+    return this.robotcloudApi.post<RobotCloudOrganizationCreateUser>(
       `organizations/${organizationId}/users`
     );
   };
 
-  
+
 }
 
-export const organizationsClient = new OrganizationsClient();
