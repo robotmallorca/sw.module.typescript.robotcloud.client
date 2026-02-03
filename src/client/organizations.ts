@@ -52,38 +52,5 @@ export class OrganizationsClient {
     );
   };
 
-  getOrganizationProjects = (
-    organizationId: string
-  ): Promise<AxiosResponse<RobotCloudProject[]>> => {
-    return this.robotcloudApi.get<RobotCloudProject[]>(
-      `organizations/${organizationId}/projects`
-    );
-  };
-
-  postOrganizationProjects = (
-    organizationId: string
-  ): Promise<AxiosResponse<RobotCloudOrganizationCreateUser>> => {
-    return this.robotcloudApi.post<RobotCloudOrganizationCreateUser>(
-      `organizations/${organizationId}/projects`
-    );
-  };
-
-  getOrganizationUsers = (
-    organizationId: string
-  ): Promise<AxiosResponse<RobotCloudOrganizationUsers[]>> => {
-    return this.robotcloudApi.get<RobotCloudOrganizationUsers[]>(
-      `organizations/${organizationId}/users`
-    );
-  };
-
-  postOrganizationUsers = (
-    organizationId: string
-  ): Promise<AxiosResponse<RobotCloudOrganizationCreateUser>> => {
-    return this.robotcloudApi.post<RobotCloudOrganizationCreateUser>(
-      `organizations/${organizationId}/users`
-    );
-  };
-
-
 }
 
