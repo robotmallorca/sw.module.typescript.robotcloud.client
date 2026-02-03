@@ -18,34 +18,7 @@ import {
 import { LocationServiceInstancesRequestParams, ProjectLocationsRequestParams } from "../../../types/request-params";
 
 class LocationsClient {
-  getLocationServiceInstances = (
-    prjId: string,
-    locId: string,
-    service_type: RobotCloudServiceType,
-    params?: LocationServiceInstancesRequestParams
-  ): Promise<AxiosResponse<RobotCloudServiceInstance[]>> => {
-    return robotcloudApi.get<RobotCloudServiceInstance[]>(
-      `projects/${prjId}/locations/${locId}/services/${service_type}/instances`,
-      {
-        params,
-      }
-    );
-  };
-
-  postLocationServiceInstances = (
-    prjId: string,
-    locId: string,
-    service_type: RobotCloudServiceType,
-    params?: LocationServiceInstancesRequestParams
-  ): Promise<AxiosResponse<CreateServiceInstance[]>> => {
-    return robotcloudApi.post<CreateServiceInstance[]>(
-      `projects/${prjId}/locations/${locId}/services/${service_type}/instances`,
-      {
-        params,
-      }
-    );
-  };
-
+  
   getLocations = (
     prjId: string,
     params?: ProjectLocationsRequestParams
