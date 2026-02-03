@@ -3,6 +3,7 @@ import { useLogger } from 'utils/logger';
 import robotcloudApi from "robotCloudApi";
 import { CheckTokenResponse, RobotCloudJWTPayload } from "../../types/Token";
 import clientConfig from "config";
+import { loginClient } from "@/client";
 
 const logger = useLogger("robotcloud-token")
 
@@ -47,12 +48,7 @@ export const renewToken = async (
   renew_token: string
 ): Promise<CheckTokenResponse> => {
   logger.debug("Renewing token ...");
-  const cloudUrl = robotcloudApi.defaults.baseURL
-  const { data } = await axios.get(cloudUrl + "login/renew", {
-    headers: {
-      Authorization: `Bearer ${renew_token}`,
-    },
-  });
+  const { data } = await loginClient.renewToken(renew_token)
 
   return {
     renewed: true,
