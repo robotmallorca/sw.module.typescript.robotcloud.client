@@ -1,6 +1,3 @@
-import type { AxiosResponse } from "axios";
-
-import robotcloudApi from "robotCloudApi";
 import {
   AirHandlingUnit1AlertEventValue,
   AirHandlingUnit1DataEventValue,

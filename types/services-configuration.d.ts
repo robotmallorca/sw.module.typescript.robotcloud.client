@@ -14,6 +14,17 @@ export interface AirQualityConfigurationParams {
   high_co2_limit?: number;
 }
 
+export interface ChillerHeatingPumpConfigurationParams {
+  conf_max_capacity: number,
+  conf_on: boolean,
+  conf_recovery_state: boolean,
+  conf_regim: "COOL" | "HEAT" | "AUTO" | "FROST",
+  cool_set_point: number,
+  frost_set_point: number,
+  heat_set_point: number,
+  recovery_set_point: number
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

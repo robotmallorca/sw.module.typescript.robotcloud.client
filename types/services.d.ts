@@ -49,6 +49,39 @@ export interface AirQuality1AlertEventValue {
   high_co2: boolean;
 }
 
+export interface ChillerHeatingPump1DataEventValue {
+  COP?: number,
+  capacity?: number,
+  compressor_state?: number,
+  condenser_impulsion_temperature?: number,
+  condenser_return_temperature?: number,
+  expansion_valve_position?: number,
+  flow_state?: boolean,
+  impulsion_temperature?: number,
+  max_capacity?: number,
+  on?: boolean,
+  recovery_impulsion_temperature?: number,
+  recovery_return_temperature?: number,
+  recovery_state?: boolean,
+  regim?: "COOL" | "HEAT" | "AUTO" | "FROST",
+  remote_state?: boolean,
+  return_temperature?: number
+}
+
+export interface ChillerHeatingPump1AlertEventValue {
+  alarm_1?: boolean;
+  alarm_2?: boolean;
+  alarm_3?: boolean;
+  alarm_4?: boolean;
+  alarm_5?: boolean;
+  alarm_6?: boolean;
+  alarm_7?: boolean;
+  alarm_8?: boolean;
+  alarm_9?: boolean;
+  alarm_10?: boolean;
+  alarm_general?: boolean;
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;
