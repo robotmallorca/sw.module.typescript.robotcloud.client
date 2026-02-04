@@ -18,10 +18,23 @@ export interface ServiceInstanceDetails extends RobotCloudServiceInstance {
   classifier?: string;
 }
 
+export interface ModifyServiceInstanceDetails  {
+  description?: string;
+  name?: string;
+  tags?: string[];
+  subsystems?: string[];
+  classifier?: string;
+}
+
 export interface CreateServiceInstance extends RobotCloudServiceInstance {
   description?: string;
   name: string
   tags?: string[];
   subsystems?: string[];
   classifier?: string;
+}
+
+export interface ProjectSizeInstances {
+  total: number
+  filtered: number
 }

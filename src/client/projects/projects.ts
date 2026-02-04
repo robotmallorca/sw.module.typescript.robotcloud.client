@@ -10,7 +10,8 @@ import {
   RobotCloudProjectUsers,
   RobotCloudProjectInstances,
   RobotCloudProjectApplications,
-  RobotCloudApplicationEnable
+  RobotCloudApplicationEnable,
+  RobotCloudCreateProject
 } from "../../../types/RobotCloudClient";
 import {
   ProjectDetailsRequestParams,
@@ -19,6 +20,23 @@ import {
 } from "../../../types/request-params";
 
 class ProjectsClient {
+
+  getOrganizationProjects = (
+    organizationId: string
+  ): Promise<AxiosResponse<RobotCloudProject[]>> => {
+    return robotcloudApi.get<RobotCloudProject[]>(
+      `organizations/${organizationId}/projects`
+    );
+  };
+  
+  postOrganizationProjects = (
+    organizationId: string
+  ): Promise<AxiosResponse<RobotCloudCreateProject>> => {
+    return robotcloudApi.post<RobotCloudCreateProject>(
+      `organizations/${organizationId}/projects`
+    );
+  };
+
   getProjects = (
     params?: ProjectsRequestParams
   ): Promise<AxiosResponse<RobotCloudProject[]>> => {
@@ -61,30 +79,6 @@ class ProjectsClient {
     return robotcloudApi.get<RobotCloudProjectUsers>(`projects/${prjId}/users`, {
       params,
     });
-  };
-
-  getProjectInstances = (
-    prjId: string,
-    params?: ProjectDetailsRequestParams
-  ): Promise<AxiosResponse<RobotCloudProjectInstances[]>> => {
-    return robotcloudApi.get<RobotCloudProjectInstances[]>(
-      `projects/${prjId}/instances`,
-      {
-        params,
-      }
-    );
-  };
-
-  getProjectServiceTypes = (
-    prjId: string,
-    params?: ProjectDetailsRequestParams
-  ): Promise<AxiosResponse<RobotCloudServiceTypeDetails[]>> => {
-    return robotcloudApi.get<RobotCloudServiceTypeDetails[]>(
-      `projects/${prjId}/services`,
-      {
-        params,
-      }
-    );
   };
 
   getProjectApplications = (
