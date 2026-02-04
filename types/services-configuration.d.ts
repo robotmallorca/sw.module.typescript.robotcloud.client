@@ -1,7 +1,17 @@
 import { RegimState, TemperatureUnit } from "./RobotCloudClient";
 
+export interface AirHandlingUnitConfigurationParams {
+  air_quality_co2_set_point?: number,
+  cool_heat_order?:"COOL" | "HEAT" | "AUTO";
+  conf_on?: boolean,
+  humidity_set_point?: number,
+  impulsion_hysteresis?: number,
+  pressure_set_point?: number,
+  temperature_set_point?: number
+}
+
 export interface AirQualityConfigurationParams {
-  high_co2_limit: number;
+  high_co2_limit?: number;
 }
 
 export interface RoomClimeConfigurationParams {

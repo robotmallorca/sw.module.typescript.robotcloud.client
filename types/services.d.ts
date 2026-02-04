@@ -12,6 +12,34 @@ export type MeasurementStatus =
 export interface ServiceDataMeasurement<T> extends ServiceInstanceRead<T> {
   status: MeasurementStatus;
 }
+export interface AirHandlingUnit1AlertEventValue {
+  alarm_1: boolean,
+  alarm_2: boolean,
+  alarm_3: boolean,
+  alarm_4: boolean,
+  alarm_general: boolean
+}
+
+export interface AirHandlingUnit1DataEventValue {
+  cool_heat_state?: "COOL" | "HEAT" | "AUTO",
+  cool_heat_valve_state?: number,
+  heat_valve_state?: number,
+  impulsion_fan_speed?: number,
+  impulsion_fan_state?: boolean,
+  impulsion_flow?: number,
+  impulsion_set_point?:number,
+  impulsion_temperature?:number,
+  on?: boolean,
+  outdoor_air_damper_state?: number,
+  return_ambient_air_quality?: number,
+  return_ambient_co2?: number,
+  return_ambient_enthalpy?: number,
+  return_ambient_humidity?: number,
+  return_ambient_temperature?: number,
+  return_fan_speed?: number,
+  return_fan_state?: boolean,
+  return_flow?: number
+}
 
 export interface AirQuality1DataEventValue {
   co2: number;
