@@ -34,9 +34,9 @@ export interface RoomGuestStatusConfigurationParams {
 
 
 export interface RoomGroupingConfigurationParams {
-  replica_1_active: boolean;
-  replica_2_active: boolean;
-  replica_3_active: boolean;
-  associate_clime: boolean;
-  associate_presence: boolean;
+  replica_1_active?: boolean;
+  replica_2_active?: boolean;
+  replica_3_active?: boolean;
+  associate_clime?: boolean;
+  associate_presence?: boolean;
 }
