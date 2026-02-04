@@ -1,5 +1,9 @@
 import { RegimState, TemperatureUnit } from "./RobotCloudClient";
 
+export interface AirQualityConfigurationParams {
+  high_co2_limit: number;
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

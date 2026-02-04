@@ -6,129 +6,59 @@ import {
   AirQuality1DataEventValue,
   HistoricAggregateFunction,
   ServiceDataMeasurement,
-  ServiceTypeClient,
 } from "../../../types/services";
-import {
-  ServiceDataRequestParams,
-  ServiceInstanceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
-} from "../../../types/request-params";
-import { GenericInstanceConfigClient } from "./generics";
+import { AirQualityConfigurationParams } from "../../../types/services-configuration";
+import { GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceAlertClient, GenericInstanceHistoricClient } from "./generics";
 
-export class AirQualityConfigClient extends GenericInstanceConfigClient<any> {
+
+export class AirQualityConfigClient extends GenericInstanceConfigClient<AirQualityConfigurationParams> {
   constructor() {
     super("AirQuality_1");
   }
 }
 
-class AirQualityClient
-  implements
-    ServiceTypeClient<AirQuality1AlertEventValue, AirQuality1DataEventValue>
-{
+export class AirQualityDataClient extends GenericInstanceDataClient<AirQuality1DataEventValue> {
+  constructor() {
+    super("AirQuality_1");
+  }
+}
+
+export class AirQualityAlertClient extends GenericInstanceAlertClient<AirQuality1AlertEventValue> {
+  constructor() {
+    super("AirQuality_1");
+  }
+}
+
+export class AirQualityHistoricClient extends GenericInstanceHistoricClient<AirQuality1DataEventValue> {
+  constructor() {
+    super("AirQuality_1");
+  }
+}
+
+export class AirQualityClient  {
   private _configurationClient: AirQualityConfigClient;
+  private _dataClient: AirQualityDataClient;
+  private _alertClient: AirQualityAlertClient;
+  private _historicClient: AirQualityHistoricClient;
+
   get configuration() {
     return this._configurationClient;
   }
+  get data() {
+    return this._dataClient;
+  }
+  get alert() {
+    return this._alertClient;
+  } 
+  get historic() {
+    return this._historicClient;
+  }
+
   constructor() {
     this._configurationClient = new AirQualityConfigClient();
-  }
-  getAlerts(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<AirQuality1AlertEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<AirQuality1AlertEventValue>[]
-    >(`/projects/${prjId}/services/AirQuality_1/alert`, {
-      params,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-  }
-
-  getData(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<AirQuality1DataEventValue>[]
-    >(`/projects/${prjId}/services/AirQuality_1/data`, {
-      params,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-  }
-
-  getInstanceData(
-    prjId: string,
-    instanceId: string,
-    params?: ServiceInstanceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>>> {
-    return robotcloudApi.get<ServiceDataMeasurement<AirQuality1DataEventValue>>(
-      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/data`,
-      {
-        params,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-  }
-
-  getInstanceHistoric(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    params: ServiceInstanceHistoricParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<AirQuality1DataEventValue>[]
-    >(
-      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/configuration`,
-      {
-        params: {
-          start_time: startTime,
-          end_time: endTime,
-          ...params,
-        },
-      }
-    );
-  }
-
-  getInstanceHistoricAggregate(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    aggFunction: HistoricAggregateFunction,
-    periode: string,
-    params: ServiceInstanceHistoricAggregateParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<AirQuality1DataEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<AirQuality1DataEventValue>[]
-    >(
-      `/projects/${prjId}/services/AirQuality_1/instances/${instanceId}/historic/data/aggregate`,
-      {
-        params: {
-          start_time: startTime,
-          end_time: endTime,
-          function: aggFunction,
-          periode,
-          ...params,
-        },
-      }
-    );
+    this._dataClient = new AirQualityDataClient();
+    this._alertClient = new AirQualityAlertClient();
+    this._historicClient = new AirQualityHistoricClient();
   }
 }
 
