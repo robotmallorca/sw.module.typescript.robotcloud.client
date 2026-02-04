@@ -7,8 +7,7 @@ import {
   ServiceTypeClient,
 } from "../../../types/services";
 import {
-  RoomGrouping1DataEventValue,
-  RoomGrouping1InstanceDeviceConfig,
+  RoomGrouping1DataEventValue
 } from "../../../types/services-data";
 import { GenericInstanceConfigClient } from "./generics";
 import {
@@ -17,16 +16,16 @@ import {
   ServiceInstanceHistoricAggregateParams,
   ServiceInstanceHistoricParams,
 } from "../../../types/request-params";
+import { RoomGroupingConfigurationParams } from "../../../types/services-configuration";
 
-export class RoomGroupingConfigClient extends GenericInstanceConfigClient<RoomGrouping1InstanceDeviceConfig> {
+export class RoomGroupingConfigClient extends GenericInstanceConfigClient<RoomGroupingConfigurationParams> {
   constructor() {
     super("RoomGrouping_1");
   }
 }
 
 class RoomGroupingClient
-  implements ServiceTypeClient<any, RoomGrouping1DataEventValue>
-{
+  implements ServiceTypeClient<any, RoomGrouping1DataEventValue> {
   private _configurationClient: RoomGroupingConfigClient;
   get configuration() {
     return this._configurationClient;
