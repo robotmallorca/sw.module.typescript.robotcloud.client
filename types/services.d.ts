@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { ServiceInstanceRead } from "./ServiceInstanceRead";
-import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceInstanceHistoricAggregateParams, ServiceInstanceHistoricParams } from "./request-params";
+import { ServiceDataRequestParams, ServiceInstanceDataRequestParams,  ServiceAlertRequestParams, ServiceInstanceAlertRequestParams, ServiceInstanceHistoricAggregateParams, ServiceInstanceHistoricParams } from "./request-params";
 
 
 export type MeasurementStatus =
@@ -47,30 +47,53 @@ export type HistoricAggregateFunction =
   | "nmax"
   | "nmin";
 
-  
+
 export interface ServiceInstanceConfigClient<T> {
   get(project_id: string, instance_id: string): Promise<AxiosResponse<T>>;
   put(project_id: string, instance_id: string, configuration: T): Promise<AxiosResponse<T>>;
 }
 
-export interface ServiceTypeClient<T_ALERTS, T_DATA> {
+export interface ServiceInstanceDataClient<T> {
 
-  get configuration(): ServiceInstanceConfigClient<any>;  
-  getAlerts(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T_ALERTS>[]>>;
+  /**
+   * Get data for a given project and instance
+   * @param prjId - The project ID
+   * @param instanceId - The instance ID
+   * @param params - The request parameters
+   * @returns A promise that resolves to the data
+   */
+  get(prjId: string, instanceId: string, params?: ServiceInstanceDataRequestParams): Promise<AxiosResponse<ServiceDataMeasurement<T>>>;
 
-  getData(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  /**
+   * Get all data for a given project and service
+   * @param prjId - The project ID
+   * @param params - The request parameters
+   * @returns A promise that resolves to the data
+   */
+  getAll(prjId: string, params?: ServiceDataRequestParams): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
+}
 
-  getInstanceData(
-    prjId: string,
-    instanceId: string,
-    params?: ServiceInstanceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>>>;
+export interface ServiceInstanceAlertClient<T> {
+
+  /**
+   * Get Alert for a given project and instance
+   * @param prjId - The project ID
+   * @param instanceId - The instance ID
+   * @param params - The request parameters
+   * @returns A promise that resolves to the data
+   */
+  get(prjId: string, instanceId: string, params?: ServiceInstanceAlertRequestParams): Promise<AxiosResponse<ServiceDataMeasurement<T>>>;
+
+  /**
+   * Get all alerts for a given project and service
+   * @param prjId - The project ID
+   * @param params - The request parameters
+   * @returns A promise that resolves to the data
+   */
+  getAll(prjId: string, params?: ServiceAlertRequestParams): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
+}
+
+export interface ServiceInstanceHistoricClient<T> {
 
   getInstanceHistoric(
     prjId: string,
@@ -78,7 +101,7 @@ export interface ServiceTypeClient<T_ALERTS, T_DATA> {
     startTime: Date,
     endTime: Date,
     params: ServiceInstanceHistoricParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
 
   getInstanceHistoricAggregate(
     prjId: string,
@@ -88,5 +111,5 @@ export interface ServiceTypeClient<T_ALERTS, T_DATA> {
     aggFunction: HistoricAggregateFunction,
     periode: string,
     params: ServiceInstanceHistoricAggregateParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T_DATA>[]>>;
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
 }

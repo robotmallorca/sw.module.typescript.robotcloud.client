@@ -1,7 +1,8 @@
 import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
-import { ServiceInstanceConfigClient } from "../../../types/services";
+import { ServiceDataMeasurement, ServiceInstanceConfigClient, ServiceInstanceDataClient, ServiceInstanceAlertClient, ServiceInstanceHistoricClient, HistoricAggregateFunction } from "../../../types/services";
+import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceInstanceAlertRequestParams, ServiceAlertRequestParams, ServiceInstanceHistoricParams, ServiceInstanceHistoricAggregateParams  } from "../../../types/request-params";
 
 
 export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClient<T> {
@@ -28,6 +29,130 @@ export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClie
     return robotcloudApi.put<T>(
       `/projects/${project_id}/services/${this.serviceName}/instances/${instance_id}/configuration`,
       new_config
+    );
+  }
+}
+
+export class GenericInstanceDataClient<T> implements ServiceInstanceDataClient<T> {
+  private readonly serviceName: string;
+
+  constructor(serviceName: string) {
+    this.serviceName = serviceName;
+  }
+
+  get(
+    prjId: string,
+    instanceId: string,
+    params?: ServiceInstanceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>>(
+      `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/data`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
+
+  getAll(
+    prjId: string,
+    params?: ServiceDataRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
+      `/projects/${prjId}/services/${this.serviceName}/data`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
+}
+
+export class GenericInstanceAlertClient<T> implements ServiceInstanceAlertClient<T> {
+  private readonly serviceName: string;
+
+  constructor(serviceName: string) {
+    this.serviceName = serviceName;
+  }
+
+  get(
+    prjId: string,
+    instanceId: string,
+    params?: ServiceInstanceAlertRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>>(
+      `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/alert`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
+
+  getAll(
+    prjId: string,
+    params?: ServiceAlertRequestParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
+      `/projects/${prjId}/services/${this.serviceName}/alert`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
+}
+
+export class GenericInstanceHistoricClient<T> implements ServiceInstanceHistoricClient<T> {
+  private readonly serviceName: string;
+
+  constructor(serviceName: string) {
+    this.serviceName = serviceName;
+  }
+
+  getInstanceHistoric(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    params: ServiceInstanceHistoricParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
+      `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/historic/data`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+  }
+
+  getInstanceHistoricAggregate(
+    prjId: string,
+    instanceId: string,
+    startTime: Date,
+    endTime: Date,
+    aggFunction: HistoricAggregateFunction,
+    periode: string,
+    params: ServiceInstanceHistoricAggregateParams
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
+      `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/historic/data/aggregate`,
+      {
+        params,
+        headers: {
+          Accept: "application/json",
+        },
+      }
     );
   }
 }

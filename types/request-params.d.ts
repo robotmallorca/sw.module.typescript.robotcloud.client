@@ -46,6 +46,8 @@ export interface ProjectLocationsRequestParams
 
 export interface ServiceInstanceDataRequestParams { }
 
+export interface ServiceInstanceAlertRequestParams { }
+
 export interface ProjectTagRequestParams extends PaginableRequestParams {
   parent_tag?: string;
   no_parent?: boolean;
@@ -89,6 +91,8 @@ export interface ServiceInstancesRequestParams
 }
 
 export interface ServiceDataRequestParams extends SubsystemTagsRequestParams { }
+
+export interface ServiceAlertRequestParams extends SubsystemTagsRequestParams { }
 
 export interface ServiceInstanceHistoricAggregateParams {
   offset?: string;
