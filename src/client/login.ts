@@ -9,7 +9,7 @@ export interface LoginClient {
 
 export class LoginClientImpl implements LoginClient {
   private robotcloudApi: AxiosInstance;
-  private logger = useLogger('AlertsClientImpl')
+  private logger = useLogger('LoginClientImpl')
 
   constructor(robotcloudApi: AxiosInstance) {
     this.robotcloudApi = robotcloudApi;
