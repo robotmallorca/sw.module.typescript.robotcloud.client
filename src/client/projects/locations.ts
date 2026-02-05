@@ -18,8 +18,8 @@ import {
 import { LocationServiceInstancesRequestParams, ProjectLocationsRequestParams } from "../../../types/request-params";
 
 class LocationsClient {
-  
-  getLocations = (
+
+  getAll = (
     prjId: string,
     params?: ProjectLocationsRequestParams
   ): Promise<AxiosResponse<RobotCloudNamedItem[]>> => {
@@ -31,7 +31,7 @@ class LocationsClient {
     );
   };
 
-  postLocations = (
+  post = (
     prjId: string,
     params?: ProjectLocationsRequestParams
   ): Promise<AxiosResponse<RobotCloudLocationCreate[]>> => {
@@ -43,7 +43,7 @@ class LocationsClient {
     );
   };
 
-  getLocation = (
+  get = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudLocationDetails>> => {
     return robotcloudApi.get<RobotCloudLocationDetails>(
@@ -52,7 +52,7 @@ class LocationsClient {
     );
   };
 
-  putLocation = (
+  put = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudLocationModify>> => {
     return robotcloudApi.put<RobotCloudLocationModify>(
@@ -61,7 +61,7 @@ class LocationsClient {
     );
   };
 
-  deleteLocation = (
+  delete = (
     locationId: string
   ): Promise<AxiosResponse<RobotCloudDelete>> => {
     return robotcloudApi.delete<RobotCloudDelete>(
