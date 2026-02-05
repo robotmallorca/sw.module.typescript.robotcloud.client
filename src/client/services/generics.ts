@@ -128,7 +128,11 @@ export class GenericInstanceHistoricClient<T> implements ServiceInstanceHistoric
     return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
       `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/historic/data`,
       {
-        params,
+        params: {
+          start_time: startTime,
+          end_time: endTime,
+          ...params,
+        },
         headers: {
           Accept: "application/json",
         },
@@ -148,7 +152,13 @@ export class GenericInstanceHistoricClient<T> implements ServiceInstanceHistoric
     return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
       `/projects/${prjId}/services/${this.serviceName}/instances/${instanceId}/historic/data/aggregate`,
       {
-        params,
+        params: {
+          start_time: startTime,
+          end_time: endTime,
+          function: aggFunction,
+          periode,
+          ...params,
+        },
         headers: {
           Accept: "application/json",
         },
