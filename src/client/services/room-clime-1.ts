@@ -34,7 +34,7 @@ export class RoomClimeHistoricClient extends GenericInstanceHistoricClient<RoomC
   }
 }
 
-export class RoomClimeClient  {
+export class RoomClimeClient {
   private _configurationClient: RoomClimeConfigClient;
   private _dataClient: RoomClimeDataClient;
   private _alertClient: RoomClimeAlertClient;
@@ -46,9 +46,9 @@ export class RoomClimeClient  {
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
-  } 
+  }
   get historic() {
     return this._historicClient;
   }

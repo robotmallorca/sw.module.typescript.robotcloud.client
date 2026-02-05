@@ -41,7 +41,7 @@ export class RoomGroupingClient implements ServiceTypeClient<RoomGrouping1DataEv
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
   }
   get historic() {

@@ -43,7 +43,7 @@ export class AirQualityClient implements ServiceTypeClient<AirQuality1DataEventV
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
   }
   get historic() {

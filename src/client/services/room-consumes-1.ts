@@ -40,7 +40,7 @@ export class RoomConsumesClient implements ServiceTypeClient<RoomConsumes1Data, 
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
   }
   get historic() {

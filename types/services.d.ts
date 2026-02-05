@@ -134,10 +134,10 @@ export interface ServiceInstanceDataClient<T> {
   getAll(prjId: string, params?: ServiceDataRequestParams): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
 }
 
-export interface ServiceInstanceAlertClient<T> {
+export interface ServiceInstanceAlertsClient<T> {
 
   /**
-   * Get Alert for a given project and instance
+   * Get Alerts for a given project and instance
    * @param prjId - The project ID
    * @param instanceId - The instance ID
    * @param params - The request parameters
@@ -156,7 +156,7 @@ export interface ServiceInstanceAlertClient<T> {
 
 export interface ServiceInstanceHistoricClient<T> {
 
-  getInstanceHistoric(
+  get(
     prjId: string,
     instanceId: string,
     startTime: Date,
@@ -164,7 +164,7 @@ export interface ServiceInstanceHistoricClient<T> {
     params: ServiceInstanceHistoricParams
   ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
 
-  getInstanceHistoricAggregate(
+  getAggregate(
     prjId: string,
     instanceId: string,
     startTime: Date,
@@ -179,6 +179,6 @@ export interface ServiceInstanceHistoricClient<T> {
 export interface ServiceTypeClient<T_DATA, T_ALERTS, T_CONFIG> {
   get configuration(): ServiceInstanceConfigClient<T_CONFIG>;
   get data(): ServiceInstanceDataClient<T_DATA>;
-  get alert(): ServiceInstanceAlertClient<T_ALERTS>;
+  get alerts(): ServiceInstanceAlertsClient<T_ALERTS>;
   get historic(): ServiceInstanceHistoricClient<T_DATA>;
 }

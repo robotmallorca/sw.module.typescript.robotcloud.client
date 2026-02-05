@@ -43,7 +43,7 @@ export class ChillerHeatingPumpClient implements ServiceTypeClient<ChillerHeatin
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
   }
   get historic() {

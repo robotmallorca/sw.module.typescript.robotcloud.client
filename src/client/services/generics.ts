@@ -1,8 +1,8 @@
 import type { AxiosResponse } from "axios";
 
 import robotcloudApi from "robotCloudApi";
-import { ServiceDataMeasurement, ServiceInstanceConfigClient, ServiceInstanceDataClient, ServiceInstanceAlertClient, ServiceInstanceHistoricClient, HistoricAggregateFunction } from "../../../types/services";
-import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceInstanceAlertRequestParams, ServiceAlertRequestParams, ServiceInstanceHistoricParams, ServiceInstanceHistoricAggregateParams  } from "../../../types/request-params";
+import { ServiceDataMeasurement, ServiceInstanceConfigClient, ServiceInstanceDataClient, ServiceInstanceAlertsClient, ServiceInstanceHistoricClient, HistoricAggregateFunction } from "../../../types/services";
+import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceInstanceAlertRequestParams, ServiceAlertRequestParams, ServiceInstanceHistoricParams, ServiceInstanceHistoricAggregateParams } from "../../../types/request-params";
 
 
 export class GenericInstanceConfigClient<T> implements ServiceInstanceConfigClient<T> {
@@ -72,7 +72,7 @@ export class GenericInstanceDataClient<T> implements ServiceInstanceDataClient<T
   }
 }
 
-export class GenericInstanceAlertClient<T> implements ServiceInstanceAlertClient<T> {
+export class GenericInstanceAlertClient<T> implements ServiceInstanceAlertsClient<T> {
   private readonly serviceName: string;
 
   constructor(serviceName: string) {
@@ -118,7 +118,7 @@ export class GenericInstanceHistoricClient<T> implements ServiceInstanceHistoric
     this.serviceName = serviceName;
   }
 
-  getInstanceHistoric(
+  get(
     prjId: string,
     instanceId: string,
     startTime: Date,
@@ -136,7 +136,7 @@ export class GenericInstanceHistoricClient<T> implements ServiceInstanceHistoric
     );
   }
 
-  getInstanceHistoricAggregate(
+  getAggregate(
     prjId: string,
     instanceId: string,
     startTime: Date,

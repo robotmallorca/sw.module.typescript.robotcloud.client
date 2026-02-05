@@ -41,7 +41,7 @@ export class RoomGuestStatusClient implements ServiceTypeClient<RoomGuestStatus1
   get data() {
     return this._dataClient;
   }
-  get alert() {
+  get alerts() {
     return this._alertClient;
   }
   get historic() {
