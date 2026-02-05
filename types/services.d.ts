@@ -96,6 +96,7 @@ export interface RoomGuestStatus1AlertEventValue {
 export type HistoricAggregateFunction =
   | "count"
   | "increase"
+  | "pincrease"
   | "mean"
   | "first"
   | "last"
