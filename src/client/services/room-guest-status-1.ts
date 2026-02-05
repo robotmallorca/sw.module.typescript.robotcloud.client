@@ -1,7 +1,7 @@
 import { RoomGuestStatus1Data } from "../../../types/services-data";
 import { RoomGuestStatusConfigurationParams } from "../../../types/services-configuration";
 import { GenericInstanceAlertClient, GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceHistoricClient } from "./generics";
-import { ServiceTypeClient } from "../../../types/services";
+import { RoomGuestStatus1AlertEventValue, ServiceTypeClient } from "../../../types/services";
 
 
 
@@ -17,7 +17,7 @@ export class RoomGuestStatusDataClient extends GenericInstanceDataClient<RoomGue
   }
 }
 
-export class RoomGuestStatusAlertClient extends GenericInstanceAlertClient<{}> {
+export class RoomGuestStatusAlertClient extends GenericInstanceAlertClient<RoomGuestStatus1AlertEventValue> {
   constructor() {
     super("RoomGuestStatus_1");
   }
@@ -29,7 +29,7 @@ export class RoomGuestStatusHistoricClient extends GenericInstanceHistoricClient
   }
 }
 
-export class RoomGuestStatusClient implements ServiceTypeClient<RoomGuestStatus1Data, {}, RoomGuestStatusConfigurationParams> {
+export class RoomGuestStatusClient implements ServiceTypeClient<RoomGuestStatus1Data, RoomGuestStatus1AlertEventValue, RoomGuestStatusConfigurationParams> {
   private _configurationClient: RoomGuestStatusConfigClient;
   private _dataClient: RoomGuestStatusDataClient;
   private _alertClient: RoomGuestStatusAlertClient;
