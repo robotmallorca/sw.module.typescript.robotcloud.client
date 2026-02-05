@@ -2,7 +2,7 @@ import { RegimState, TemperatureUnit } from "./RobotCloudClient";
 
 export interface AirHandlingUnitConfigurationParams {
   air_quality_co2_set_point?: number,
-  cool_heat_order?:"COOL" | "HEAT" | "AUTO";
+  cool_heat_order?: "COOL" | "HEAT" | "AUTO";
   conf_on?: boolean,
   humidity_set_point?: number,
   impulsion_hysteresis?: number,
@@ -64,4 +64,13 @@ export interface RoomGroupingConfigurationParams {
   replica_3_active?: boolean;
   associate_clime?: boolean;
   associate_presence?: boolean;
+}
+
+export interface RoomConsumesConfigurationParams {
+  daily_energy_electric_limit: number;
+  daily_energy_thermal_limit: number;
+  daily_hot_water_limit: number;
+  daily_cold_water_limit: number;
+  co2_electric_coefficient: number;
+  co2_thermal_coefficient: number;
 }

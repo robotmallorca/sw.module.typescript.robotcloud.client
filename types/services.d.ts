@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { ServiceInstanceRead } from "./ServiceInstanceRead";
-import { ServiceDataRequestParams, ServiceInstanceDataRequestParams,  ServiceAlertRequestParams, ServiceInstanceAlertRequestParams, ServiceInstanceHistoricAggregateParams, ServiceInstanceHistoricParams } from "./request-params";
+import { ServiceDataRequestParams, ServiceInstanceDataRequestParams, ServiceAlertRequestParams, ServiceInstanceAlertRequestParams, ServiceInstanceHistoricAggregateParams, ServiceInstanceHistoricParams } from "./request-params";
 
 
 export type MeasurementStatus =
@@ -27,8 +27,8 @@ export interface AirHandlingUnit1DataEventValue {
   impulsion_fan_speed?: number,
   impulsion_fan_state?: boolean,
   impulsion_flow?: number,
-  impulsion_set_point?:number,
-  impulsion_temperature?:number,
+  impulsion_set_point?: number,
+  impulsion_temperature?: number,
   on?: boolean,
   outdoor_air_damper_state?: number,
   return_ambient_air_quality?: number,
@@ -173,4 +173,12 @@ export interface ServiceInstanceHistoricClient<T> {
     periode: string,
     params: ServiceInstanceHistoricAggregateParams
   ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>>;
+}
+
+
+export interface ServiceTypeClient<T_DATA, T_ALERTS, T_CONFIG> {
+  get configuration(): ServiceInstanceConfigClient<T_CONFIG>;
+  get data(): ServiceInstanceDataClient<T_DATA>;
+  get alert(): ServiceInstanceAlertClient<T_ALERTS>;
+  get historic(): ServiceInstanceHistoricClient<T_DATA>;
 }
