@@ -2,6 +2,7 @@ import { RoomClime1AlertEventValue } from "../../../types/RobotCloudClient";
 import { RoomClime1Data } from "../../../types/services-data";
 import { RoomClimeConfigurationParams } from "../../../types/services-configuration";
 import { GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceAlertClient, GenericInstanceHistoricClient } from "./generics";
+import { ServiceTypeClient } from "../../../types/services";
 
 
 export type RoomClimeAlertsKeys =
@@ -34,7 +35,7 @@ export class RoomClimeHistoricClient extends GenericInstanceHistoricClient<RoomC
   }
 }
 
-export class RoomClimeClient {
+export class RoomClimeClient implements ServiceTypeClient<RoomClime1Data, RoomClime1AlertEventValue, RoomClimeConfigurationParams> {
   private _configurationClient: RoomClimeConfigClient;
   private _dataClient: RoomClimeDataClient;
   private _alertClient: RoomClimeAlertClient;
