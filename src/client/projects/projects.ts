@@ -28,7 +28,7 @@ class ProjectsClient {
       `organizations/${organizationId}/projects`
     );
   };
-  
+
   postOrganizationProjects = (
     organizationId: string
   ): Promise<AxiosResponse<RobotCloudCreateProject>> => {
@@ -94,7 +94,7 @@ class ProjectsClient {
     prjId: string,
     appId: string
   ): Promise<AxiosResponse<RobotCloudProjectApplications>> => {
-    return robotcloudApi.get<RobotCloudProjectApplications>(`projects/${prjId}/applications/${appId}`, 
+    return robotcloudApi.get<RobotCloudProjectApplications>(`projects/${prjId}/applications/${appId}`,
       {}
     );
   };
@@ -103,8 +103,32 @@ class ProjectsClient {
     prjId: string,
     appId: string
   ): Promise<AxiosResponse<RobotCloudApplicationEnable>> => {
-    return robotcloudApi.put<RobotCloudApplicationEnable>(`projects/${prjId}/applications/${appId}`, 
+    return robotcloudApi.put<RobotCloudApplicationEnable>(`projects/${prjId}/applications/${appId}`,
       {}
+    );
+  };
+
+  getProjectInstances = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudProjectInstances[]>> => {
+    return robotcloudApi.get<RobotCloudProjectInstances[]>(
+      `projects/${prjId}/instances`,
+      {
+        params,
+      }
+    );
+  };
+
+  getProjectServiceTypes = (
+    prjId: string,
+    params?: ProjectDetailsRequestParams
+  ): Promise<AxiosResponse<RobotCloudServiceTypeDetails[]>> => {
+    return robotcloudApi.get<RobotCloudServiceTypeDetails[]>(
+      `projects/${prjId}/services`,
+      {
+        params,
+      }
     );
   };
 
