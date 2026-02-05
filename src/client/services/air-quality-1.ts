@@ -1,11 +1,7 @@
-import type { AxiosResponse } from "axios";
-
-import robotcloudApi from "robotCloudApi";
 import {
   AirQuality1AlertEventValue,
   AirQuality1DataEventValue,
-  HistoricAggregateFunction,
-  ServiceDataMeasurement,
+  ServiceTypeClient
 } from "../../../types/services";
 import { AirQualityConfigurationParams } from "../../../types/services-configuration";
 import { GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceAlertClient, GenericInstanceHistoricClient } from "./generics";
@@ -35,7 +31,7 @@ export class AirQualityHistoricClient extends GenericInstanceHistoricClient<AirQ
   }
 }
 
-export class AirQualityClient  {
+export class AirQualityClient implements ServiceTypeClient<AirQuality1DataEventValue, AirQuality1AlertEventValue, AirQualityConfigurationParams> {
   private _configurationClient: AirQualityConfigClient;
   private _dataClient: AirQualityDataClient;
   private _alertClient: AirQualityAlertClient;
@@ -49,7 +45,7 @@ export class AirQualityClient  {
   }
   get alert() {
     return this._alertClient;
-  } 
+  }
   get historic() {
     return this._historicClient;
   }

@@ -1,8 +1,7 @@
 import {
   ChillerHeatingPump1AlertEventValue,
   ChillerHeatingPump1DataEventValue,
-  HistoricAggregateFunction,
-  ServiceDataMeasurement,
+  ServiceTypeClient
 } from "../../../types/services";
 import { ChillerHeatingPumpConfigurationParams } from "../../../types/services-configuration";
 import { GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceAlertClient, GenericInstanceHistoricClient } from "./generics";
@@ -32,7 +31,7 @@ export class ChillerHeatingPumpHistoricClient extends GenericInstanceHistoricCli
   }
 }
 
-export class ChillerHeatingPumpClient  {
+export class ChillerHeatingPumpClient implements ServiceTypeClient<ChillerHeatingPump1DataEventValue, ChillerHeatingPump1AlertEventValue, ChillerHeatingPumpConfigurationParams> {
   private _configurationClient: ChillerHeatingPumpConfigClient;
   private _dataClient: ChillerHeatingPumpDataClient;
   private _alertClient: ChillerHeatingPumpAlertClient;
@@ -46,7 +45,7 @@ export class ChillerHeatingPumpClient  {
   }
   get alert() {
     return this._alertClient;
-  } 
+  }
   get historic() {
     return this._historicClient;
   }

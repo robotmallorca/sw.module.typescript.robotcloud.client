@@ -1,8 +1,7 @@
 import {
   AirHandlingUnit1AlertEventValue,
   AirHandlingUnit1DataEventValue,
-  HistoricAggregateFunction,
-  ServiceDataMeasurement,
+  ServiceTypeClient
 } from "../../../types/services";
 import { AirHandlingUnitConfigurationParams } from "../../../types/services-configuration";
 import { GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceAlertClient, GenericInstanceHistoricClient } from "./generics";
@@ -32,7 +31,8 @@ export class AirHandlingUnitHistoricClient extends GenericInstanceHistoricClient
   }
 }
 
-export class AirHandlingUnitClient  {
+export class AirHandlingUnitClient implements
+  ServiceTypeClient<AirHandlingUnit1DataEventValue, AirHandlingUnit1AlertEventValue, AirHandlingUnitConfigurationParams> {
   private _configurationClient: AirHandlingUnitConfigClient;
   private _dataClient: AirHandlingUnitDataClient;
   private _alertClient: AirHandlingUnitAlertClient;
@@ -46,7 +46,7 @@ export class AirHandlingUnitClient  {
   }
   get alert() {
     return this._alertClient;
-  } 
+  }
   get historic() {
     return this._historicClient;
   }

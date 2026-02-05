@@ -1,21 +1,9 @@
-import type { AxiosResponse } from "axios";
-
-import robotcloudApi from "robotCloudApi";
-import {
-  HistoricAggregateFunction,
-  RoomGuestStatus1AlertEventValue,
-  ServiceDataMeasurement,
-  ServiceTypeClient,
-} from "../../../types/services";
 import { RoomGuestStatus1Data } from "../../../types/services-data";
 import { RoomGuestStatusConfigurationParams } from "../../../types/services-configuration";
-import { GenericInstanceConfigClient } from "./generics";
-import {
-  ServiceDataRequestParams,
-  ServiceInstanceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
-} from "../../../types/request-params";
+import { GenericInstanceAlertClient, GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceHistoricClient } from "./generics";
+import { ServiceTypeClient } from "../../../types/services";
+
+
 
 export class RoomGuestStatusConfigClient extends GenericInstanceConfigClient<RoomGuestStatusConfigurationParams> {
   constructor() {
@@ -23,104 +11,48 @@ export class RoomGuestStatusConfigClient extends GenericInstanceConfigClient<Roo
   }
 }
 
-class RoomGuestStatusClient
-  implements
-    ServiceTypeClient<RoomGuestStatus1AlertEventValue, RoomGuestStatus1Data>
-{
+export class RoomGuestStatusDataClient extends GenericInstanceDataClient<RoomGuestStatus1Data> {
+  constructor() {
+    super("RoomGuestStatus_1");
+  }
+}
+
+export class RoomGuestStatusAlertClient extends GenericInstanceAlertClient<{}> {
+  constructor() {
+    super("RoomGuestStatus_1");
+  }
+}
+
+export class RoomGuestStatusHistoricClient extends GenericInstanceHistoricClient<RoomGuestStatus1Data> {
+  constructor() {
+    super("RoomGuestStatus_1");
+  }
+}
+
+export class RoomGuestStatusClient implements ServiceTypeClient<RoomGuestStatus1Data, {}, RoomGuestStatusConfigurationParams> {
   private _configurationClient: RoomGuestStatusConfigClient;
+  private _dataClient: RoomGuestStatusDataClient;
+  private _alertClient: RoomGuestStatusAlertClient;
+  private _historicClient: RoomGuestStatusHistoricClient;
+
   get configuration() {
     return this._configurationClient;
   }
+  get data() {
+    return this._dataClient;
+  }
+  get alert() {
+    return this._alertClient;
+  }
+  get historic() {
+    return this._historicClient;
+  }
+
   constructor() {
     this._configurationClient = new RoomGuestStatusConfigClient();
-  }
-  getAlerts(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1AlertEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<RoomGuestStatus1AlertEventValue>[]
-    >(`/projects/${prjId}/services/RoomGuestStatus_1/alert`, {
-      params,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-  }
-
-  getData(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1Data>[]>> {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1Data>[]>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/data`,
-      {
-        params,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-  }
-
-  getInstanceData = (
-    prjId: string,
-    instanceId: string,
-    params?: ServiceInstanceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1Data>>> => {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1Data>>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/data`,
-      {
-        params,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-  };
-
-  getInstanceHistoric(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    params: ServiceInstanceHistoricParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1Data>[]>> {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1Data>[]>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/historic/data`,
-      {
-        params: {
-          start_time: startTime,
-          end_time: endTime,
-          ...params,
-        },
-      }
-    );
-  }
-
-  getInstanceHistoricAggregate(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    aggFunction: HistoricAggregateFunction,
-    periode: string,
-    params: ServiceInstanceHistoricAggregateParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<RoomGuestStatus1Data>[]>> {
-    return robotcloudApi.get<ServiceDataMeasurement<RoomGuestStatus1Data>[]>(
-      `/projects/${prjId}/services/RoomGuestStatus_1/instances/${instanceId}/historic/data/aggregate`,
-      {
-        params: {
-          start_time: startTime,
-          end_time: endTime,
-          function: aggFunction,
-          periode,
-          ...params,
-        },
-      }
-    );
+    this._dataClient = new RoomGuestStatusDataClient();
+    this._alertClient = new RoomGuestStatusAlertClient();
+    this._historicClient = new RoomGuestStatusHistoricClient();
   }
 }
 

@@ -1,22 +1,9 @@
-import type { AxiosResponse } from "axios";
-
-import robotcloudApi from "robotCloudApi";
-import {
-  HistoricAggregateFunction,
-  ServiceDataMeasurement,
-  ServiceTypeClient,
-} from "../../../types/services";
 import {
   RoomGrouping1DataEventValue
 } from "../../../types/services-data";
-import { GenericInstanceConfigClient } from "./generics";
-import {
-  ServiceDataRequestParams,
-  ServiceInstanceDataRequestParams,
-  ServiceInstanceHistoricAggregateParams,
-  ServiceInstanceHistoricParams,
-} from "../../../types/request-params";
+import { GenericInstanceAlertClient, GenericInstanceConfigClient, GenericInstanceDataClient, GenericInstanceHistoricClient } from "./generics";
 import { RoomGroupingConfigurationParams } from "../../../types/services-configuration";
+import { ServiceTypeClient } from "../../../types/services";
 
 export class RoomGroupingConfigClient extends GenericInstanceConfigClient<RoomGroupingConfigurationParams> {
   constructor() {
@@ -24,82 +11,48 @@ export class RoomGroupingConfigClient extends GenericInstanceConfigClient<RoomGr
   }
 }
 
-class RoomGroupingClient
-  implements ServiceTypeClient<any, RoomGrouping1DataEventValue> {
+export class RoomGroupingDataClient extends GenericInstanceDataClient<RoomGrouping1DataEventValue> {
+  constructor() {
+    super("RoomGrouping_1");
+  }
+}
+
+export class RoomGroupingAlertClient extends GenericInstanceAlertClient<{}> {
+  constructor() {
+    super("RoomGrouping_1");
+  }
+}
+
+export class RoomGroupingHistoricClient extends GenericInstanceHistoricClient<RoomGrouping1DataEventValue> {
+  constructor() {
+    super("RoomGrouping_1");
+  }
+}
+
+export class RoomGroupingClient implements ServiceTypeClient<RoomGrouping1DataEventValue, {}, RoomGroupingConfigurationParams> {
   private _configurationClient: RoomGroupingConfigClient;
+  private _dataClient: RoomGroupingDataClient;
+  private _alertClient: RoomGroupingAlertClient;
+  private _historicClient: RoomGroupingHistoricClient;
+
   get configuration() {
     return this._configurationClient;
   }
+  get data() {
+    return this._dataClient;
+  }
+  get alert() {
+    return this._alertClient;
+  }
+  get historic() {
+    return this._historicClient;
+  }
+
   constructor() {
     this._configurationClient = new RoomGroupingConfigClient();
-  }
-  getAlerts(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<AxiosResponse<ServiceDataMeasurement<any>[]>> {
-    throw Error("Not implemented method");
-  }
-
-  getData(
-    prjId: string,
-    params?: ServiceDataRequestParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<RoomGrouping1DataEventValue>[]>
-  > {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<RoomGrouping1DataEventValue>[]
-    >(`/projects/${prjId}/services/RoomGrouping_1/data`, {
-      params,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-  }
-
-  getInstanceData = (
-    prjId: string,
-    instanceId: string,
-    params?: ServiceInstanceDataRequestParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<RoomGrouping1DataEventValue>>
-  > => {
-    return robotcloudApi.get<
-      ServiceDataMeasurement<RoomGrouping1DataEventValue>
-    >(
-      `/projects/${prjId}/services/RoomConsumes_1/instances/${instanceId}/data`,
-      {
-        params,
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-  };
-
-  getInstanceHistoric(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    params: ServiceInstanceHistoricParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<RoomGrouping1DataEventValue>[]>
-  > {
-    throw Error("Not implemented method");
-  }
-
-  getInstanceHistoricAggregate(
-    prjId: string,
-    instanceId: string,
-    startTime: Date,
-    endTime: Date,
-    aggFunction: HistoricAggregateFunction,
-    periode: string,
-    params: ServiceInstanceHistoricAggregateParams
-  ): Promise<
-    AxiosResponse<ServiceDataMeasurement<RoomGrouping1DataEventValue>[]>
-  > {
-    throw Error("Not implemented method");
+    this._dataClient = new RoomGroupingDataClient();
+    this._alertClient = new RoomGroupingAlertClient();
+    this._historicClient = new RoomGroupingHistoricClient();
   }
 }
 
