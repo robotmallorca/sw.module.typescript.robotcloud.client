@@ -283,6 +283,14 @@ export interface TemporizedOutput1Data {
 }
 
 export interface TemporizedOutput1AlertEventValue {
+
+}
+
+export interface WaterCounter1Data {
+  consumed_volume?: number;
+}
+
+export interface WaterCounter1AlertEventValue {
   
 }
 
