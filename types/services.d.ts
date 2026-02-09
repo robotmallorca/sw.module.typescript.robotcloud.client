@@ -129,6 +129,23 @@ export interface EnergyCounter1AlertEventValue {
 
 }
 
+export interface EnergyProduction1DataEventValue {
+  energy_delivered?: number;
+  energy_received?: number;
+  energy_selfconsumption?: number;
+  energy_consumed?: number;
+  energy_produced?: number;
+  power_produced?: number;
+  power_consumed?: number;
+  power_selfconsumption?: number;
+  power_delivered?: number;
+  power_received?: number;
+}
+
+export interface EnergyProduction1AlertEventValue {
+  power_production_alert: boolean;
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;

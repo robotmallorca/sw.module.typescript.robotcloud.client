@@ -35,7 +35,13 @@ export interface CoolHeatProdConfigurationParams {
 export interface CoolHeatTemperatureConfigurationParams { }
 
 export interface EnergyCounterConfigurationParams {
-  
+
+}
+
+export interface EnergyProductionConfigurationParams {
+  power_production_start_monitoring: number,
+  power_production_end_monitoring: number,
+  power_production_alert_limit: number
 }
 
 export interface RoomClimeConfigurationParams {
