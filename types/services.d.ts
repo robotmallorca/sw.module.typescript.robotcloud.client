@@ -200,7 +200,59 @@ export interface OutdoorClime1DataEventValue {
 }
 
 export interface OutdoorClime1AlertEventValue {
-  
+
+}
+
+export interface PowerMeter1DataEventValue {
+  power_active?: number;
+  power_reactive?: number;
+  power_apparent?: number;
+  voltage_1_2?: number;
+  voltage_2_3?: number;
+  voltage_3_1?: number;
+  voltage_1?: number;
+  voltage_2?: number;
+  voltage_3?: number;
+  current_1?: number;
+  current_2?: number;
+  current_3?: number;
+  current?: number;
+  energy_active?: number;
+  energy_reactive?: number;
+  energy_apparent?: number;
+  energy_active_received?: number;
+  energy_reactive_received?: number;
+  energy_apparent_received?: number;
+  energy_active_delivered?: number;
+  energy_reactive_delivered?: number;
+  energy_apparent_delivered?: number;
+  power_factor?: number;
+  power_factor_1?: number;
+  power_factor_2?: number;
+  power_factor_3?: number;
+  frequency?: number;
+}
+
+export interface PowerMeter1AlertEventValue {
+  power_active_alert: boolean;
+  power_active_phase_1_alert: boolean;
+  power_active_phase_2_alert: boolean;
+  power_active_phase_3_alert: boolean;
+  power_reactive_alert: boolean;
+  voltage_phase_1_alert: boolean;
+  voltage_phase_2_alert: boolean;
+  voltage_phase_3_alert: boolean;
+  current_phase_1_alert: boolean;
+  current_phase_2_alert: boolean;
+  current_phase_3_alert: boolean;
+  current_phase_1_balance_alert: boolean;
+  current_phase_2_balance_alert: boolean;
+  current_phase_3_balance_alert: boolean;
+  power_factor_alert: boolean;
+  power_factor_phase_1_alert: boolean;
+  power_factor_phase_2_alert: boolean;
+  power_factor_phase_3_alert: boolean;
+  frequency_alert: boolean;
 }
 
 export interface RoomGuestStatus1AlertEventValue {

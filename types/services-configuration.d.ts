@@ -62,7 +62,23 @@ export interface HeatProductionConfigurationParams {
 }
 
 export interface OutdoorClimeConfigurationParams {
-  
+
+}
+
+export interface PowerMeterConfigurationParams {
+  energy_active_daily_limit: number,
+  energy_active_weekly_limit: number,
+  energy_active_monthly_limit: number,
+  power_active_limit: number,
+  power_active_phase_limit: number,
+  power_reactive_limit: number,
+  voltage_phase_nominal: number,
+  voltage_phase_limit: number,
+  current_phase_limit: number,
+  current_balance_limit: number,
+  power_factor_limit: number,
+  frequency_nominal: number,
+  frequency_limit: number
 }
 
 export interface RoomClimeConfigurationParams {
