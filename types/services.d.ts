@@ -118,7 +118,15 @@ export interface CoolHeatTemperature1DataEventValue {
 }
 
 export interface CoolHeatTemperature1AlertEventValue {
-  
+
+}
+
+export interface EnergyCounter1DataEventValue {
+  consumed_energy?: number;
+}
+
+export interface EnergyCounter1AlertEventValue {
+
 }
 
 export interface RoomGuestStatus1AlertEventValue {

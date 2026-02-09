@@ -34,6 +34,10 @@ export interface CoolHeatProdConfigurationParams {
 
 export interface CoolHeatTemperatureConfigurationParams { }
 
+export interface EnergyCounterConfigurationParams {
+  
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;
