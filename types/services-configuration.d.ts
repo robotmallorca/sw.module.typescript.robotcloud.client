@@ -27,6 +27,11 @@ export interface ChillerHeatingPumpConfigurationParams {
 
 export interface CoolHeatConsConfigurationParams { }
 
+export interface CoolHeatProdConfigurationParams {
+  power_consumption_limit: number,
+  cop_thermal_limit: number
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

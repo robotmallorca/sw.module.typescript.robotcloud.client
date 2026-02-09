@@ -91,6 +91,26 @@ export interface CoolHeatCons1DataEventValue {
 
 export interface CoolHeatCons1AlertEventValue {}
 
+export interface CoolHeatProd1DataEventValue {
+  output_temperature?: number;
+  return_temperature?: number;
+  compressor_power?: number;
+  condenser_power?: number;
+  transport_power?: number;
+  output_power?: number;
+  cop_thermal?: number;
+  cop_global?: number;
+  regime?: "COOL" | "HEAT";
+  compressor_energy?: number;
+  condenser_energy?: number;
+  transport_energy?: number;
+  output_energy?: number;
+}
+
+export interface CoolHeatProd1AlertEventValue {
+  power_consumption_alert: number,
+  cop_thermal_alert: number
+}
 
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
