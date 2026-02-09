@@ -151,6 +151,14 @@ export interface GasCounter1DataEventValue {
 }
 
 export interface GasCounter1AlertEventValue {
+
+}
+
+export interface GenericTemperature1DataEventValue {
+  temperature?: number;
+}
+
+export interface GenericTemperature1AlertEventValue {
   
 }
 

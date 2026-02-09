@@ -48,7 +48,9 @@ export interface GasCounterConfigurationParams {
 
 }
 
-
+export interface GenericTemperatureConfigurationParams {
+  
+}
 
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
