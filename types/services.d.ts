@@ -191,6 +191,18 @@ export interface HeatProduction1AlertEventValue {
   efficiency_alert: boolean;
 }
 
+export interface OutdoorClime1DataEventValue {
+  temperature?: number;
+  humidity_relative?: number;
+  humidity_absolute?: number;
+  enthalpy?: number;
+  luminosity?: number;
+}
+
+export interface OutdoorClime1AlertEventValue {
+  
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;

@@ -61,6 +61,10 @@ export interface HeatProductionConfigurationParams {
   efficiency_limit: number
 }
 
+export interface OutdoorClimeConfigurationParams {
+  
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;
