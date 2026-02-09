@@ -44,6 +44,12 @@ export interface EnergyProductionConfigurationParams {
   power_production_alert_limit: number
 }
 
+export interface GasCounterConfigurationParams {
+
+}
+
+
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

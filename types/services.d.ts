@@ -146,6 +146,14 @@ export interface EnergyProduction1AlertEventValue {
   power_production_alert: boolean;
 }
 
+export interface GasCounter1DataEventValue {
+  consumed_volume?: number;
+}
+
+export interface GasCounter1AlertEventValue {
+  
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;
