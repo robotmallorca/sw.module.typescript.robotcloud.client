@@ -159,6 +159,20 @@ export interface GenericTemperature1DataEventValue {
 }
 
 export interface GenericTemperature1AlertEventValue {
+
+}
+
+export interface HeatMeter1DataEventValue {
+  temperature_1?: number;
+  temperature_2?: number;
+  flow?: number;
+  volume?: number;
+  power?: number;
+  heat_energy?: number;
+  refrigeration_energy?: number;
+}
+
+export interface HeatMeter1AlertEventValue {
   
 }
 

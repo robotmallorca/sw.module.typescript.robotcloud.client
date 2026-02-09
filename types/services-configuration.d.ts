@@ -49,6 +49,10 @@ export interface GasCounterConfigurationParams {
 }
 
 export interface GenericTemperatureConfigurationParams {
+
+}
+
+export interface HeatMeterConfigurationParams{
   
 }
 
