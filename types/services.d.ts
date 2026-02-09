@@ -173,7 +173,22 @@ export interface HeatMeter1DataEventValue {
 }
 
 export interface HeatMeter1AlertEventValue {
-  
+
+}
+
+export interface HeatProduction1DataEventValue {
+  output_temperature?: number;
+  return_temperature?: number;
+  output_power?: number;
+  consumed_power?: number;
+  efficiency?: number;
+  output_energy?: number;
+  consumed_energy?: number;
+}
+
+export interface HeatProduction1AlertEventValue {
+  output_power_alert: boolean;
+  efficiency_alert: boolean;
 }
 
 export interface RoomGuestStatus1AlertEventValue {

@@ -53,7 +53,12 @@ export interface GenericTemperatureConfigurationParams {
 }
 
 export interface HeatMeterConfigurationParams{
-  
+
+}
+
+export interface HeatProductionConfigurationParams {
+  output_power_limit: number,
+  efficiency_limit: number
 }
 
 export interface RoomClimeConfigurationParams {
