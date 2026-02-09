@@ -32,6 +32,8 @@ export interface CoolHeatProdConfigurationParams {
   cop_thermal_limit: number
 }
 
+export interface CoolHeatTemperatureConfigurationParams { }
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

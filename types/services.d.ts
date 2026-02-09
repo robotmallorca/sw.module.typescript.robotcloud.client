@@ -112,6 +112,15 @@ export interface CoolHeatProd1AlertEventValue {
   cop_thermal_alert: number
 }
 
+export interface CoolHeatTemperature1DataEventValue {
+  input_temperature?: number;
+  output_temperature?: number;
+}
+
+export interface CoolHeatTemperature1AlertEventValue {
+  
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;
