@@ -138,3 +138,7 @@ export interface RoomConsumesConfigurationParams {
 export interface RoomDiagnosticsConfigurationParams {
   low_peripheral_num_limit: number;
 }
+
+export interface TemporizedOutputConfigurationParams {
+  timeout: number;
+}

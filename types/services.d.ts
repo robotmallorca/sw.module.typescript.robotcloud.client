@@ -278,6 +278,14 @@ export interface RoomDiagnostics1AlertEventValue {
    low_peripheral_num: boolean;
 }
 
+export interface TemporizedOutput1Data {
+  on: boolean;
+}
+
+export interface TemporizedOutput1AlertEventValue {
+  
+}
+
 
 ////
 // Generic interface  types
