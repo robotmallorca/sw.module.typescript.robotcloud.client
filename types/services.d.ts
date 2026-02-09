@@ -255,6 +255,15 @@ export interface PowerMeter1AlertEventValue {
   frequency_alert: boolean;
 }
 
+export interface RoomBlePairing1DataEventValue {
+  installation_id?: number;
+  pairing_key?: number;
+}
+
+export interface RoomBlePairing1AlertEventValue {
+  
+}
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;

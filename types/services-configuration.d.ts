@@ -81,6 +81,10 @@ export interface PowerMeterConfigurationParams {
   frequency_limit: number
 }
 
+export interface RoomBlePairingConfigurationParams {
+  pairing_key: number;
+}
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;
