@@ -134,3 +134,7 @@ export interface RoomConsumesConfigurationParams {
   co2_electric_coefficient: number;
   co2_thermal_coefficient: number;
 }
+
+export interface RoomDiagnosticsConfigurationParams {
+  low_peripheral_num_limit: number;
+}

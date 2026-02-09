@@ -270,6 +270,14 @@ export interface RoomGuestStatus1AlertEventValue {
   medical_alarm: boolean;
 }
 
+export interface RoomDiagnostics1Data {
+  peripheral_num?: number;
+}
+
+export interface RoomDiagnostics1AlertEventValue {
+   low_peripheral_num: boolean;
+}
+
 
 ////
 // Generic interface  types
