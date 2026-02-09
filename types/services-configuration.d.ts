@@ -25,6 +25,8 @@ export interface ChillerHeatingPumpConfigurationParams {
   recovery_set_point: number
 }
 
+export interface CoolHeatConsConfigurationParams { }
+
 export interface RoomClimeConfigurationParams {
   temperature_set_point?: number;
   humidity_set_point?: number;

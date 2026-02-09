@@ -82,6 +82,16 @@ export interface ChillerHeatingPump1AlertEventValue {
   alarm_general?: boolean;
 }
 
+export interface CoolHeatCons1DataEventValue {
+  total_power?: number;
+  thermal_power?: number;
+  total_energy?: number;
+  thermal_energy?: number;
+}
+
+export interface CoolHeatCons1AlertEventValue {}
+
+
 export interface RoomGuestStatus1AlertEventValue {
   door_open_overtime: boolean;
   window_open_overtime: boolean;
