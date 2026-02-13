@@ -1,6 +1,6 @@
 {
   "name": "@robotbas/robotcloud-client",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "RobotCloud API client",
   "author": {
     "name": "Bernat Galmés Rubert",
