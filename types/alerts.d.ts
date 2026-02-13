@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import {
   AlertAggregatedLogsRequestParams,
   AlertLogsListRequestParams,
+  AlertsByLocationRequestParams,
   AlertsProjectStatsRequestParams,
   SubsystemRequestParams
 } from "./request-params";
@@ -52,6 +53,21 @@ export interface AlertsLogsAggregated {
   alerts: AlertsLogsAggregatedAlert[];
 }
 
+export interface AlertsByLocation {
+  total_alerts: number;
+  tags: { tag: string, activation_count: number }[];
+  locations: {
+    total_size: number;
+    initial_index: number;
+    locations: {
+      location: string;
+      classifier: string;
+      alert_name: string;
+      activation_count: number;
+    }[];
+  };
+}
+
 interface AlertLogAckItem {
   id: string;
   acknowledged: boolean;
@@ -83,6 +99,7 @@ export interface AlertsClient {
   ): Promise<AxiosResponse<AlertsLogsAggregated>>;
 
   getAvailableAlerts(projectId: string, params?: SubsystemRequestParams): Promise<AxiosResponse<string[]>>;
+  getAlertsByLocation(projectId: string, params?: AlertsByLocationRequestParams): Promise<AxiosResponse<AlertsByLocation>>;
 
   getServiceTypeAlertKeys(serviceType: string): string[];
 }

@@ -82,6 +82,15 @@ export interface AlertAggregatedLogsRequestParams extends SubsystemTagsRequestPa
   offset?: string;
   time_range: string;
 }
+
+export interface AlertsByLocationRequestParams extends SubsystemTagsRequestParams, PaginableRequestParams {
+  tag_max_level?: number;
+  service_name?: string;
+  name?: string;
+  active?: boolean;
+  active_time?: string;
+}
+
 export interface ServiceInstancesRequestParams
   extends BaseFullPaginableRequestParams {
   id?: string;

@@ -5,12 +5,14 @@ import {
 import {
   AlertAggregatedLogsRequestParams,
   AlertLogsListRequestParams,
+  AlertsByLocationRequestParams,
   AlertsProjectStatsRequestParams,
   SubsystemRequestParams
 } from "../../types/request-params";
 import { useLogger } from "utils/logger";
 import {
   AlertLogAckAlerts,
+  AlertsByLocation,
   AlertsClient,
   AlertsLogsAggregated,
   AlertsLogsList,
@@ -106,6 +108,13 @@ export class AlertsClientImpl implements AlertsClient {
     return {
       data: alerts
     } as AxiosResponse<string[]>;
+  }
+
+  getAlertsByLocation(projectId: string, params?: AlertsByLocationRequestParams): Promise<AxiosResponse<AlertsByLocation>> {
+    return this.robotcloudApi.get<AlertsByLocation>(
+      `projects/${projectId}/alerts/bylocation`,
+      { params }
+    );
   }
 
   getServiceTypeAlertKeys(serviceType: string): string[] {
