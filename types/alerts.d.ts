@@ -61,9 +61,13 @@ export interface AlertsByLocation {
     initial_index: number;
     locations: {
       location: string;
-      classifier: string;
-      alert_name: string;
       activation_count: number;
+      alerts: {
+        instance: string;
+        classifier: string;
+        alert_name: string;
+        activation_count: number;
+      }[];
     }[];
   };
 }
