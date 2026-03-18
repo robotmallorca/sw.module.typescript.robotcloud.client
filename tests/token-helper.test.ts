@@ -6,13 +6,13 @@ import axios from 'axios';
 beforeEach(() => {
   jest.clearAllMocks();
 })
-const example_token = 
+const example_token =
   "eyJraWQiOiJhc2stNjYwMjAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJvYWMiOiJNQVNURVIiLCJzdWIiOiJCZXJuYXRfbWFzdGVyIiwiYXVkIjoia2V5LTE0IiwiYWFjIjoiQURWQU5DRUQiLCJvcmciOiJvcmctMCIsInR5cCI6IkFDQ0VTUyIsImV4cCI6MTc1OTM5NDg5N30.lY5314qfC7yw0Z5QXU2G8GE0GEsfRHNhMaxZLfy9lKjoeDKzbD1aR2MHomRPTDGYDbGy6Kdf5UG_yWezg0Se4Q6XmMhDC3ckbJ5qxSYKxeI4WG1YukQv3c5gznq0egcLPVxMIMQZ4FEujRxpd7-vsNRr6SJ2V-NMD8TYrCQgiNODUq9pOEzjWqxzSzWdpRhzhHNjZfRcQjjfpSFIVWGad6vH6RCPJmZ3EOGdF15UdEnU5QDOA-s8f8i2osxng5uRzeMtVceu-uMWiqaEPYCKrZgeB3Y5zaDVN3ah7UZgeF1PWG1-CgQAVy8pfCHPIShHhZ7mm2KXgerHHA0FY0qthQ";
 
 describe("Decode token", () => {
   it("Has expected values", () => {
 
-    const payload = decodeToken(example_token);
+    const payload = decodeToken(example_token) as RobotCloudJWTPayload;
 
     expect(payload).toBeDefined();
 
@@ -36,7 +36,7 @@ describe("Token need renew", () => {
     const result = needRenew(tokenPayload)
     expect(result).toBeTruthy()
   })
-  
+
   it('Is not expired and do not need renew ', () => {
     clientConfig.tokenMinutesBeforeExpirationRenew = 10
     // Expires in 30 minutes
@@ -70,24 +70,24 @@ describe("Token need renew", () => {
 describe("Renew token", () => {
   it('Is robotcloud endpoint called', async () => {
     jest.spyOn(axios, 'get').mockResolvedValue({
-      'data': { 
-        'access': {'token': 'access_token_value'}, 
-        'renew': {'token': 'renew_token_value'}
+      'data': {
+        'access': { 'token': 'access_token_value' },
+        'renew': { 'token': 'renew_token_value' }
       }
     })
-    
+
     await renewToken('renew-token-value')
     expect(axios.get).toHaveBeenCalledTimes(1)
   })
 
   it('Return api tokens', async () => {
     jest.spyOn(axios, 'get').mockResolvedValue({
-      'data': { 
-        'access': {'token': 'access_token_value'}, 
-        'renew': {'token': 'renew_token_value'}
+      'data': {
+        'access': { 'token': 'access_token_value' },
+        'renew': { 'token': 'renew_token_value' }
       }
     })
-    
+
     const tokens = await renewToken('renew-token-value')
     expect(tokens.renewed).toBe(true)
     expect(tokens.access).toBe('access_token_value')

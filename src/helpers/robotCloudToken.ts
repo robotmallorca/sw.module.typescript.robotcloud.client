@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useLogger } from 'utils/logger';
 import robotcloudApi from "robotCloudApi";
-import { CheckTokenResponse, RobotCloudJWTPayload } from "../../types/Token";
+import { CheckTokenResponse, RobotCloudJWTPayload, RobotCloudRenewJWTPayload } from "../../types/Token";
 import clientConfig from "config";
 import { loginClient } from "@/client";
 
@@ -20,7 +20,7 @@ export interface RobotCloudNewTokenResponse {
   renew: string;
 }
 
-export const decodeToken = (token: string): RobotCloudJWTPayload | undefined => {
+export const decodeToken = (token: string): RobotCloudJWTPayload | RobotCloudRenewJWTPayload | undefined => {
   const payload = parseJwt(token);
   if (!payload) {
     return undefined

@@ -1,3 +1,5 @@
+import { OrganizationAccessLevel, ProjectAccessLevel } from "./RobotCloudClient";
+
 export interface TokenResponse {
   token: string;
   expiration: string; // ISO 8601 date string (YYYY-MM-DDTHH:MM:SS.SSSZ)
@@ -14,7 +16,16 @@ export interface CheckTokenResponse {
 }
 
 export interface RobotCloudJWTPayload {
-  exp: number;
+  oac: OrganizationAccessLevel; // Organization Access Level
   sub: string; // username
+  aud: string; // audience (app api key id)
+  aac: ProjectAccessLevel; // Default project Access Level
   org: string; // organization
+  exp: number;
+}
+
+export interface RobotCloudRenewJWTPayload {
+  sub: string; // username
+  aud: string; // audience (app api key id)
+  exp: number;
 }
