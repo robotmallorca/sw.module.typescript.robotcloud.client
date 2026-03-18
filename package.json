@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsup",
     "test": "jest",
-    "publish-patch": "pnpm version patch && tsup && npm publish"
+    "publish-patch": "pnpm version patch && tsup && pnpm login && npm publish"
   },
   "repository": {
     "type": "git",
@@ -48,3 +48,4 @@
     "access": "public"
   }
 }
+
