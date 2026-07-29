@@ -47,8 +47,8 @@ export class GenericInstanceConfigClient<
   getAll(
     project_id: string,
     params?: ServiceDataRequestParams,
-  ): Promise<AxiosResponse<ServiceDataMeasurement<T>>> {
-    return robotcloudApi.get<ServiceDataMeasurement<T>>(
+  ): Promise<AxiosResponse<ServiceDataMeasurement<T>[]>> {
+    return robotcloudApi.get<ServiceDataMeasurement<T>[]>(
       `/projects/${project_id}/services/${this.serviceName}/configuration`,
       {
         params,
